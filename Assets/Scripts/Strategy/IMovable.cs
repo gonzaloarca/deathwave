@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public interface IMovable
+namespace Strategy
 {
-    float MovementSpeed { get; }
-    float RotationSpeed { get; }
+    public interface IMovable
+    {
+        float MovementSpeed { get; }
+        float RotationSpeed { get; }
     
-    
+        void Travel(Vector3 direction);
+        void Rotate(Vector3 direction);
+    }
 }
