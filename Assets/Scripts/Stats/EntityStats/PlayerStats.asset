@@ -15,6 +15,7 @@ MonoBehaviour:
   _statsValues:
     MaxLife: 100
     MovementSpeed: 10
-    RotationSpeed: 20
+    MouseXSensitivity: 200
+    MouseYSensitivity: 200
     MaxVerticalRotation: 90
     MinVerticalRotation: -90

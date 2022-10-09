@@ -11,7 +11,8 @@ namespace Flyweight
 
         public int MaxLife => _statsValues.MaxLife;
         public float MovementSpeed => _statsValues.MovementSpeed;
-        public float RotationSpeed => _statsValues.RotationSpeed;
+        public float MouseXSensitivity => _statsValues.MouseXSensitivity;
+        public float MouseYSensitivity => _statsValues.MouseYSensitivity;
         public float MaxVerticalRotation => _statsValues.MaxVerticalRotation;
         public float MinVerticalRotation => _statsValues.MinVerticalRotation;
     }
@@ -21,7 +22,8 @@ namespace Flyweight
     {
         public int MaxLife;
         public float MovementSpeed;
-        public float RotationSpeed;
+        public float MouseXSensitivity;
+        public float MouseYSensitivity;
         public float MaxVerticalRotation;
         public float MinVerticalRotation;
     }

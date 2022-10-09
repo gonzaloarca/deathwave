@@ -9,7 +9,8 @@ namespace Controllers
     public class MovementController : MonoBehaviour, IMovable
     {
         public float MovementSpeed => GetComponent<Actor>().ActorStats.MovementSpeed;
-        public float RotationSpeed => GetComponent<Actor>().ActorStats.RotationSpeed;
+        public float MouseXSensitivity => GetComponent<Actor>().ActorStats.MouseXSensitivity;
+        public float MouseYSensitivity => GetComponent<Actor>().ActorStats.MouseYSensitivity;
 
 
         public float MaxVerticalRotation => GetComponent<Actor>().ActorStats.MaxVerticalRotation;
@@ -34,12 +35,12 @@ namespace Controllers
         {
             // Chracter Prefab Hips Axis are flipped, therefore we use the z-axis for torso vertical rotation,
             // and the y-axis for the player horizontal rotation
-            var mouseX = direction.x * RotationSpeed * Time.deltaTime;
-            var mouseY = direction.y * RotationSpeed * Time.deltaTime;
+            var mouseX = direction.x * MouseXSensitivity * Time.deltaTime;
+            var mouseY = direction.y * MouseYSensitivity * Time.deltaTime;
 
             var horizontalRotation = new Vector3(0, mouseX, 0);
 
-            transform.Rotate(horizontalRotation * (Time.deltaTime * RotationSpeed));
+            transform.Rotate(horizontalRotation);
 
             _verticalRotation -= mouseY;
             _verticalRotation = Mathf.Clamp(_verticalRotation, MinVerticalRotation, MaxVerticalRotation);
