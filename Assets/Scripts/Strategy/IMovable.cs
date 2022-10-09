@@ -10,5 +10,7 @@ namespace Strategy
     
         void Travel(Vector3 direction);
         void Rotate(Vector3 direction);
+        void Jump();
+        void Sprint(bool isSprinting);
     }
 }

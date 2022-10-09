@@ -8,21 +8,25 @@ namespace Controllers
     [RequireComponent(typeof(Actor))]
     public class MovementController : MonoBehaviour, IMovable
     {
-        public float MovementSpeed => GetComponent<Actor>().ActorStats.MovementSpeed;
+        public float MovementSpeed => _movementSpeed;
+        private float _movementSpeed;
         public float MouseXSensitivity => GetComponent<Actor>().ActorStats.MouseXSensitivity;
         public float MouseYSensitivity => GetComponent<Actor>().ActorStats.MouseYSensitivity;
 
-
+        public float JumpStrength => GetComponent<Actor>().ActorStats.JumpStrength;
         public float MaxVerticalRotation => GetComponent<Actor>().ActorStats.MaxVerticalRotation;
         public float MinVerticalRotation => GetComponent<Actor>().ActorStats.MinVerticalRotation;
 
         public Transform _torso;
 
         private float _verticalRotation = 0f;
+        public int GroundLayer => LayerMask.NameToLayer($"Ground");
 
+        private Rigidbody _rigidbody;
         private void Start()
         {
-            // _torso = transform.Find("Spine_01");
+            _rigidbody = GetComponent<Rigidbody>();
+            _movementSpeed = GetComponent<Actor>().ActorStats.WalkSpeed;
         }
 
         public void Travel(Vector3 direction)
@@ -47,5 +51,28 @@ namespace Controllers
             
             _torso.localEulerAngles = new Vector3(-180, 0, _verticalRotation);
         }
+        
+        public void Jump()
+        {
+            // Only jump if the player is on the ground
+            if (Physics.Raycast(transform.position, -Vector3.up, 100.0f, 1 << GroundLayer))
+            {
+                Debug.Log("JUMP - VAN HALEN");
+                _rigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
+            }
+        }
+
+        public void Sprint(bool isSprinting)
+        {
+            if (isSprinting)
+            {
+                _movementSpeed = GetComponent<Actor>().ActorStats.SprintSpeed;
+            }
+            else
+            {
+                _movementSpeed = GetComponent<Actor>().ActorStats.WalkSpeed;
+            }
+        }
+
     }
 }

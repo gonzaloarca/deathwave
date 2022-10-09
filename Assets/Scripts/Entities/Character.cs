@@ -9,6 +9,7 @@ using Weapons;
 
 namespace Entities
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Character : Actor
     {
         // INSTANCIAS
@@ -21,6 +22,8 @@ namespace Entities
         [SerializeField] private KeyCode _moveBack = KeyCode.S;
         [SerializeField] private KeyCode _moveLeft = KeyCode.A;
         [SerializeField] private KeyCode _moveRight = KeyCode.D;
+        [SerializeField] private KeyCode _jump = KeyCode.Space;
+        [SerializeField] private KeyCode _sprint = KeyCode.LeftShift;
 
         // BIINDING COMBAT
         [SerializeField] private KeyCode _attack = KeyCode.Mouse0;
@@ -38,6 +41,9 @@ namespace Entities
         private CmdMovement _cmdMoveBack;
         private CmdMovement _cmdMoveLeft;
         private CmdMovement _cmdMoveRight;
+        private CmdJump _cmdJump;
+        private CmdSprint _cmdStartSprint;
+        private CmdSprint _cmdStopSprint;
         private CmdAttack _cmdAttack;
 
         private void Start()
@@ -45,12 +51,14 @@ namespace Entities
 
             _movementController = GetComponent<MovementController>();
             // ChangeWeapon(0);
-            Debug.Log("💀");
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
             _cmdMoveLeft = new CmdMovement(_movementController, -Vector3.right);
             _cmdMoveRight = new CmdMovement(_movementController, Vector3.right);
+            _cmdStartSprint = new CmdSprint(_movementController, true);
+            _cmdStopSprint = new CmdSprint(_movementController, false);
+            _cmdJump = new CmdJump(_movementController);
 
             _cmdAttack = new CmdAttack(_currentGun);
         }
@@ -58,13 +66,19 @@ namespace Entities
         void Update()
         {
             // W-A-ÎS-D
-            Debug.Log("MBEH2");
             if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddCommand(_cmdMoveForward);
             if (Input.GetKey(_moveBack)) EventQueueManager.Instance.AddCommand(_cmdMoveBack);
             if (Input.GetKey(_moveLeft)) EventQueueManager.Instance.AddCommand(_cmdMoveLeft);
             if (Input.GetKey(_moveRight)) EventQueueManager.Instance.AddCommand(_cmdMoveRight);
-
-            // Rotation
+            
+            // Jumping
+            if (Input.GetKeyDown(_jump)) EventQueueManager.Instance.AddCommand(_cmdJump);
+            
+            // Sprinting
+            if (Input.GetKeyDown(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStartSprint);
+            if (Input.GetKeyUp(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStopSprint);
+            
+            // Camera Rotation
             var verticalRotation = Input.GetAxis("Mouse Y"); 
             var horizontalRotation = Input.GetAxis("Mouse X");
             var rotationDirection = new Vector3(horizontalRotation, verticalRotation, 0);

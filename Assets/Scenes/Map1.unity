@@ -474,12 +474,13 @@ GameObject:
   - component: {fileID: 1065019495}
   - component: {fileID: 1065019494}
   - component: {fileID: 1065019493}
-  m_Layer: 0
+  - component: {fileID: 1065019497}
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1065019493
 MeshCollider:
@@ -558,6 +559,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1065019497
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065019492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1273742650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2967648819011463079, guid: f6029d88051cf45fbbdc1e681a1e44f7, type: 3}
@@ -630,6 +644,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2153966685607753646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3804232893451867443, guid: f6029d88051cf45fbbdc1e681a1e44f7, type: 3}
+  m_PrefabInstance: {fileID: 2967648819906536093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2153966685607753649
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2153966685607753646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &2967648819906536093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -637,6 +670,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1943103091392759151, guid: f6029d88051cf45fbbdc1e681a1e44f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804232893451867437, guid: f6029d88051cf45fbbdc1e681a1e44f7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3804232893451867443, guid: f6029d88051cf45fbbdc1e681a1e44f7, type: 3}
       propertyPath: m_Name
       value: Player

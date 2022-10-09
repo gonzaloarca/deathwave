@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statsValues:
     MaxLife: 100
-    MovementSpeed: 10
+    WalkSpeed: 10
+    SprintSpeed: 50
     MouseXSensitivity: 200
     MouseYSensitivity: 200
     MaxVerticalRotation: 90
-    MinVerticalRotation: -90
+    MinVerticalRotation: -87
+    JumpStrength: 3
