@@ -31,7 +31,6 @@ namespace Entities
 
         [SerializeField] private KeyCode _weaponSlot1 = KeyCode.Alpha1;
         [SerializeField] private KeyCode _weaponSlot2 = KeyCode.Alpha2;
-        [SerializeField] private KeyCode _weaponSlot3 = KeyCode.Alpha3;
 
         [SerializeField] private KeyCode _setVictory = KeyCode.Return;
         [SerializeField] private KeyCode _setDefeat = KeyCode.Backspace;
@@ -50,7 +49,6 @@ namespace Entities
         {
 
             _movementController = GetComponent<MovementController>();
-            // ChangeWeapon(0);
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
@@ -60,6 +58,7 @@ namespace Entities
             _cmdStopSprint = new CmdSprint(_movementController, false);
             _cmdJump = new CmdJump(_movementController);
 
+            ChangeWeapon(0);
             _cmdAttack = new CmdAttack(_currentGun);
         }
 
@@ -85,13 +84,14 @@ namespace Entities
 
             EventQueueManager.Instance.AddCommand(new CmdRotation(_movementController, rotationDirection));
 
-            //
-            // if (Input.GetKeyDown(_attack)) EventQueueManager.Instance.AddCommand(_cmdAttack);
-            // if (Input.GetKeyDown(_reload)) _currentGun?.Reload();
-            //
-            // if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
-            // if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
-            // if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
+            
+            // Gun Logic
+            if (Input.GetKeyDown(_attack)) EventQueueManager.Instance.AddCommand(_cmdAttack);
+            if (Input.GetKeyDown(_reload)) _currentGun?.Reload();
+
+            if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
+            if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
+
             //
             // if (Input.GetKeyDown(_setVictory)) EventsManager.Instance.EventGameOver(true);
             // if (Input.GetKeyDown(_setDefeat)) GetComponent<IDamageable>().TakeDamage(20);

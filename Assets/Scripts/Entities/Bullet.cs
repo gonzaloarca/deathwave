@@ -33,7 +33,7 @@ namespace Entities
         {
             if (!_layerTarget.Contains(collider.gameObject.layer)) return;
             IDamageable damageable = collider.GetComponent<IDamageable>();
-            damageable?.TakeDamage(_owner.Damage);
+            damageable?.TakeDamage(_damage);
 
             Destroy(this.gameObject);
         }
@@ -49,7 +49,11 @@ namespace Entities
             _rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
         }
 
-        public void SetOwner(IGun owner) => _owner = owner;
+        public void SetOwner(IGun owner)
+        {
+            _owner = owner;
+            _damage = owner.Damage;
+        }
 
         private void Update()
         {

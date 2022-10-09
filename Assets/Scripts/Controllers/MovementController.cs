@@ -55,7 +55,7 @@ namespace Controllers
         public void Jump()
         {
             // Only jump if the player is on the ground
-            if (Physics.Raycast(transform.position, -Vector3.up, 100.0f, 1 << GroundLayer))
+            if (Physics.Raycast(transform.position, -Vector3.up, 0.01f, 1 << GroundLayer))
             {
                 Debug.Log("JUMP - VAN HALEN");
                 _rigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
