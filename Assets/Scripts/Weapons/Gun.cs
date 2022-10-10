@@ -1,5 +1,8 @@
 using System;
+using Commands;
+using Controllers;
 using Entities;
+using EventQueue;
 using Flyweight;
 using Strategy;
 using UnityEngine;
@@ -27,10 +30,15 @@ namespace Weapons
         public float CooldownTimer => _cooldownTimer;
         [SerializeField] private float _cooldownTimer = 0f;
 
+        private RecoilController _recoilController;
+        private CmdRecoilFire _cmdRecoilFire;
+
         private void Start()
         {
             Refill();
             _bulletsLeftInMag = MagSize;
+            _recoilController = transform.root.GetComponentInChildren<RecoilController>();
+            _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
         }
 
         protected void InstantiateBullet(Vector3 position, Quaternion rotation, string bulletName)
@@ -58,6 +66,8 @@ namespace Weapons
             _bulletsLeftInMag--;
             _cooldownTimer = Cooldown;
             var transform1 = transform;
+
+            EventQueueManager.Instance.AddCommand(_cmdRecoilFire);
 
             ShootBullet(transform1);
         }

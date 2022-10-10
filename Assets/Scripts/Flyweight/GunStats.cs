@@ -35,10 +35,13 @@ public struct GunStatsValues
 [System.Serializable]
 public struct GunRecoil
 {
-    public float RecoilX;
-    public float RecoilY;
-    public float RecoilZ;
-    public float AimRecoilX;
-    public float AimRecoilY;
-    public float AimRecoilZ;
+    public float x;
+    public float y;
+    public float z;
+    public struct Ads
+    {
+        public float x;
+        public float y;
+        public float z;
+    }
 }

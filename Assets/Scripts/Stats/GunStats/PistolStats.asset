@@ -21,9 +21,6 @@ MonoBehaviour:
     ReloadTime: 2
     PlayerSpeedModifier: 1
     Recoil:
-      RecoilX: 0
-      RecoilY: 0
-      RecoilZ: 0
-      AimRecoilX: 0
-      AimRecoilY: 0
-      AimRecoilZ: 0
+      x: -1
+      y: 0
+      z: 3
