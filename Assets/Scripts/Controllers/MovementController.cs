@@ -10,6 +10,9 @@ namespace Controllers
     {
         public float MovementSpeed => _movementSpeed;
         private float _movementSpeed;
+        
+        public float SpeedModifier => _speedModifier;
+        [SerializeField] private float _speedModifier = 1f;
         public float MouseXSensitivity => GetComponent<Actor>().ActorStats.MouseXSensitivity;
         public float MouseYSensitivity => GetComponent<Actor>().ActorStats.MouseYSensitivity;
 
@@ -31,10 +34,9 @@ namespace Controllers
 
         public void Travel(Vector3 direction)
         {
-            transform.Translate(direction * (Time.deltaTime * MovementSpeed));
+            transform.Translate(direction * (Time.deltaTime * MovementSpeed * SpeedModifier));
         }
-
-
+        
         public void Rotate(Vector3 direction)
         {
             // Chracter Prefab Hips Axis are flipped, therefore we use the z-axis for torso vertical rotation,
@@ -55,7 +57,7 @@ namespace Controllers
         public void Jump()
         {
             // Only jump if the player is on the ground
-            if (Physics.Raycast(transform.position, -Vector3.up, 100.0f, 1 << GroundLayer))
+            if (Physics.Raycast(transform.position, -Vector3.up, 0.01f, 1 << GroundLayer))
             {
                 Debug.Log("JUMP - VAN HALEN");
                 _rigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
@@ -74,5 +76,9 @@ namespace Controllers
             }
         }
 
+        public void SetSpeedModifier(float amount)
+        {
+            _speedModifier = amount;
+        }
     }
 }

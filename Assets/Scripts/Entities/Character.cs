@@ -26,12 +26,11 @@ namespace Entities
         [SerializeField] private KeyCode _sprint = KeyCode.LeftShift;
 
         // BIINDING COMBAT
-        [SerializeField] private KeyCode _attack = KeyCode.Mouse0;
+        [SerializeField] private KeyCode _shoot = KeyCode.Mouse0;
         [SerializeField] private KeyCode _reload = KeyCode.R;
 
         [SerializeField] private KeyCode _weaponSlot1 = KeyCode.Alpha1;
         [SerializeField] private KeyCode _weaponSlot2 = KeyCode.Alpha2;
-        [SerializeField] private KeyCode _weaponSlot3 = KeyCode.Alpha3;
 
         [SerializeField] private KeyCode _setVictory = KeyCode.Return;
         [SerializeField] private KeyCode _setDefeat = KeyCode.Backspace;
@@ -44,14 +43,14 @@ namespace Entities
         private CmdJump _cmdJump;
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
-        private CmdAttack _cmdAttack;
+        private CmdShoot _cmdShoot;
+        private CmdReload _cmdReload;
 
         private PlayerDamageSFX _grunts;
         private void Start()
         {
 
             _movementController = GetComponent<MovementController>();
-            // ChangeWeapon(0);
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
@@ -60,8 +59,12 @@ namespace Entities
             _cmdStartSprint = new CmdSprint(_movementController, true);
             _cmdStopSprint = new CmdSprint(_movementController, false);
             _cmdJump = new CmdJump(_movementController);
-
-            _cmdAttack = new CmdAttack(_currentGun);
+            
+            // Set _currentGun
+            ChangeWeapon(0);
+            
+            _cmdReload = new CmdReload(_currentGun);
+            _cmdShoot = new CmdShoot(_currentGun);
             _grunts = GetComponent<PlayerDamageSFX>();
         }
 
@@ -87,13 +90,14 @@ namespace Entities
 
             EventQueueManager.Instance.AddCommand(new CmdRotation(_movementController, rotationDirection));
 
-            //
-            // if (Input.GetKeyDown(_attack)) EventQueueManager.Instance.AddCommand(_cmdAttack);
-            // if (Input.GetKeyDown(_reload)) _currentGun?.Reload();
-            //
-            // if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
-            // if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
-            // if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
+            
+            // Gun Logic
+            if (Input.GetKeyDown(_shoot)) EventQueueManager.Instance.AddCommand(_cmdShoot);
+            if (Input.GetKeyDown(_reload)) EventQueueManager.Instance.AddCommand(_cmdReload);
+
+            if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
+            if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
+
             //
             // if (Input.GetKeyDown(_setVictory)) EventsManager.Instance.EventGameOver(true);
             // if (Input.GetKeyDown(_setDefeat)) GetComponent<IDamageable>().TakeDamage(20);
@@ -107,7 +111,10 @@ namespace Entities
             foreach (var gun in _guns) gun.gameObject.SetActive(false);
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
-            _cmdAttack = new CmdAttack(_currentGun);
+            _cmdShoot = new CmdShoot(_currentGun);
+            
+            // Change speed of character based on weapon
+            EventQueueManager.Instance.AddCommand(new CmdSetSpeedModifier(_movementController, _currentGun.PlayerSpeedModifier));
         }
 
         void OnCollisionEnter(Collision collision)

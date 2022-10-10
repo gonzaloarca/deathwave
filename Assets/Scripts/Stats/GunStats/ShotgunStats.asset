@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e060a43adaa450ca26b12d4c0b04df1, type: 3}
+  m_Name: ShotgunStats
+  m_EditorClassIdentifier: 
+  _gunStatsValues:
+    BulletPrefab: {fileID: 5164088415189186486, guid: cb94165e1362242ab93c5be45ee874c8, type: 3}
+    Damage: 50
+    MagSize: 6
+    MaxMags: 1
+    Cooldown: 1
+    ReloadTime: 4
+    PlayerSpeedModifier: 0.5
+    Recoil:
+      RecoilX: 0
+      RecoilY: 0
+      RecoilZ: 0
+      AimRecoilX: 0
+      AimRecoilY: 0
+      AimRecoilZ: 0

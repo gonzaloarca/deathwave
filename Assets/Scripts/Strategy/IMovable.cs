@@ -12,5 +12,6 @@ namespace Strategy
         void Rotate(Vector3 direction);
         void Jump();
         void Sprint(bool isSprinting);
+        void SetSpeedModifier(float amount);
     }
 }
