@@ -9,25 +9,24 @@ using Weapons;
 
 namespace Entities
 {
-  
-    public class Skeleton : IA
+    public class Skeleton : Enemy
     {
         // INSTANCIAS
-        private IAMovementController _movementController;
+        private EnemyMovementController _movementController;
 
         /* Commands */
         private CmdJump _cmdJump;
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
-        
-      //  private CmdIdle _idle;
-        private float _vision; 
+
+        //  private CmdIdle _idle;
+        private float _vision;
         private float _meleeRange;
         private GameObject _target;
+
         private void Start()
         {
-
-            _movementController = GetComponent<IAMovementController>();
+            _movementController = GetComponent<EnemyMovementController>();
             // ChangeWeapon(0);
             GameObject[] gameObjects;
             gameObjects = GameObject.FindGameObjectsWithTag("Player");
@@ -35,11 +34,14 @@ namespace Entities
             if (gameObjects.Length == 0)
             {
                 Debug.Log("No game objects are tagged with Player");
-            }else{
-            _target = gameObjects[0];
             }
-            _vision = this.IAStats.Vision;
-            _meleeRange = this.IAStats.MeleeRange;
+            else
+            {
+                _target = gameObjects[0];
+            }
+
+            _vision = this.EnemyStats.Vision;
+            _meleeRange = this.ActorStats.MeleeRange;
             _cmdStartSprint = new CmdSprint(_movementController, true);
             _cmdStopSprint = new CmdSprint(_movementController, false);
             _cmdJump = new CmdJump(_movementController);
@@ -48,40 +50,44 @@ namespace Entities
 
         void Update()
         {
-           // Debug.Log("Bad to the bone");
-            float distance = Vector3.Distance(_target.transform.position , transform.position);
-            if(distance >= _vision){
-                EventQueueManager.Instance.AddCommand(new CmdFollow(_movementController , _target.transform.position));
+            // Debug.Log("Bad to the bone");
+            float distance = Vector3.Distance(_target.transform.position, transform.position);
+            if (distance >= _vision)
+            {
+                EventQueueManager.Instance.AddCommand(new CmdFollow(_movementController, _target.transform.position));
                 //Debug.Log("Not Following");
                 // _animator.SetFloat("Vertical", 0f);
                 // _animator.SetFloat("Horizontal", 0f);
                 // _animator.SetBool("running", false);
                 return;
             }
-            if(distance <= _meleeRange){
-                EventQueueManager.Instance.AddCommand(new CmdPunch(_movementController,_target.transform.position));
+
+            if (distance <= _meleeRange)
+            {
+                EventQueueManager.Instance.AddCommand(new CmdPunch(_movementController, _target.transform.position));
                 return;
             }
-           // Debug.Log("Wanna move");
+
+            // Debug.Log("Wanna move");
             // //Desde el Jugador 
             // var direction = _target.transform.position - transform.position;
             // Debug.DrawRay(transform.position, direction,  Color.red, 0.1f);
             // Debug.DrawRay(transform.position, Vector3.forward,  Color.blue, 0.1f);
-            EventQueueManager.Instance.AddCommand(new CmdFollow(_movementController , _target.transform.position));
-      
-        //    if(Vector3.Distance)
+            EventQueueManager.Instance.AddCommand(new CmdFollow(_movementController, _target.transform.position));
+
+            //    if(Vector3.Distance)
             //  if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddCommand(_cmdMoveForward);
             // if (Input.GetKey(_moveBack)) EventQueueManager.Instance.AddCommand(_cmdMoveBack);
             // if (Input.GetKey(_moveLeft)) EventQueueManager.Instance.AddCommand(_cmdMoveLeft);
             // if (Input.GetKey(_moveRight)) EventQueueManager.Instance.AddCommand(_cmdMoveRight);
-            
+
             // // Jumping
             // if (Input.GetKeyDown(_jump)) EventQueueManager.Instance.AddCommand(_cmdJump);
-            
+
             // // Sprinting
             // if (Input.GetKeyDown(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStartSprint);
             // if (Input.GetKeyUp(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStopSprint);
-            
+
             // // Camera Rotation
             // var verticalRotation = Input.GetAxis("Mouse Y"); 
             // var horizontalRotation = Input.GetAxis("Mouse X");
@@ -102,7 +108,6 @@ namespace Entities
 
 
             // // if (_timer <= 0) Debug.Log("timer fin");     // W-A-S-D
-      
         }
 
         // private void ChangeWeapon(int index)

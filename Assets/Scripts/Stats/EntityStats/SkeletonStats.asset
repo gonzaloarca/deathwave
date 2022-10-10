@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 534324c0be8357e4f91966c129dec1bc, type: 3}
-  m_Name: Skeleton
+  m_Name: SkeletonStats
   m_EditorClassIdentifier: 
   _statsValues:
     MaxLife: 1

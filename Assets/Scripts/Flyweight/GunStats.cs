@@ -16,6 +16,9 @@ namespace Flyweight
         public float Cooldown => _gunStatsValues.Cooldown;
         public float PlayerSpeedModifier => _gunStatsValues.PlayerSpeedModifier;
         public GunRecoil Recoil => _gunStatsValues.Recoil;
+        public float Range => _gunStatsValues.Range;
+        
+        public float Spread => _gunStatsValues.Spread;
     }
 }
 
@@ -30,6 +33,8 @@ public struct GunStatsValues
     public float ReloadTime; // in seconds
     public float PlayerSpeedModifier;
     public GunRecoil Recoil;
+    public float Range; // in meters
+    public float Spread; 
 }
 
 [System.Serializable]
@@ -38,10 +43,4 @@ public struct GunRecoil
     public float x;
     public float y;
     public float z;
-    public struct Ads
-    {
-        public float x;
-        public float y;
-        public float z;
-    }
 }

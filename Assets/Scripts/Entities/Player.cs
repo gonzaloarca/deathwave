@@ -10,13 +10,15 @@ using Weapons;
 namespace Entities
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Character : Actor
+    public class Player : Actor
     {
         // INSTANCIAS
-        private MovementController _movementController;
+        private PlayerMovementController _movementController;
+        private PlayerCameraController _cameraController;
+        
         [SerializeField] private List<Gun> _guns;
         private Gun _currentGun;
-        private LifeController _lifeController;
+        private HealthController _healthController;
         // BINDING MOVEMENT
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
         [SerializeField] private KeyCode _moveBack = KeyCode.S;
@@ -35,6 +37,7 @@ namespace Entities
         [SerializeField] private KeyCode _setVictory = KeyCode.Return;
         [SerializeField] private KeyCode _setDefeat = KeyCode.Backspace;
 
+
         /* Commands */
         private CmdMovement _cmdMoveForward;
         private CmdMovement _cmdMoveBack;
@@ -51,8 +54,9 @@ namespace Entities
         private void Start()
         {
 
-            _lifeController = GetComponent<LifeController>();
-            _movementController = GetComponent<MovementController>();
+            _healthController = GetComponent<HealthController>();
+            _movementController = GetComponent<PlayerMovementController>();
+            _cameraController = GetComponent<PlayerCameraController>();
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
@@ -91,7 +95,7 @@ namespace Entities
             var horizontalRotation = Input.GetAxis("Mouse X");
             var rotationDirection = new Vector3(horizontalRotation, verticalRotation, 0);
 
-            EventQueueManager.Instance.AddCommand(new CmdRotation(_movementController, rotationDirection));
+            EventQueueManager.Instance.AddCommand(new CmdRotatePlayerCamera(_cameraController, rotationDirection));
 
             
             // Gun Logic
@@ -132,7 +136,7 @@ namespace Entities
                 return;
         
             _grunts.Sound();
-            _lifeController.TakeDamage(melee.Damage());
+            _healthController.TakeDamage(melee.Damage());
         
         }
     }

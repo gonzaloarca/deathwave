@@ -6,6 +6,7 @@ using EventQueue;
 using Flyweight;
 using Strategy;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Weapons
 {
@@ -22,16 +23,20 @@ namespace Weapons
         public int MaxMags => _stats.MaxMags;
         public GunRecoil GunRecoil => _stats.Recoil;
         public int TotalBulletsLeft => _totalBulletsLeft;
+        public float Range => _stats.Range;
+        public float Spread => _stats.Spread;
         [SerializeField] private int _totalBulletsLeft;
 
         public int BulletsLeftInMag => _bulletsLeftInMag;
         [SerializeField] private int _bulletsLeftInMag;
 
-        public float CooldownTimer => _cooldownTimer;
-        [SerializeField] private float _cooldownTimer = 0f;
+        public float CooldownTimer => _nextTimeToFire;
+        [SerializeField] private float _nextTimeToFire = 0f;
 
         private RecoilController _recoilController;
         private CmdRecoilFire _cmdRecoilFire;
+
+        private int _hitBoxLayer;
 
         private void Start()
         {
@@ -39,6 +44,7 @@ namespace Weapons
             _bulletsLeftInMag = MagSize;
             _recoilController = transform.root.GetComponentInChildren<RecoilController>();
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
+            _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
         }
 
         protected void InstantiateBullet(Vector3 position, Quaternion rotation, string bulletName)
@@ -49,8 +55,23 @@ namespace Weapons
         }
 
         // Bullet instantiation method for modularity across extended classes
-        protected virtual void ShootBullet(Transform theTransform) =>
-            InstantiateBullet(theTransform.position, theTransform.rotation, "Bullet");
+        protected virtual void ShootBullet(Transform theTransform)
+        {
+            // apply spread to the bullet
+            var bulletTarget = theTransform.forward + new Vector3(Random.Range(-Spread, Spread), Random.Range(-Spread, Spread), 0);
+            // Raycast to see if we hit anything
+            if (Physics.Raycast(theTransform.position, bulletTarget, out var hit, Range, 1 << _hitBoxLayer))
+            {
+                // If we hit something, instantiate a bullet at the hit point
+               // hit.transform.root.
+            }
+            else
+            {
+                // If we didn't hit anything, instantiate a bullet at the end of the raycast
+                InstantiateBullet(theTransform.position + (theTransform.forward * Range), theTransform.rotation, "Bullet");
+            }
+            // InstantiateBullet(theTransform.position, theTransform.rotation, "Bullet");
+        }
 
         public virtual void Shoot()
         {
@@ -61,10 +82,10 @@ namespace Weapons
                 return;
             }
 
-            if (_cooldownTimer > 0) return;
+            if (Time.time < _nextTimeToFire) return;
 
             _bulletsLeftInMag--;
-            _cooldownTimer = Cooldown;
+            _nextTimeToFire = Time.time + Cooldown;
             var transform1 = transform;
 
             EventQueueManager.Instance.AddCommand(_cmdRecoilFire);
@@ -91,9 +112,9 @@ namespace Weapons
 
         protected virtual void Update()
         {
-            if (_cooldownTimer > 0)
+            if (_nextTimeToFire > 0)
             {
-                _cooldownTimer -= Time.deltaTime;
+                _nextTimeToFire -= Time.deltaTime;
             }
         }
     }

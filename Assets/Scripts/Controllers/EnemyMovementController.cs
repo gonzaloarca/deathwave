@@ -6,19 +6,13 @@ using UnityEngine;
 
 namespace Controllers{
     
-    [RequireComponent(typeof(IA),typeof(Animator))]
-    public class IAMovementController : MonoBehaviour, IFollower
+    [RequireComponent(typeof(Enemy),typeof(Animator))]
+    public class EnemyMovementController : MonoBehaviour, IFollower
     {
-        public float MouseXSensitivity => 0;
-        public float MouseYSensitivity => 0;
-    
         public float MovementSpeed => _movementSpeed;
         private float _movementSpeed;
-        public float RotationSpeed => GetComponent<IA>().IAStats.RotationSpeed;
-        public float JumpStrength => GetComponent<IA>().IAStats.JumpStrength;
         // public Transform _torso;
         private Animator _animator;
-        private float _verticalRotation = 0f;
         public int GroundLayer => LayerMask.NameToLayer($"Ground");
         private bool _sprint;
         private bool _lpunch = false;
@@ -30,7 +24,7 @@ namespace Controllers{
             // _rigidbody = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
             _animator.SetBool("running" , true);
-            _movementSpeed = GetComponent<IA>().IAStats.SprintSpeed;
+            _movementSpeed = GetComponent<Enemy>().ActorStats.SprintSpeed;
         }
 
         private void Update(){

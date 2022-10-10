@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class IAEventsManager : MonoBehaviour
+    public class EnemyEventsManager : MonoBehaviour
     {
-        public static IAEventsManager Instance;
+        public static EnemyEventsManager Instance;
 
         private void Awake()
         {
