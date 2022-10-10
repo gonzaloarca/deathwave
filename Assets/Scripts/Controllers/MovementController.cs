@@ -10,6 +10,9 @@ namespace Controllers
     {
         public float MovementSpeed => _movementSpeed;
         private float _movementSpeed;
+        
+        public float SpeedModifier => _speedModifier;
+        [SerializeField] private float _speedModifier = 1f;
         public float MouseXSensitivity => GetComponent<Actor>().ActorStats.MouseXSensitivity;
         public float MouseYSensitivity => GetComponent<Actor>().ActorStats.MouseYSensitivity;
 
@@ -31,10 +34,9 @@ namespace Controllers
 
         public void Travel(Vector3 direction)
         {
-            transform.Translate(direction * (Time.deltaTime * MovementSpeed));
+            transform.Translate(direction * (Time.deltaTime * MovementSpeed * SpeedModifier));
         }
-
-
+        
         public void Rotate(Vector3 direction)
         {
             // Chracter Prefab Hips Axis are flipped, therefore we use the z-axis for torso vertical rotation,
@@ -74,5 +76,9 @@ namespace Controllers
             }
         }
 
+        public void SetSpeedModifier(float amount)
+        {
+            _speedModifier = amount;
+        }
     }
 }

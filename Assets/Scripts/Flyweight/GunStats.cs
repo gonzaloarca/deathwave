@@ -14,7 +14,7 @@ namespace Flyweight
         public int MaxMags => _gunStatsValues.MaxMags;
         public float ReloadTime => _gunStatsValues.ReloadTime;
         public float Cooldown => _gunStatsValues.Cooldown;
-        public float Weight => _gunStatsValues.Weight;
+        public float PlayerSpeedModifier => _gunStatsValues.PlayerSpeedModifier;
         public GunRecoil Recoil => _gunStatsValues.Recoil;
     }
 }
@@ -28,7 +28,7 @@ public struct GunStatsValues
     public int MaxMags;
     public float Cooldown; // in seconds
     public float ReloadTime; // in seconds
-    public float Weight;
+    public float PlayerSpeedModifier;
     public GunRecoil Recoil;
 }
 

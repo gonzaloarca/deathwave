@@ -19,7 +19,7 @@ MonoBehaviour:
     MaxMags: 6
     Cooldown: 1
     ReloadTime: 4
-    Weight: 20
+    PlayerSpeedModifier: 0.5
     Recoil:
       RecoilX: 0
       RecoilY: 0

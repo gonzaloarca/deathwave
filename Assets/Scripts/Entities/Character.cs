@@ -44,6 +44,7 @@ namespace Entities
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
         private CmdShoot _cmdShoot;
+        private CmdReload _cmdReload;
 
         private void Start()
         {
@@ -57,8 +58,11 @@ namespace Entities
             _cmdStartSprint = new CmdSprint(_movementController, true);
             _cmdStopSprint = new CmdSprint(_movementController, false);
             _cmdJump = new CmdJump(_movementController);
-
+            
+            // Set _currentGun
             ChangeWeapon(0);
+            
+            _cmdReload = new CmdReload(_currentGun);
             _cmdShoot = new CmdShoot(_currentGun);
         }
 
@@ -87,7 +91,7 @@ namespace Entities
             
             // Gun Logic
             if (Input.GetKeyDown(_shoot)) EventQueueManager.Instance.AddCommand(_cmdShoot);
-            if (Input.GetKeyDown(_reload)) _currentGun?.Reload();
+            if (Input.GetKeyDown(_reload)) EventQueueManager.Instance.AddCommand(_cmdReload);
 
             if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
             if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
@@ -106,6 +110,9 @@ namespace Entities
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
             _cmdShoot = new CmdShoot(_currentGun);
+            
+            // Change speed of character based on weapon
+            EventQueueManager.Instance.AddCommand(new CmdSetSpeedModifier(_movementController, _currentGun.PlayerSpeedModifier));
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Strategy
         public int Damage { get; }
         public int MaxMags { get; }
         public float Cooldown { get; }
-        public float Weight { get; }
+        public float PlayerSpeedModifier { get; }
         public GunRecoil GunRecoil { get; }
         public int TotalBulletsLeft { get; }
 

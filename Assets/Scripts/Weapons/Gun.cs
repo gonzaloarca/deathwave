@@ -14,7 +14,7 @@ namespace Weapons
         public int MagSize => _stats.MagSize;
         public float ReloadTime => _stats.ReloadTime;
         public float Cooldown => _stats.Cooldown;
-        public float Weight => _stats.Weight;
+        public float PlayerSpeedModifier => _stats.PlayerSpeedModifier;
         public int Damage => _stats.Damage;
         public int MaxMags => _stats.MaxMags;
         public GunRecoil GunRecoil => _stats.Recoil;
