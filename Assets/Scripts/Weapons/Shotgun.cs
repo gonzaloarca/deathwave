@@ -9,6 +9,7 @@ namespace Weapons
 
         protected override void ShootBullet(Transform theTransform)
         {
+            
             base.ShootBullet(theTransform);
         }
     }
