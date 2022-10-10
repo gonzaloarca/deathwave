@@ -26,7 +26,7 @@ namespace Entities
         [SerializeField] private KeyCode _sprint = KeyCode.LeftShift;
 
         // BIINDING COMBAT
-        [SerializeField] private KeyCode _attack = KeyCode.Mouse0;
+        [SerializeField] private KeyCode _shoot = KeyCode.Mouse0;
         [SerializeField] private KeyCode _reload = KeyCode.R;
 
         [SerializeField] private KeyCode _weaponSlot1 = KeyCode.Alpha1;
@@ -43,7 +43,7 @@ namespace Entities
         private CmdJump _cmdJump;
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
-        private CmdAttack _cmdAttack;
+        private CmdShoot _cmdShoot;
 
         private void Start()
         {
@@ -59,7 +59,7 @@ namespace Entities
             _cmdJump = new CmdJump(_movementController);
 
             ChangeWeapon(0);
-            _cmdAttack = new CmdAttack(_currentGun);
+            _cmdShoot = new CmdShoot(_currentGun);
         }
 
         void Update()
@@ -86,7 +86,7 @@ namespace Entities
 
             
             // Gun Logic
-            if (Input.GetKeyDown(_attack)) EventQueueManager.Instance.AddCommand(_cmdAttack);
+            if (Input.GetKeyDown(_shoot)) EventQueueManager.Instance.AddCommand(_cmdShoot);
             if (Input.GetKeyDown(_reload)) _currentGun?.Reload();
 
             if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
@@ -105,7 +105,7 @@ namespace Entities
             foreach (var gun in _guns) gun.gameObject.SetActive(false);
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
-            _cmdAttack = new CmdAttack(_currentGun);
+            _cmdShoot = new CmdShoot(_currentGun);
         }
     }
 }

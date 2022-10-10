@@ -7,7 +7,7 @@ namespace Weapons
     {
         [SerializeField] private int _bulletsInShell = 5;
 
-        public override void Attack()
+        public override void Shoot()
         {
             for (int i = 0; i < _bulletsInShell; i++)
             {

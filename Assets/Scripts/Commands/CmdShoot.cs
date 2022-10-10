@@ -2,15 +2,15 @@ using Strategy;
 
 namespace Commands
 {
-    public class CmdAttack : ICommand
+    public class CmdShoot : ICommand
     {
         private IGun _gun;
 
-        public CmdAttack(IGun gun)
+        public CmdShoot(IGun gun)
         {
             _gun = gun;
         }
 
-        public void Execute() => _gun.Attack();
+        public void Execute() => _gun.Shoot();
     }
 }
