@@ -19,7 +19,7 @@ namespace Entities
         private CmdJump _cmdJump;
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
-        private CmdAttack _cmdAttack;
+        
       //  private CmdIdle _idle;
         private float _vision; 
         private float _meleeRange;

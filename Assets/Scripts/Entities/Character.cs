@@ -16,7 +16,7 @@ namespace Entities
         private MovementController _movementController;
         [SerializeField] private List<Gun> _guns;
         private Gun _currentGun;
-
+        private LifeController _lifeController;
         // BINDING MOVEMENT
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
         [SerializeField] private KeyCode _moveBack = KeyCode.S;
@@ -47,9 +47,11 @@ namespace Entities
         private CmdReload _cmdReload;
 
         private PlayerDamageSFX _grunts;
+        private int _enemyLayer;
         private void Start()
         {
 
+            _lifeController = GetComponent<LifeController>();
             _movementController = GetComponent<MovementController>();
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
@@ -66,6 +68,7 @@ namespace Entities
             _cmdReload = new CmdReload(_currentGun);
             _cmdShoot = new CmdShoot(_currentGun);
             _grunts = GetComponent<PlayerDamageSFX>();
+            _enemyLayer = LayerMask.NameToLayer("Enemy");
         }
 
         void Update()
@@ -108,6 +111,8 @@ namespace Entities
 
         private void ChangeWeapon(int index)
         {
+            if(_guns.Count <= 0)
+                return;
             foreach (var gun in _guns) gun.gameObject.SetActive(false);
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
@@ -119,12 +124,15 @@ namespace Entities
 
         void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("hit with: " + collision.gameObject.name);
+            if (_enemyLayer != collision.gameObject.layer ) return;
+
+            
             IMelee melee = collision.gameObject.GetComponent<IMelee>();
             if(melee == null)
                 return;
-            Debug.Log("Damage: " + melee.Damage());
+        
             _grunts.Sound();
+            _lifeController.TakeDamage(melee.Damage());
         
         }
     }

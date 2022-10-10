@@ -38,7 +38,7 @@ namespace Controllers{
                     _stop -= Time.deltaTime;
         }
 
-        
+        public void SetSpeedModifier(float num ){}
         public void Travel(Vector3 direction)
         {
             if(_stop >0f)
