@@ -24,11 +24,25 @@ namespace Weapons
         public int BulletsLeftInMag => _bulletsLeftInMag;
         [SerializeField] private int _bulletsLeftInMag;
 
+        public float CooldownTimer => _cooldownTimer;
+        [SerializeField] private float _cooldownTimer = 0f;
+
         private void Start()
         {
             Refill();
             _bulletsLeftInMag = MagSize;
         }
+
+        protected void InstantiateBullet(Vector3 position, Quaternion rotation, string bulletName)
+        {
+            var bullet = Instantiate(BulletPrefab, position, rotation);
+            bullet.name = bulletName;
+            bullet.GetComponent<Bullet>().SetOwner(this);
+        }
+
+        // Bullet instantiation method for modularity across extended classes
+        protected virtual void ShootBullet(Transform theTransform) =>
+            InstantiateBullet(theTransform.position, theTransform.rotation, "Bullet");
 
         public virtual void Shoot()
         {
@@ -39,11 +53,13 @@ namespace Weapons
                 return;
             }
 
+            if (_cooldownTimer > 0) return;
+
             _bulletsLeftInMag--;
+            _cooldownTimer = Cooldown;
             var transform1 = transform;
-            var bullet = Instantiate(BulletPrefab, transform1.position, transform1.rotation);
-            bullet.name = "Bullet";
-            bullet.GetComponent<Bullet>().SetOwner(this);
+
+            ShootBullet(transform1);
         }
 
         public void Reload()
@@ -61,6 +77,14 @@ namespace Weapons
         public void AddMags(int mags)
         {
             _totalBulletsLeft = Math.Min(_totalBulletsLeft + mags * MagSize, MaxMags * MagSize);
+        }
+
+        protected virtual void Update()
+        {
+            if (_cooldownTimer > 0)
+            {
+                _cooldownTimer -= Time.deltaTime;
+            }
         }
     }
 }
