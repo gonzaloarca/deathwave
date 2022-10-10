@@ -16,8 +16,8 @@ MonoBehaviour:
     MaxLife: 100
     WalkSpeed: 10
     SprintSpeed: 50
-    MouseXSensitivity: 200
-    MouseYSensitivity: 200
+    MouseXSensitivity: 400
+    MouseYSensitivity: 400
     MaxVerticalRotation: 90
     MinVerticalRotation: -87
     JumpStrength: 3

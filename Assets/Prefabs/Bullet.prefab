@@ -130,4 +130,4 @@ MonoBehaviour:
   _rigidbody: {fileID: 0}
   _collider: {fileID: 0}
   _speed: 50
-  _layerTarget: 
+  _layerTarget: 07000000
