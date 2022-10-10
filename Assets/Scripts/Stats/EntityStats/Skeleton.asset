@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88a197f03f44f4f8d63585bc7be4cd4, type: 3}
-  m_Name: PlayerStats
+  m_Script: {fileID: 11500000, guid: 534324c0be8357e4f91966c129dec1bc, type: 3}
+  m_Name: Skeleton
   m_EditorClassIdentifier: 
   _statsValues:
     MaxLife: 100
-    WalkSpeed: 10
-    SprintSpeed: 50
-    MouseXSensitivity: 400
-    MouseYSensitivity: 400
-    MaxVerticalRotation: 90
-    MinVerticalRotation: -87
-    JumpStrength: 3
+    WalkSpeed: 1
+    SprintSpeed: 3
+    RotationSpeed: 10
+    JumpStrength: 10
+    MeleeRange: 1
+    Vision: 10
