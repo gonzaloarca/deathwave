@@ -31,6 +31,7 @@ namespace Entities
 
         public void OnTriggerEnter(Collider collider)
         {
+           
             if (!_layerTarget.Contains(collider.gameObject.layer)) return;
             IDamageable damageable = collider.GetComponent<IDamageable>();
             damageable?.TakeDamage(_damage);
@@ -42,7 +43,6 @@ namespace Entities
         {
             _rigidbody = GetComponent<Rigidbody>();
             _collider = GetComponent<Collider>();
-
             _collider.isTrigger = true;
             _rigidbody.useGravity = false;
             _rigidbody.isKinematic = true;
