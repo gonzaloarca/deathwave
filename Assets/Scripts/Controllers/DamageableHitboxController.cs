@@ -1,12 +1,13 @@
 using Strategy;
+using UnityEngine;
 
 namespace Controllers
 {
-    public class DamageableHitboxController : IHittable
+    public class DamageableHitboxController : MonoBehaviour, IHittable
     {
-        public void Hit()
+        public void Hit(float damage)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("HIT");
         }
     }
 }

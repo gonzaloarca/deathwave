@@ -47,30 +47,19 @@ namespace Weapons
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
         }
 
-        protected void InstantiateBullet(Vector3 position, Quaternion rotation, string bulletName)
-        {
-            var bullet = Instantiate(BulletPrefab, position, rotation);
-            bullet.name = bulletName;
-            bullet.GetComponent<Bullet>().SetOwner(this);
-        }
-
         // Bullet instantiation method for modularity across extended classes
         protected virtual void ShootBullet(Transform theTransform)
         {
+            Debug.Log("SHOOT");
             // apply spread to the bullet
             var bulletTarget = theTransform.forward + new Vector3(Random.Range(-Spread, Spread), Random.Range(-Spread, Spread), 0);
             // Raycast to see if we hit anything
             if (Physics.Raycast(theTransform.position, bulletTarget, out var hit, Range, 1 << _hitBoxLayer))
             {
+                Debug.Log("HIT");
                 // If we hit something, instantiate a bullet at the hit point
-               // hit.transform.root.
+               hit.transform.GetComponent<IHittable>()?.Hit(Damage);
             }
-            else
-            {
-                // If we didn't hit anything, instantiate a bullet at the end of the raycast
-                InstantiateBullet(theTransform.position + (theTransform.forward * Range), theTransform.rotation, "Bullet");
-            }
-            // InstantiateBullet(theTransform.position, theTransform.rotation, "Bullet");
         }
 
         public virtual void Shoot()

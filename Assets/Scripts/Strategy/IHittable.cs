@@ -2,6 +2,6 @@ namespace Strategy
 {
     public interface IHittable
     {
-        void Hit();
+        void Hit(float damage);
     }
 }

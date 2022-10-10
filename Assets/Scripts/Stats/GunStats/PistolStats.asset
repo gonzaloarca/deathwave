@@ -24,3 +24,5 @@ MonoBehaviour:
       x: -1
       y: 0
       z: 3
+    Range: 100
+    Spread: 0
