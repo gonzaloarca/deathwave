@@ -46,6 +46,7 @@ namespace Entities
         private CmdSprint _cmdStopSprint;
         private CmdAttack _cmdAttack;
 
+        private PlayerDamageSFX _grunts;
         private void Start()
         {
 
@@ -61,6 +62,7 @@ namespace Entities
             _cmdJump = new CmdJump(_movementController);
 
             _cmdAttack = new CmdAttack(_currentGun);
+            _grunts = GetComponent<PlayerDamageSFX>();
         }
 
         void Update()
@@ -106,6 +108,17 @@ namespace Entities
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
             _cmdAttack = new CmdAttack(_currentGun);
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("hit with: " + collision.gameObject.name);
+            IMelee melee = collision.gameObject.GetComponent<IMelee>();
+            if(melee == null)
+                return;
+            Debug.Log("Damage: " + melee.Damage());
+            _grunts.Sound();
+        
         }
     }
 }

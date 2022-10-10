@@ -5,13 +5,19 @@ namespace Commands
 {
     public class CmdPunch : ICommand
     {
-        private IMelee _melee;
+ 
+        private IFollower _follower;
+        private Vector3 _target;
 
-        public CmdPunch(IMelee melee)
+        public CmdPunch(IFollower follower , Vector3 target)
         {
-            _melee = melee;
+            _follower = follower;
+            _target = target;
         }
 
-        public void Execute() => _melee.Attack();
+        public void Execute(){
+            _follower.LookAt(_target);
+            _follower.Attack();
+        }
     }
 }

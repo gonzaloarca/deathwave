@@ -20,6 +20,7 @@ namespace Entities
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
         private CmdAttack _cmdAttack;
+      //  private CmdIdle _idle;
         private float _vision; 
         private float _meleeRange;
         private GameObject _target;
@@ -47,21 +48,21 @@ namespace Entities
 
         void Update()
         {
-            Debug.Log("Bad to the bone");
+           // Debug.Log("Bad to the bone");
             float distance = Vector3.Distance(_target.transform.position , transform.position);
             if(distance >= _vision){
-                
-                Debug.Log("Not Following");
+                EventQueueManager.Instance.AddCommand(new CmdFollow(_movementController , _target.transform.position));
+                //Debug.Log("Not Following");
                 // _animator.SetFloat("Vertical", 0f);
                 // _animator.SetFloat("Horizontal", 0f);
                 // _animator.SetBool("running", false);
                 return;
             }
             if(distance <= _meleeRange){
-                Debug.Log("Wanna punch");
+                EventQueueManager.Instance.AddCommand(new CmdPunch(_movementController,_target.transform.position));
                 return;
             }
-            Debug.Log("Wanna move");
+           // Debug.Log("Wanna move");
             // //Desde el Jugador 
             // var direction = _target.transform.position - transform.position;
             // Debug.DrawRay(transform.position, direction,  Color.red, 0.1f);
