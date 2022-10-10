@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   _statsValues:
-    MaxLife: 100
+    MaxLife: 1
     WalkSpeed: 1
-    SprintSpeed: 3
+    SprintSpeed: 1
     RotationSpeed: 10
     JumpStrength: 10
     MeleeRange: 1

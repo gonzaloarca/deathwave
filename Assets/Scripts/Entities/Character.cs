@@ -127,7 +127,7 @@ namespace Entities
             if (_enemyLayer != collision.gameObject.layer ) return;
 
             
-            IMelee melee = collision.gameObject.GetComponent<IMelee>();
+            IMelee melee = collision.gameObject.GetComponentInChildren<IMelee>();
             if(melee == null)
                 return;
         
