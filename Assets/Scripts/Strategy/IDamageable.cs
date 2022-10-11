@@ -4,9 +4,9 @@ namespace Strategy
 {
     public interface IDamageable
     {
-        float MaxLife { get; }
+        int MaxHealth { get; }
 
-        void TakeDamage(float damage);
+        void TakeDamage(int damage);
 
         void Die();
     }

@@ -31,9 +31,10 @@ namespace Entities
 
         public void OnTriggerEnter(Collider collider)
         {
+           
             if (!_layerTarget.Contains(collider.gameObject.layer)) return;
             IDamageable damageable = collider.GetComponent<IDamageable>();
-            damageable?.TakeDamage(_owner.Damage);
+            damageable?.TakeDamage(_damage);
 
             Destroy(this.gameObject);
         }
@@ -42,14 +43,17 @@ namespace Entities
         {
             _rigidbody = GetComponent<Rigidbody>();
             _collider = GetComponent<Collider>();
-
             _collider.isTrigger = true;
             _rigidbody.useGravity = false;
             _rigidbody.isKinematic = true;
             _rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
         }
 
-        public void SetOwner(IGun owner) => _owner = owner;
+        public void SetOwner(IGun owner)
+        {
+            _owner = owner;
+            _damage = owner.Damage;
+        }
 
         private void Update()
         {

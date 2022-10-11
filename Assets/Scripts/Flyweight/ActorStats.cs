@@ -9,27 +9,22 @@ namespace Flyweight
     {
         [SerializeField] private ActorStatValues _statsValues;
 
-        public int MaxLife => _statsValues.MaxLife;
+        public int MaxHealth => _statsValues.MaxHealth;
         public float WalkSpeed => _statsValues.WalkSpeed;
         public float SprintSpeed => _statsValues.SprintSpeed;
-        public float MouseXSensitivity => _statsValues.MouseXSensitivity;
-        public float MouseYSensitivity => _statsValues.MouseYSensitivity;
-        public float MaxVerticalRotation => _statsValues.MaxVerticalRotation;
-        public float MinVerticalRotation => _statsValues.MinVerticalRotation;
-
         public float JumpStrength => _statsValues.JumpStrength;
+        public float MeleeRange => _statsValues.MeleeRange;
+        public float RotationSpeed => _statsValues.RotationSpeed;
     }
 
     [System.Serializable]
     public struct ActorStatValues
     {
-        public int MaxLife;
+        public int MaxHealth;
         public float WalkSpeed;
         public float SprintSpeed;
-        public float MouseXSensitivity;
-        public float MouseYSensitivity;
-        public float MaxVerticalRotation;
-        public float MinVerticalRotation;
         public float JumpStrength;
+        public float MeleeRange;
+        public float RotationSpeed;
     }
 }
