@@ -13,7 +13,7 @@ namespace Weapons
     public class Gun : MonoBehaviour, IGun
     {
         [SerializeField] private GunStats _stats;
-        
+
         public GameObject MuzzleFlash => _stats.MuzzleFlash;
         public int MagSize => _stats.MagSize;
         public float ReloadTime => _stats.ReloadTime;
@@ -37,7 +37,7 @@ namespace Weapons
         private CmdRecoilFire _cmdRecoilFire;
 
         private ParticleSystem _muzzleFlashParticles;
-        
+
         private int _hitBoxLayer;
 
         private void Start()
@@ -47,7 +47,7 @@ namespace Weapons
             _recoilController = transform.root.GetComponentInChildren<RecoilController>();
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
-            
+
             var bulletSpawn = transform.GetComponentInChildren<BulletSpawnController>()?.transform;
             var muzzleFlash = Instantiate(MuzzleFlash, bulletSpawn.position, bulletSpawn.rotation);
             muzzleFlash.transform.parent = bulletSpawn;
@@ -60,16 +60,15 @@ namespace Weapons
             Debug.Log("SHOOT");
             _muzzleFlashParticles.Play();
             // apply spread to the bullet
-            var bulletTarget = theTransform.forward + new Vector3(Random.Range(-Spread, Spread), Random.Range(-Spread, Spread), 0);
-            // Raycast to see if we hit anything
-            var mask = 1 << _hitBoxLayer;
-            Debug.DrawRay(theTransform.position , theTransform.TransformDirection(Vector3.forward) * 10 , Color.red , 1f);
-            if ( Physics.Raycast(theTransform.position, bulletTarget, out var hit, Range, mask) ) 
+            var crosshairRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            var spread = Random.insideUnitCircle * Spread;
+            var layerMask = 1 << _hitBoxLayer;
+
+            if (Physics.Raycast(crosshairRay.origin, crosshairRay.direction + new Vector3(spread.x, spread.y, 0),
+                    out var hit, Range, layerMask))
             {
-                Debug.Log("HIT: " + hit.collider.transform.gameObject.name);
-                // If we hit something, instantiate a bullet at the hit point
-               hit.collider.transform.gameObject.GetComponent<IHittable>()?.Hit(Damage);
-              
+                Debug.Log("HIT");
+                hit.collider.transform.gameObject.GetComponent<IHittable>()?.Hit(Damage);
             }
         }
 
