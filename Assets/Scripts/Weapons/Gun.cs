@@ -40,6 +40,7 @@ namespace Weapons
         private ParticleSystem _muzzleFlashParticles;
 
         private int _hitBoxLayer;
+        private Transform _bulletSpawnPoint;
 
         private void Start()
         {
@@ -49,9 +50,9 @@ namespace Weapons
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
 
-            var bulletSpawn = transform.GetComponentInChildren<BulletSpawnController>()?.transform;
-            var muzzleFlash = Instantiate(MuzzleFlash, bulletSpawn.position, bulletSpawn.rotation);
-            muzzleFlash.transform.parent = bulletSpawn;
+            _bulletSpawnPoint = transform.GetComponentInChildren<BulletSpawnController>()?.transform;
+            var muzzleFlash = Instantiate(MuzzleFlash, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
+            muzzleFlash.transform.parent = _bulletSpawnPoint;
             _muzzleFlashParticles = muzzleFlash.GetComponent<ParticleSystem>();
         }
 
@@ -59,10 +60,11 @@ namespace Weapons
         protected void InstantiateBullet(Vector3 position, Quaternion rotation)
         {
             var bullet = Instantiate(Bullet, position, rotation);
-            bullet.name = "Bullet";
             var bulletScript = bullet.GetComponent<IBullet>();
+            bullet.name = "Bullet";
             bulletScript.SetRange(Range);
         }
+
         protected virtual void ShootBullet(Transform theTransform)
         {
             Debug.Log("SHOOT");
@@ -70,13 +72,15 @@ namespace Weapons
             // apply spread to the bullet
             var crosshairRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             var spread = Random.insideUnitCircle * Spread;
+            var bulletDirection = crosshairRay.direction + new Vector3(spread.x, spread.y, 0);
+            
+            InstantiateBullet(_bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));
+            
             var layerMask = 1 << _hitBoxLayer;
-
-            if (Physics.Raycast(crosshairRay.origin, crosshairRay.direction + new Vector3(spread.x, spread.y, 0),
+            if (Physics.Raycast(crosshairRay.origin, bulletDirection,
                     out var hit, Range, layerMask))
             {
                 Debug.Log("HIT");
-                InstantiateBullet(crosshairRay.origin, Quaternion.LookRotation(hit.point - crosshairRay.origin));
                 hit.collider.transform.gameObject.GetComponent<IHittable>()?.Hit(Damage);
             }
         }
