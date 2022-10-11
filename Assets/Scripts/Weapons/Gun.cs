@@ -62,11 +62,14 @@ namespace Weapons
             // apply spread to the bullet
             var bulletTarget = theTransform.forward + new Vector3(Random.Range(-Spread, Spread), Random.Range(-Spread, Spread), 0);
             // Raycast to see if we hit anything
-            if (Physics.Raycast(theTransform.position, bulletTarget, out var hit, Range, 1 << _hitBoxLayer))
+            var mask = 1 << _hitBoxLayer;
+            Debug.DrawRay(theTransform.position , theTransform.TransformDirection(Vector3.forward) * 10 , Color.red , 1f);
+            if ( Physics.Raycast(theTransform.position, bulletTarget, out var hit, Range, mask) ) 
             {
-                Debug.Log("HIT");
+                Debug.Log("HIT: " + hit.collider.transform.gameObject.name);
                 // If we hit something, instantiate a bullet at the hit point
-               hit.transform.GetComponent<IHittable>()?.Hit(Damage);
+               hit.collider.transform.gameObject.GetComponent<IHittable>()?.Hit(Damage);
+              
             }
         }
 
