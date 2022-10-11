@@ -15,6 +15,7 @@ namespace Weapons
         [SerializeField] private GunStats _stats;
 
         public GameObject MuzzleFlash => _stats.MuzzleFlash;
+        public GameObject Bullet => _stats.Bullet;
         public int MagSize => _stats.MagSize;
         public float ReloadTime => _stats.ReloadTime;
         public float Cooldown => _stats.Cooldown;
@@ -55,6 +56,13 @@ namespace Weapons
         }
 
         // Bullet instantiation method for modularity across extended classes
+        protected void InstantiateBullet(Vector3 position, Quaternion rotation)
+        {
+            var bullet = Instantiate(Bullet, position, rotation);
+            bullet.name = "Bullet";
+            var bulletScript = bullet.GetComponent<IBullet>();
+            bulletScript.SetRange(Range);
+        }
         protected virtual void ShootBullet(Transform theTransform)
         {
             Debug.Log("SHOOT");
@@ -68,6 +76,7 @@ namespace Weapons
                     out var hit, Range, layerMask))
             {
                 Debug.Log("HIT");
+                InstantiateBullet(crosshairRay.origin, Quaternion.LookRotation(hit.point - crosshairRay.origin));
                 hit.collider.transform.gameObject.GetComponent<IHittable>()?.Hit(Damage);
             }
         }
