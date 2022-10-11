@@ -4,7 +4,7 @@ namespace Strategy
 {
     public interface IGun
     {
-        GameObject BulletPrefab { get; }
+        GameObject MuzzleFlash { get; }
         public int MagSize { get; }
         public float ReloadTime { get; }
         public int Damage { get; }

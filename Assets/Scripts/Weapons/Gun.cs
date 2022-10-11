@@ -13,8 +13,8 @@ namespace Weapons
     public class Gun : MonoBehaviour, IGun
     {
         [SerializeField] private GunStats _stats;
-
-        public GameObject BulletPrefab => _stats.BulletPrefab;
+        
+        public GameObject MuzzleFlash => _stats.MuzzleFlash;
         public int MagSize => _stats.MagSize;
         public float ReloadTime => _stats.ReloadTime;
         public float Cooldown => _stats.Cooldown;
@@ -36,6 +36,8 @@ namespace Weapons
         private RecoilController _recoilController;
         private CmdRecoilFire _cmdRecoilFire;
 
+        private ParticleSystem _muzzleFlashParticles;
+        
         private int _hitBoxLayer;
 
         private void Start()
@@ -45,12 +47,18 @@ namespace Weapons
             _recoilController = transform.root.GetComponentInChildren<RecoilController>();
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
+            
+            var bulletSpawn = transform.GetComponentInChildren<BulletSpawnController>()?.transform;
+            var muzzleFlash = Instantiate(MuzzleFlash, bulletSpawn.position, bulletSpawn.rotation);
+            muzzleFlash.transform.parent = bulletSpawn;
+            _muzzleFlashParticles = muzzleFlash.GetComponent<ParticleSystem>();
         }
 
         // Bullet instantiation method for modularity across extended classes
         protected virtual void ShootBullet(Transform theTransform)
         {
             Debug.Log("SHOOT");
+            _muzzleFlashParticles.Play();
             // apply spread to the bullet
             var bulletTarget = theTransform.forward + new Vector3(Random.Range(-Spread, Spread), Random.Range(-Spread, Spread), 0);
             // Raycast to see if we hit anything

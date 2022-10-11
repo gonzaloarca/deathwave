@@ -8,7 +8,7 @@ namespace Flyweight
     {
         [SerializeField] private GunStatsValues _gunStatsValues;
 
-        public GameObject BulletPrefab => _gunStatsValues.BulletPrefab;
+        public GameObject MuzzleFlash => _gunStatsValues.MuzzleFlash;
         public int Damage => _gunStatsValues.Damage;
         public int MagSize => _gunStatsValues.MagSize;
         public int MaxMags => _gunStatsValues.MaxMags;
@@ -25,7 +25,7 @@ namespace Flyweight
 [System.Serializable]
 public struct GunStatsValues
 {
-    public GameObject BulletPrefab;
+    public GameObject MuzzleFlash;
     public int Damage;
     public int MagSize;
     public int MaxMags;
