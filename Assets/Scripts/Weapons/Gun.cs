@@ -40,7 +40,11 @@ namespace Weapons
         private ParticleSystem _muzzleFlashParticles;
 
         private int _hitBoxLayer;
-        private Transform _bulletSpawnPoint;
+        
+        public Transform BulletSpawnPoint => _bulletSpawnPoint;
+        [SerializeField] private Transform _bulletSpawnPoint;
+        
+        
 
         private void Start()
         {
@@ -50,7 +54,6 @@ namespace Weapons
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
 
-            _bulletSpawnPoint = transform.GetComponentInChildren<BulletSpawnController>()?.transform;
             var muzzleFlash = Instantiate(MuzzleFlash, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
             muzzleFlash.transform.parent = _bulletSpawnPoint;
             _muzzleFlashParticles = muzzleFlash.GetComponent<ParticleSystem>();
