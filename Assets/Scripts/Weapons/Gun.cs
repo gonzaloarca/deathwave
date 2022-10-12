@@ -73,9 +73,9 @@ namespace Weapons
             var crosshairRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             var spread = Random.insideUnitCircle * Spread;
             var bulletDirection = crosshairRay.direction + new Vector3(spread.x, spread.y, 0);
-            
+
             InstantiateBullet(_bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));
-            
+
             var layerMask = 1 << _hitBoxLayer;
             if (Physics.Raycast(crosshairRay.origin, bulletDirection,
                     out var hit, Range, layerMask))
@@ -107,7 +107,7 @@ namespace Weapons
 
         public void Reload()
         {
-            if (_totalBulletsLeft < MagSize) return;
+            if (_totalBulletsLeft < MagSize || _bulletsLeftInMag == MagSize) return;
             _totalBulletsLeft -= MagSize - _bulletsLeftInMag;
             _bulletsLeftInMag = MagSize;
         }
