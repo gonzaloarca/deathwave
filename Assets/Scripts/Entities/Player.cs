@@ -131,6 +131,9 @@ namespace Entities
             _cmdShoot = new CmdShoot(_currentGun);
             _cmdReload= new CmdReload(_currentGun);
             _currentGun.DrawGun();
+            _cmdShoot = new CmdShoot(_currentGun);
+            _cmdReload = new CmdReload(_currentGun);
+            
             // Change speed of character based on weapon
             EventQueueManager.Instance.AddCommand(new CmdSetSpeedModifier(_movementController, _currentGun.PlayerSpeedModifier));
         }

@@ -22,14 +22,14 @@ namespace Weapons
         public float ReloadTime => _stats.ReloadTime;
         public float Cooldown => _stats.Cooldown;
         public float PlayerSpeedModifier => _stats.PlayerSpeedModifier;
-        public int Damage => _stats.Damage;
+        public float Damage => _stats.Damage;
         public int MaxMags => _stats.MaxMags;
         public GunRecoil GunRecoil => _stats.Recoil;
         public int TotalBulletsLeft => _totalBulletsLeft;
         public float Range => _stats.Range;
         public float Spread => _stats.Spread;
         [SerializeField] private int _totalBulletsLeft;
-    
+
         public int BulletsLeftInMag => _bulletsLeftInMag;
         [SerializeField] private int _bulletsLeftInMag;
 
@@ -39,10 +39,10 @@ namespace Weapons
         private RecoilController _recoilController;
         private CmdRecoilFire _cmdRecoilFire;
 
-        private ParticleSystem _muzzleFlashParticles;
+        protected ParticleSystem MuzzleFlashParticles;
 
         private int _hitBoxLayer;
-        
+
         public Transform BulletSpawnPoint => _bulletSpawnPoint;
         [SerializeField] private Transform _bulletSpawnPoint;
 
@@ -52,10 +52,9 @@ namespace Weapons
 
         private Animator _animations;
 
-    
 
         // Bullet instantiation method for modularity across extended classes
-        protected void InstantiateBullet(Vector3 position, Quaternion rotation)
+        protected virtual void InstantiateBullet(Vector3 position, Quaternion rotation)
         {
             var bullet = Instantiate(Bullet, position, rotation);
             var bulletScript = bullet.GetComponent<IBullet>();
@@ -67,7 +66,7 @@ namespace Weapons
         protected virtual void ShootBullet(Transform theTransform)
         {
             Debug.Log("SHOOT");
-            _muzzleFlashParticles.Play();
+            MuzzleFlashParticles.Play();
             // apply spread to the bullet
             var crosshairRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             var spread = Random.insideUnitCircle * Spread;
@@ -76,17 +75,19 @@ namespace Weapons
             InstantiateBullet(_bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));
         }
 
-        public void ChangeGun(){
+        public void ChangeGun()
+        {
             _reloading = false;
             _reloadTimer = 0;
-            _animations?.SetBool("change_gun" , true);
-            _animations?.SetBool("draw_gun" , false);
-            _animations?.SetBool("reloading_start" , false);
+            _animations?.SetBool("change_gun", true);
+            _animations?.SetBool("draw_gun", false);
+            _animations?.SetBool("reloading_start", false);
         }
 
-        public void DrawGun(){
-            _animations?.SetBool("change_gun" , false);
-            _animations?.SetBool("draw_gun" , true);
+        public void DrawGun()
+        {
+            _animations?.SetBool("change_gun", false);
+            _animations?.SetBool("draw_gun", true);
             _animations?.SetTrigger("draw_gun 0");
         }
 
@@ -109,10 +110,9 @@ namespace Weapons
 
             EventQueueManager.Instance.AddCommand(_cmdRecoilFire);
             EventsManager.Instance.EventGunShot();
-            
+
             ShootBullet(transform1);
         }
-
 
 
         public void Reload()
@@ -133,12 +133,11 @@ namespace Weapons
             _animations?.SetBool("reload_finish" , true);
             _reloading = false;
             var emptyRounds = MagSize - _bulletsLeftInMag;
-            if(emptyRounds > _totalBulletsLeft )
+            if (emptyRounds > _totalBulletsLeft)
                 emptyRounds = _totalBulletsLeft;
 
             _totalBulletsLeft -= emptyRounds;
             _bulletsLeftInMag += emptyRounds;
-          
         }
 
 
@@ -153,7 +152,6 @@ namespace Weapons
         }
 
 
-
         private void Start()
         {
             Refill();
@@ -164,19 +162,19 @@ namespace Weapons
 
             var muzzleFlash = Instantiate(MuzzleFlash, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
             muzzleFlash.transform.parent = _bulletSpawnPoint;
-            _muzzleFlashParticles = muzzleFlash.GetComponent<ParticleSystem>();
+            MuzzleFlashParticles = muzzleFlash.GetComponent<ParticleSystem>();
             _animations = GetComponent<Animator>();
         }
 
 
-        private void Update(){
-            if(_reloading){
+        private void Update()
+        {
+            if (_reloading)
+            {
                 _reloadTimer -= Time.deltaTime;
-                if(_reloadTimer <=0)
+                if (_reloadTimer <= 0)
                     ReloadFinish();
             }
         }
-
-      
     }
 }

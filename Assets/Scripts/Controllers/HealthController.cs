@@ -9,15 +9,15 @@ namespace Controllers
     [RequireComponent(typeof(Actor))]
     public class HealthController : MonoBehaviour, IDamageable
     {
-        public int MaxHealth => GetComponent<Actor>().ActorStats.MaxHealth;
-        [SerializeField] private int _currentHealth;
+        public float MaxHealth => GetComponent<Actor>().ActorStats.MaxHealth;
+        [SerializeField] private float _currentHealth;
 
         private void Start()
         {
             _currentHealth = MaxHealth;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             _currentHealth -= damage;
 
