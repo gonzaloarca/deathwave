@@ -64,6 +64,7 @@ namespace Weapons
             var bulletScript = bullet.GetComponent<IBullet>();
             bullet.name = "Bullet";
             bulletScript.SetRange(Range);
+            bulletScript.SetDamage(Damage);
         }
 
         protected virtual void ShootBullet(Transform theTransform)
@@ -76,14 +77,6 @@ namespace Weapons
             var bulletDirection = crosshairRay.direction + new Vector3(spread.x, spread.y, 0);
 
             InstantiateBullet(_bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));
-
-            var layerMask = 1 << _hitBoxLayer;
-            if (Physics.Raycast(crosshairRay.origin, bulletDirection,
-                    out var hit, Range, layerMask))
-            {
-                Debug.Log("HIT");
-                hit.collider.transform.gameObject.GetComponent<IHittable>()?.Hit(Damage);
-            }
         }
 
         public virtual void Shoot()

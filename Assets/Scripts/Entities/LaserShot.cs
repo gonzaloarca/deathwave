@@ -11,6 +11,9 @@ namespace Entities
         public float Range => _range;
         [SerializeField] private float _range;
 
+        public int Damage => _damage;
+        [SerializeField] private int _damage;
+
         public ParticleSystem ImpactParticles => _impactParticles;
         [SerializeField] private ParticleSystem _impactParticles;
         
@@ -26,6 +29,10 @@ namespace Entities
             // TODO: destroy self
             Debug.Log("TRIGGER ENTER");
             
+            // take damage
+            var hittable = other.GetComponent<IHittable>();
+            hittable?.Hit(Damage);
+            
             // spawn particle effect, normal to surface
             var impact = Instantiate(ImpactParticles, transform.position, Quaternion.identity);
             // impact.transform.parent = other.transform;
@@ -39,6 +46,11 @@ namespace Entities
         public void SetRange(float range)
         {
             _range = range;
+        }
+        
+        public void SetDamage(int damage)
+        {
+            _damage = damage;
         }
 
         public void Start()
