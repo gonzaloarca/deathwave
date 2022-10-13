@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: GunStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
-    BulletPrefab: {fileID: 0}
-    Damage: 0
-    MagSize: 0
-    MaxMags: 0
+    MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
+    Bullet: {fileID: 5470383844280770365, guid: ab8682b3d380e43019378dd59ee750f0, type: 3}
+    Damage: 10
+    MagSize: 15
+    MaxMags: 3
     Cooldown: 0
-    ReloadTime: 0
-    PlayerSpeedModifier: 0
+    ReloadTime: 1
+    PlayerSpeedModifier: 1
     Recoil:
       x: 0
       y: 0
