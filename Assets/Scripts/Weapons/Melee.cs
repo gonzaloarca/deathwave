@@ -13,11 +13,12 @@ namespace Weapons
             return _stats.BaseDamage + Random.Range(- _stats.DeltaDamage , _stats.DeltaDamage);
         } 
 
-         private void OnTriggerEnter(Collider other){
-            Debug.Log("hit");
-            if(other.gameObject.layer != 9)
+        private void OnTriggerEnter(Collider other){
+           
+            if(other.gameObject.layer != LayerMask.NameToLayer("Player"))
                 return;
-            other.gameObject.GetComponent<HealthController>().TakeDamage(this.Damage());
+
+            other.gameObject.GetComponent<HealthController>()?.TakeDamage(this.Damage());
         }
 
 
