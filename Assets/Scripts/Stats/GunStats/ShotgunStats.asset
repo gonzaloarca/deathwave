@@ -22,8 +22,8 @@ MonoBehaviour:
     ReloadTime: 3
     PlayerSpeedModifier: 0.8
     Recoil:
-      x: -10
+      x: -4
       y: 0
-      z: 10
+      z: 5
     Range: 50
     Spread: 0.1

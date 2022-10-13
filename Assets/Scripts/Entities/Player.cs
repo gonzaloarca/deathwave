@@ -121,12 +121,15 @@ namespace Entities
         {
             if(_guns.Count <= 0)
                 return;
+
             foreach (var gun in _guns) {
                 gun.gameObject.SetActive(false);
                 gun.ChangeGun();
             }
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
+            _cmdShoot = new CmdShoot(_currentGun);
+            _cmdReload= new CmdReload(_currentGun);
             _currentGun.DrawGun();
             _cmdShoot = new CmdShoot(_currentGun);
             _cmdReload = new CmdReload(_currentGun);
