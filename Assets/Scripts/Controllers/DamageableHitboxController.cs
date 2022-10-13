@@ -8,17 +8,22 @@ namespace Controllers
     {
         private HealthController _healthController;
 
-        private void FindOwnerHealthController(){
+        private void FindOwnerHealthController()
+        {
             GameObject healthOwner = gameObject;
             _healthController = healthOwner?.GetComponent<HealthController>();
-            while(_healthController == null && healthOwner != null){
+            while (_healthController == null && healthOwner != null)
+            {
                 Debug.Log("finding:" + healthOwner.name);
                 healthOwner = healthOwner.transform.parent.gameObject;
                 _healthController = healthOwner.GetComponent<HealthController>();
             }
+
             Debug.Log("owner: " + healthOwner?.name + "health controller:" + _healthController);
         }
-        public void Start(){
+
+        public void Start()
+        {
             FindOwnerHealthController();
         }
 
@@ -26,7 +31,6 @@ namespace Controllers
         {
             Debug.Log("GUNHIT");
             _healthController?.TakeDamage(damage);
-            
         }
     }
 }

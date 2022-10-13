@@ -14,10 +14,15 @@ namespace Managers
         }
 
         public event Action<bool> OnGameOver;
-
+        public event Action OnPlayerDamage;
         public void EventGameOver(bool isVictory)
         {
             OnGameOver?.Invoke(isVictory);
+        }
+        
+        public void EventPlayerDamage()
+        {
+            OnPlayerDamage?.Invoke();
         }
     }
 }

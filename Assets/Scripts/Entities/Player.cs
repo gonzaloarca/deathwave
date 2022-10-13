@@ -3,6 +3,7 @@ using Commands;
 using Controllers;
 using EventQueue;
 using Managers;
+using Sounds;
 using Strategy;
 using UnityEngine;
 using Weapons;
@@ -49,7 +50,7 @@ namespace Entities
         private CmdShoot _cmdShoot;
         private CmdReload _cmdReload;
 
-        private PlayerDamageSFX _grunts;
+        private PlayerSoundController _soundController;
         private int _enemyLayer;
         private void Start()
         {
@@ -57,6 +58,7 @@ namespace Entities
             _healthController = GetComponent<HealthController>();
             _movementController = GetComponent<PlayerMovementController>();
             _cameraController = GetComponent<PlayerCameraController>();
+            _soundController = GetComponent<PlayerSoundController>();
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
@@ -71,7 +73,6 @@ namespace Entities
             
             _cmdReload = new CmdReload(_currentGun);
             _cmdShoot = new CmdShoot(_currentGun);
-            _grunts = GetComponent<PlayerDamageSFX>();
             _enemyLayer = LayerMask.NameToLayer("Enemy");
         }
 
@@ -135,7 +136,7 @@ namespace Entities
             if(melee == null)
                 return;
         
-            _grunts.Sound();
+            EventsManager.Instance.EventPlayerDamage();
             _healthController.TakeDamage(melee.Damage());
         
         }

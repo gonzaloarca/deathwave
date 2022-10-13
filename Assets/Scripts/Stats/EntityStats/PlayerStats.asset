@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   _statsValues:
-    MaxLife: 100
+    MaxHealth: 1000
     WalkSpeed: 10
     SprintSpeed: 50
-    MouseXSensitivity: 400
-    MouseYSensitivity: 400
-    MaxVerticalRotation: 90
-    MinVerticalRotation: -87
     JumpStrength: 3
+    MeleeRange: 0
+    RotationSpeed: 0
