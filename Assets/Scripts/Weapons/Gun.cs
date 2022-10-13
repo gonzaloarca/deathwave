@@ -43,8 +43,6 @@ namespace Weapons
         
         public Transform BulletSpawnPoint => _bulletSpawnPoint;
         [SerializeField] private Transform _bulletSpawnPoint;
-        
-        
 
         private void Start()
         {
@@ -123,14 +121,6 @@ namespace Weapons
         public void AddMags(int mags)
         {
             _totalBulletsLeft = Math.Min(_totalBulletsLeft + mags * MagSize, MaxMags * MagSize);
-        }
-
-        protected virtual void Update()
-        {
-            if (_nextTimeToFire > 0)
-            {
-                _nextTimeToFire -= Time.deltaTime;
-            }
         }
     }
 }

@@ -11,21 +11,29 @@ namespace Entities
         public float Range => _range;
         [SerializeField] private float _range;
 
-
+        public ParticleSystem ImpactParticles => _impactParticles;
+        [SerializeField] private ParticleSystem _impactParticles;
+        
         public void Travel()
         {
             transform.Translate(Vector3.forward * (Speed * Time.deltaTime));
         }
 
-        public void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
-            // TODO: spawn particle effect
             // TODO: spawn sound effect
             // TODO: force feedback
             // TODO: destroy self
             Debug.Log("TRIGGER ENTER");
-            Destroy(gameObject);
             
+            // spawn particle effect, normal to surface
+            var impact = Instantiate(ImpactParticles, transform.position, Quaternion.identity);
+            // impact.transform.parent = other.transform;
+            impact.Play();
+            
+            Destroy(impact.gameObject, 1f);
+            
+            Destroy(gameObject);
         }
 
         public void SetRange(float range)
@@ -35,6 +43,7 @@ namespace Entities
 
         public void Start()
         {
+            // set lifetime of projectile
             var lifeTime = Range / Speed;
             Destroy(gameObject, lifeTime);
         }

@@ -10,8 +10,6 @@ namespace Strategy
 
         void Travel();
         
-        void OnTriggerEnter(Collider other);
-        
         void SetRange(float range);
     }
 }
