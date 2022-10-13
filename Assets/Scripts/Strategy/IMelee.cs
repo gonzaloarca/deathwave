@@ -4,6 +4,6 @@ namespace Strategy
 {
     public interface IMelee
     {
-        float Damage();
+        int Damage();
     }
 }

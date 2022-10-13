@@ -7,14 +7,14 @@ namespace Flyweight
     public class MeleeStats : ScriptableObject
     {
         [SerializeField] private MeleeStatsValues _MeleeStatsValues;
-        public float BaseDamage => _MeleeStatsValues.BaseDamage;
-        public float DeltaDamage => _MeleeStatsValues.DeltaDamage;
+        public int BaseDamage => _MeleeStatsValues.BaseDamage;
+        public int DeltaDamage => _MeleeStatsValues.DeltaDamage;
     }
 }
 
 [System.Serializable]
 public struct MeleeStatsValues
 {
-    public float BaseDamage;
-    public float DeltaDamage;
+    public int BaseDamage;
+    public int DeltaDamage;
 }

@@ -27,7 +27,7 @@ namespace Controllers
             FindOwnerHealthController();
         }
 
-        public void Hit(float damage)
+        public void Hit(int damage)
         {
             Debug.Log("GUNHIT");
             _healthController?.TakeDamage(damage);

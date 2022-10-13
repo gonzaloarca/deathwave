@@ -9,7 +9,7 @@ namespace Flyweight
     {
         [SerializeField] private ActorStatValues _statsValues;
 
-        public float MaxHealth => _statsValues.MaxHealth;
+        public int MaxHealth => _statsValues.MaxHealth;
         public float WalkSpeed => _statsValues.WalkSpeed;
         public float SprintSpeed => _statsValues.SprintSpeed;
         public float JumpStrength => _statsValues.JumpStrength;
@@ -20,7 +20,7 @@ namespace Flyweight
     [System.Serializable]
     public struct ActorStatValues
     {
-        public float MaxHealth;
+        public int MaxHealth;
         public float WalkSpeed;
         public float SprintSpeed;
         public float JumpStrength;

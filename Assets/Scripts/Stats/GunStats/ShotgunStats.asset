@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: ShotgunStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
-    MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
-    Bullet: {fileID: 5470383844280770365, guid: ab8682b3d380e43019378dd59ee750f0, type: 3}
-    Damage: 30
+    BulletPrefab: {fileID: 5164088415189186486, guid: cb94165e1362242ab93c5be45ee874c8, type: 3}
+    Damage: 50
     MagSize: 6
-    MaxMags: 5
+    MaxMags: 1
     Cooldown: 1
-    ReloadTime: 3
-    PlayerSpeedModifier: 0.8
+    ReloadTime: 4
+    PlayerSpeedModifier: 0.5
     Recoil:
-      x: -4
-      y: 0
-      z: 5
-    Range: 50
-    Spread: 0.1
+      RecoilX: 0
+      RecoilY: 0
+      RecoilZ: 0
+      AimRecoilX: 0
+      AimRecoilY: 0
+      AimRecoilZ: 0

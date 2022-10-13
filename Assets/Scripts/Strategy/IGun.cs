@@ -8,7 +8,7 @@ namespace Strategy
         GameObject Bullet { get; }
         public int MagSize { get; }
         public float ReloadTime { get; }
-        public float Damage { get; }
+        public int Damage { get; }
         public int MaxMags { get; }
         public float Cooldown { get; }
         public float PlayerSpeedModifier { get; }

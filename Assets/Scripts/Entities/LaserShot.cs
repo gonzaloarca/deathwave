@@ -11,12 +11,12 @@ namespace Entities
         public float Range => _range;
         [SerializeField] private float _range;
 
-        public float Damage => _damage;
-        [SerializeField] private float _damage;
+        public int Damage => _damage;
+        [SerializeField] private int _damage;
 
         public ParticleSystem ImpactParticles => _impactParticles;
         [SerializeField] private ParticleSystem _impactParticles;
-
+        
         public void Travel()
         {
             transform.Translate(Vector3.forward * (Speed * Time.deltaTime));
@@ -28,21 +28,18 @@ namespace Entities
             // TODO: force feedback
             // TODO: destroy self
             Debug.Log("TRIGGER ENTER");
-
-            if (other.gameObject.layer == gameObject.layer)
-                return;
-
+            
             // take damage
             var hittable = other.GetComponent<IHittable>();
             hittable?.Hit(Damage);
-
+            
             // spawn particle effect, normal to surface
             var impact = Instantiate(ImpactParticles, transform.position, Quaternion.identity);
             // impact.transform.parent = other.transform;
             impact.Play();
-
+            
             Destroy(impact.gameObject, 1f);
-
+            
             Destroy(gameObject);
         }
 
@@ -50,8 +47,8 @@ namespace Entities
         {
             _range = range;
         }
-
-        public void SetDamage(float damage)
+        
+        public void SetDamage(int damage)
         {
             _damage = damage;
         }
