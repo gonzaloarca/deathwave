@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7824263417568225484}
   - component: {fileID: 3544367934288305421}
   - component: {fileID: 4508490247383558778}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GreenLaserShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_startPos: {x: 0, y: 0, z: 20}
   m_endPos: {x: 0, y: 0, z: 0}
   m_lineColor: {r: 0, g: 1, b: 0.18025136, a: 1}
-  m_lineWidth: 300
+  m_lineWidth: 10
   m_lightSaberFactor: 0.8
 --- !u!114 &7824263417568225484
 MonoBehaviour:
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStats: {fileID: 11400000, guid: 08f97adef84444878ae806493a44c99a, type: 2}
   _range: 0
+  _damage: 0
   _impactParticles: {fileID: 198000013440722320, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
 --- !u!65 &3544367934288305421
 BoxCollider:

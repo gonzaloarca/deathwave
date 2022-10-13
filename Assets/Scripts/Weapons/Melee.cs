@@ -9,8 +9,8 @@ namespace Weapons
     {
         [SerializeField] private MeleeStats _stats;
     
-        public int Damage(){
-            return _stats.BaseDamage + UnityEngine.Random.Range(- _stats.DeltaDamage , _stats.DeltaDamage);
+        public float Damage(){
+            return _stats.BaseDamage + Random.Range(- _stats.DeltaDamage , _stats.DeltaDamage);
         } 
 
          private void OnTriggerEnter(Collider other){
