@@ -4,6 +4,7 @@ using Controllers;
 using Entities;
 using EventQueue;
 using Flyweight;
+using Managers;
 using Strategy;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -95,7 +96,8 @@ namespace Weapons
             var transform1 = transform;
 
             EventQueueManager.Instance.AddCommand(_cmdRecoilFire);
-
+            EventsManager.Instance.EventGunShot();
+            
             ShootBullet(transform1);
         }
 
@@ -104,6 +106,9 @@ namespace Weapons
             if (_totalBulletsLeft < MagSize || _bulletsLeftInMag == MagSize) return;
             _totalBulletsLeft -= MagSize - _bulletsLeftInMag;
             _bulletsLeftInMag = MagSize;
+            
+            // animation with lerping
+            transform.Rotate(Quaternion.Slerp();
         }
 
         public void Refill()
