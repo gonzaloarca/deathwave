@@ -121,15 +121,16 @@ namespace Entities
         {
             if(_guns.Count <= 0)
                 return;
+
             foreach (var gun in _guns) {
                 gun.gameObject.SetActive(false);
                 gun.ChangeGun();
             }
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
-            _currentGun.DrawGun();
             _cmdShoot = new CmdShoot(_currentGun);
-            
+            _cmdReload= new CmdReload(_currentGun);
+            _currentGun.DrawGun();
             // Change speed of character based on weapon
             EventQueueManager.Instance.AddCommand(new CmdSetSpeedModifier(_movementController, _currentGun.PlayerSpeedModifier));
         }

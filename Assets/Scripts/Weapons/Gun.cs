@@ -92,13 +92,15 @@ namespace Weapons
 
         public virtual void Shoot()
         {
-            if (_reloading || _totalBulletsLeft == 0) return; // TODO: Play empty sound
+            if (_reloading) return; // TODO: Play empty sound
+
             if (_bulletsLeftInMag == 0)
             {
+                EventsManager.Instance.EventEmptyMag();
                 Reload();
                 return;
             }
-
+            
             if (Time.time < _nextTimeToFire) return;
 
             _bulletsLeftInMag--;
@@ -116,17 +118,17 @@ namespace Weapons
         public void Reload()
         {
             if (_totalBulletsLeft <= 0|| _bulletsLeftInMag == MagSize) return;
-            
-          
-            
+            EventsManager.Instance.EventGunReloadStart();
             // animation with lerping\
             _reloading = true;
             _reloadTimer = _stats.ReloadTime;
-             _animations?.SetBool("reload_finish" , false);
+            _animations?.SetBool("reload_finish" , false);
             _animations?.SetBool("reload_start" , true);
         }
 
+
         public void ReloadFinish(){
+            EventsManager.Instance.EventGunReloadEnd();
             _animations?.SetBool("reload_start" , false);
             _animations?.SetBool("reload_finish" , true);
             _reloading = false;

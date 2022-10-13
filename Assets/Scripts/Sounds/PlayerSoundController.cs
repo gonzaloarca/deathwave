@@ -38,5 +38,7 @@ namespace Sounds
             InitAudioSource();
             EventsManager.Instance.OnPlayerDamage += OnPlayerDamage;
         }
+
+        
     }
 }
