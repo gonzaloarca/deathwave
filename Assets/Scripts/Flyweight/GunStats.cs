@@ -10,7 +10,7 @@ namespace Flyweight
 
         public GameObject MuzzleFlash => _gunStatsValues.MuzzleFlash;
         public GameObject Bullet => _gunStatsValues.Bullet;
-        public int Damage => _gunStatsValues.Damage;
+        public float Damage => _gunStatsValues.Damage;
         public int MagSize => _gunStatsValues.MagSize;
         public int MaxMags => _gunStatsValues.MaxMags;
         public float ReloadTime => _gunStatsValues.ReloadTime;
@@ -28,7 +28,7 @@ public struct GunStatsValues
 {
     public GameObject MuzzleFlash;
     public GameObject Bullet;
-    public int Damage;
+    public float Damage;
     public int MagSize;
     public int MaxMags;
     public float Cooldown; // in seconds

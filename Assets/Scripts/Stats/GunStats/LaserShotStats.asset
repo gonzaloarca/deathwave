@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LaserShotStats
   m_EditorClassIdentifier: 
   bulletStatsValues:
-    Speed: 500
+    Speed: 50
