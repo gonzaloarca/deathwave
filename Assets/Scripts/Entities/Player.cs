@@ -3,6 +3,7 @@ using Commands;
 using Controllers;
 using EventQueue;
 using Managers;
+using Sounds;
 using Strategy;
 using UnityEngine;
 using Weapons;
@@ -49,7 +50,7 @@ namespace Entities
         private CmdShoot _cmdShoot;
         private CmdReload _cmdReload;
 
-        private PlayerDamageSFX _grunts;
+        private PlayerSoundController _soundController;
         private int _enemyLayer;
         private void Start()
         {
@@ -57,6 +58,7 @@ namespace Entities
             _healthController = GetComponent<HealthController>();
             _movementController = GetComponent<PlayerMovementController>();
             _cameraController = GetComponent<PlayerCameraController>();
+            _soundController = GetComponent<PlayerSoundController>();
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
@@ -67,11 +69,13 @@ namespace Entities
             _cmdJump = new CmdJump(_movementController);
             
             // Set _currentGun
+          
+            foreach (var gun in _guns) {
+                gun.ChangeGun();
+            }
             ChangeWeapon(0);
-            
             _cmdReload = new CmdReload(_currentGun);
             _cmdShoot = new CmdShoot(_currentGun);
-            _grunts = GetComponent<PlayerDamageSFX>();
             _enemyLayer = LayerMask.NameToLayer("Enemy");
         }
 
@@ -117,9 +121,13 @@ namespace Entities
         {
             if(_guns.Count <= 0)
                 return;
-            foreach (var gun in _guns) gun.gameObject.SetActive(false);
+            foreach (var gun in _guns) {
+                gun.gameObject.SetActive(false);
+                gun.ChangeGun();
+            }
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
+            _currentGun.DrawGun();
             _cmdShoot = new CmdShoot(_currentGun);
             
             // Change speed of character based on weapon
@@ -135,7 +143,7 @@ namespace Entities
             if(melee == null)
                 return;
         
-            _grunts.Sound();
+            EventsManager.Instance.EventPlayerDamage();
             _healthController.TakeDamage(melee.Damage());
         
         }
