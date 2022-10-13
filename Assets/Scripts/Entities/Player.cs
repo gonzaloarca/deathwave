@@ -69,8 +69,11 @@ namespace Entities
             _cmdJump = new CmdJump(_movementController);
             
             // Set _currentGun
+          
+            foreach (var gun in _guns) {
+                gun.ChangeGun();
+            }
             ChangeWeapon(0);
-            
             _cmdReload = new CmdReload(_currentGun);
             _cmdShoot = new CmdShoot(_currentGun);
             _enemyLayer = LayerMask.NameToLayer("Enemy");
@@ -118,9 +121,13 @@ namespace Entities
         {
             if(_guns.Count <= 0)
                 return;
-            foreach (var gun in _guns) gun.gameObject.SetActive(false);
+            foreach (var gun in _guns) {
+                gun.gameObject.SetActive(false);
+                gun.ChangeGun();
+            }
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
+            _currentGun.DrawGun();
             _cmdShoot = new CmdShoot(_currentGun);
             
             // Change speed of character based on weapon

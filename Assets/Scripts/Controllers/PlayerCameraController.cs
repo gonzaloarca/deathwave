@@ -18,13 +18,19 @@ namespace Controllers
         public Transform VerticalTransform => _verticalTransform;
         [SerializeField] private Transform _verticalTransform;
 
+        public void Start(){
+            Cursor.lockState = CursorLockMode.Locked;
+            
+        }
         public void Rotate(Vector3 direction)
         {
+            
+
             // Chracter Prefab Hips Axis are flipped, therefore we use the z-axis for torso vertical rotation,
             // and the y-axis for the player horizontal rotation
             var mouseX = direction.x * XMouseSensitivity * Time.deltaTime;
             var mouseY = direction.y * YMouseSensitivity * Time.deltaTime;
-
+            
             var horizontalRotation = new Vector3(0, mouseX, 0);
 
             transform.Rotate(horizontalRotation);
