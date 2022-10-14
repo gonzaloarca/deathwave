@@ -17,10 +17,11 @@ namespace Managers
         public event Action OnPlayerDamage;
         public event Action OnGunShot;
         public event Action<int, int> OnAmmoChange;
+        public event Action<int> OnScoreChange;
         
-        public event Action onGunReloadStart;
-        public event Action onGunReloadEnd;
-        public event Action onEmptyMag;
+        public event Action OnGunReloadStart;
+        public event Action OnGunReloadEnd;
+        public event Action OnEmptyMag;
         
         public void EventGameOver(bool isVictory)
         {
@@ -39,21 +40,26 @@ namespace Managers
         
         public void EventGunReloadStart()
         {
-            onGunReloadStart?.Invoke();
+            OnGunReloadStart?.Invoke();
         }
         
         public void EventGunReloadEnd()
         {
-            onGunReloadEnd?.Invoke();
+            OnGunReloadEnd?.Invoke();
         }
 
         public void EventEmptyMag(){
-            onEmptyMag?.Invoke();
+            OnEmptyMag?.Invoke();
         }
         
         public void EventAmmoChange(int ammo, int maxAmmo)
         {
             OnAmmoChange?.Invoke(ammo, maxAmmo);
+        }
+        
+        public void EventScoreChange(int score)
+        {
+            OnScoreChange?.Invoke(score);
         }
     }
 }

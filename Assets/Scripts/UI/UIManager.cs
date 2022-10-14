@@ -17,17 +17,17 @@ namespace UI
         {
             _ammo.text = $"{ammo}/{maxAmmo}";
         }
+        
+        private void OnScoreChange(int score)
+        {
+            _score.text = $"${score}";
+        }
     
         void Start()
         {
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
-        
+            EventsManager.Instance.OnScoreChange += OnScoreChange;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }

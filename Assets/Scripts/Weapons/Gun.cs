@@ -110,10 +110,10 @@ namespace Weapons
 
             EventQueueManager.Instance.AddCommand(_cmdRecoilFire);
             
-            UI_AmmoUpdater();
-            
             ShootBullet(transform1);
+            
             EventsManager.Instance.EventGunShot();
+            UI_AmmoUpdater();
         }
 
 

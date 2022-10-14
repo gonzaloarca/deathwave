@@ -16,6 +16,7 @@ namespace Entities
         // INSTANCIAS
         private PlayerMovementController _movementController;
         private PlayerCameraController _cameraController;
+        private PlayerScoreController _scoreController;
         
         [SerializeField] private List<Gun> _guns;
         private Gun _currentGun;
@@ -59,6 +60,7 @@ namespace Entities
             _movementController = GetComponent<PlayerMovementController>();
             _cameraController = GetComponent<PlayerCameraController>();
             _soundController = GetComponent<PlayerSoundController>();
+            _scoreController = GetComponent<PlayerScoreController>();
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);

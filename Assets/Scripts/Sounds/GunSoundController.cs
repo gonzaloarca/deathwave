@@ -33,9 +33,9 @@ namespace Sounds
         {
             InitAudioSource();
             EventsManager.Instance.OnGunShot += PlayGunShot;
-            EventsManager.Instance.onGunReloadStart += PlayReloadStart;
-            EventsManager.Instance.onGunReloadEnd += PlayReloadEnd;
-            EventsManager.Instance.onEmptyMag += onEmptyMag;
+            EventsManager.Instance.OnGunReloadStart += PlayReloadStart;
+            EventsManager.Instance.OnGunReloadEnd += PlayReloadEnd;
+            EventsManager.Instance.OnEmptyMag += onEmptyMag;
         }
         
         private void PlayGunShot()

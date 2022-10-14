@@ -1,3 +1,4 @@
+using Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,10 @@ namespace Managers
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
         [SerializeField] private Text _gameoverMessage;
-    
+        
         void Start()
         {
             EventsManager.Instance.OnGameOver += OnGameOver;
-            _gameoverMessage.text = string.Empty;
         }
 
         private void OnGameOver(bool isVictory)
