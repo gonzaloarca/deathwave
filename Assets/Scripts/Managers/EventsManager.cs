@@ -16,6 +16,8 @@ namespace Managers
         public event Action<bool> OnGameOver;
         public event Action OnPlayerDamage;
         public event Action OnGunShot;
+        public event Action<int, int> OnAmmoChange;
+        
         public void EventGameOver(bool isVictory)
         {
             OnGameOver?.Invoke(isVictory);
@@ -29,6 +31,11 @@ namespace Managers
         public void EventGunShot()
         {
             OnGunShot?.Invoke();
+        }
+        
+        public void EventAmmoChange(int ammo, int maxAmmo)
+        {
+            OnAmmoChange?.Invoke(ammo, maxAmmo);
         }
     }
 }

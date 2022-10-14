@@ -93,7 +93,7 @@ namespace Weapons
 
         public virtual void Shoot()
         {
-            if (_reloading || _totalBulletsLeft == 0) return; // TODO: Play empty sound
+            if (_reloading) return; // TODO: Play empty sound
             if (_bulletsLeftInMag == 0)
             {
                 Reload();
@@ -107,9 +107,11 @@ namespace Weapons
             var transform1 = transform;
 
             EventQueueManager.Instance.AddCommand(_cmdRecoilFire);
-            EventsManager.Instance.EventGunShot();
-
+            
+            UI_AmmoUpdater();
+            
             ShootBullet(transform1);
+            EventsManager.Instance.EventGunShot();
         }
 
 
@@ -136,24 +138,33 @@ namespace Weapons
 
             _totalBulletsLeft -= emptyRounds;
             _bulletsLeftInMag += emptyRounds;
+            
+            UI_AmmoUpdater();
         }
 
 
-        public void Refill()
+        public void RefillAmmo()
         {
             _totalBulletsLeft = _stats.MaxMags * _stats.MagSize;
+            _bulletsLeftInMag = MagSize;
+
+            UI_AmmoUpdater();
         }
 
         public void AddMags(int mags)
         {
             _totalBulletsLeft = Math.Min(_totalBulletsLeft + mags * MagSize, MaxMags * MagSize);
+            
+            UI_AmmoUpdater();
         }
+        
+        public void UI_AmmoUpdater() => EventsManager.Instance.EventAmmoChange(_bulletsLeftInMag, _totalBulletsLeft);
 
 
         private void Start()
         {
-            Refill();
-            _bulletsLeftInMag = MagSize;
+            RefillAmmo();
+            
             _recoilController = transform.root.GetComponentInChildren<RecoilController>();
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
