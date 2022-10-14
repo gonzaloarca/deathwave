@@ -34,6 +34,11 @@ namespace Managers
         // Update is called once per frame
         void Update()
         {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+            
             if (_menu)
             {
                 if (_source.loop && Input.GetKey(KeyCode.Space))
@@ -60,6 +65,8 @@ namespace Managers
 
                 return;
             }
+            
+          
         }
 
         public void FadeToLevel(int levelIndex)
