@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731689, g: 0.13414702, b: 0.1210784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -648,6 +648,30 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1767778510}
+    - target: {fileID: 2005896980617118985, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896980617118985, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896980617118985, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896981050971524, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896981050971524, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896981050971524, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2005896981050971771, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
       propertyPath: m_text
       value: "Press \"space\" to play \nor \"escape\" to leave"
@@ -695,6 +719,18 @@ PrefabInstance:
     - target: {fileID: 2005896981868201433, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
       propertyPath: m_text
       value: "Press \"space\" to play \nor \"escape\" to leave"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896981868201434, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896981868201434, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005896981868201434, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2005896982230366632, guid: 7a94d4683d7543748a16a63b68f2a1c0, type: 3}
       propertyPath: m_Name
