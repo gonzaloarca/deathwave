@@ -13,12 +13,35 @@ namespace Controllers
 
         public float SpeedModifier => _speedModifier;
         [SerializeField] private float _speedModifier = 1f;
+        
+        [SerializeField] private float _maxX=0;
+        [SerializeField] private float _maxZ=0;
+        [SerializeField] private float _minX=0;
+        [SerializeField] private float _minZ=0;
 
         public float JumpStrength => GetComponent<Actor>().ActorStats.JumpStrength;
 
         public int GroundLayer => LayerMask.NameToLayer($"Ground");
 
         private Rigidbody _rigidbody;
+
+        private void Update(){
+            //World boundaries
+            Vector3 newPos = transform.position;
+            if(transform.position.x > _maxX){
+                newPos.x = _maxX;
+            }
+            if(transform.position.x < _minX){
+                newPos.x = _minX;
+            }
+            if(transform.position.z < _minZ){
+                newPos.z = _minZ;
+            }
+            if(transform.position.z > _maxZ){
+                newPos.z = _maxX;
+            }
+            transform.position = newPos;
+        }
 
         private void Start()
         {
@@ -41,7 +64,7 @@ namespace Controllers
             // Only jump if the player is on the ground
             if (Physics.Raycast(transform.position, -Vector3.up, 0.01f, 1 << GroundLayer))
             {
-                Debug.Log("JUMP - VAN HALEN");
+             
                 _rigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
             }
         }

@@ -33,7 +33,7 @@ namespace Entities
                 return;
 
             // take damage
-            var hittable = other.GetComponent<IHittable>();
+            var hittable = other.gameObject.GetComponent<IHittable>();
             hittable?.Hit(Damage);
 
             // spawn particle effect, normal to surface

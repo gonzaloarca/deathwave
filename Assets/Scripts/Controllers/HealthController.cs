@@ -10,6 +10,7 @@ namespace Controllers
     public class HealthController : MonoBehaviour, IDamageable
     {
         public float MaxHealth => GetComponent<Actor>().ActorStats.MaxHealth;
+        
         [SerializeField] private float _currentHealth;
 
         private void Start()
