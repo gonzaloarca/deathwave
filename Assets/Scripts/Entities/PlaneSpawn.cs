@@ -56,9 +56,10 @@ public class PlaneSpawn : MonoBehaviour , ISpawn
  
 
     public void Spawn(){
-        
+     
         var position = new Vector3(Random.Range(_minX, _maxX), transform.position.y + 2, Random.Range(_minZ, _maxZ));
-        Instantiate(SpawnObject, position, Quaternion.identity);
+        var skeletonRoot = Instantiate(_spawnObject, position, Quaternion.identity);
+      
     }
 
 

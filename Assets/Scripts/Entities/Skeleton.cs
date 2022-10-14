@@ -18,7 +18,7 @@ namespace Entities
         private CmdJump _cmdJump;
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
-
+        [SerializeField] private GameObject _ammoDrop;
         //  private CmdIdle _idle;
         private float _vision;
         private float _meleeRange;
@@ -52,9 +52,10 @@ namespace Entities
         {
             // Debug.Log("Bad to the bone");
             float distance = Vector3.Distance(_target.transform.position, transform.position);
+            _movementController.LookAt(_target.transform.position);
             if (distance >= _vision)
             {
-                EventQueueManager.Instance.AddCommand(new CmdFollow(_movementController, _target.transform.position));
+                _movementController.Travel(Vector3.forward);
                 //Debug.Log("Not Following");
                 // _animator.SetFloat("Vertical", 0f);
                 // _animator.SetFloat("Horizontal", 0f);
@@ -64,58 +65,20 @@ namespace Entities
 
             if (distance <= _meleeRange)
             {
-                EventQueueManager.Instance.AddCommand(new CmdPunch(_movementController, _target.transform.position));
-                return;
+                _movementController.Attack();
+            return;
             }
 
-            // Debug.Log("Wanna move");
-            // //Desde el Jugador 
-            // var direction = _target.transform.position - transform.position;
-            // Debug.DrawRay(transform.position, direction,  Color.red, 0.1f);
-            // Debug.DrawRay(transform.position, Vector3.forward,  Color.blue, 0.1f);
-            EventQueueManager.Instance.AddCommand(new CmdFollow(_movementController, _target.transform.position));
+            
+            _movementController.Travel(Vector3.forward);
 
-            //    if(Vector3.Distance)
-            //  if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddCommand(_cmdMoveForward);
-            // if (Input.GetKey(_moveBack)) EventQueueManager.Instance.AddCommand(_cmdMoveBack);
-            // if (Input.GetKey(_moveLeft)) EventQueueManager.Instance.AddCommand(_cmdMoveLeft);
-            // if (Input.GetKey(_moveRight)) EventQueueManager.Instance.AddCommand(_cmdMoveRight);
-
-            // // Jumping
-            // if (Input.GetKeyDown(_jump)) EventQueueManager.Instance.AddCommand(_cmdJump);
-
-            // // Sprinting
-            // if (Input.GetKeyDown(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStartSprint);
-            // if (Input.GetKeyUp(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStopSprint);
-
-            // // Camera Rotation
-            // var verticalRotation = Input.GetAxis("Mouse Y"); 
-            // var horizontalRotation = Input.GetAxis("Mouse X");
-            // var rotationDirection = new Vector3(horizontalRotation, verticalRotation, 0);
-
-            // EventQueueManager.Instance.AddCommand(new CmdRotation(_movementController, rotationDirection));
-
-            // //
-            // // if (Input.GetKeyDown(_attack)) EventQueueManager.Instance.AddCommand(_cmdAttack);
-            // // if (Input.GetKeyDown(_reload)) _currentGun?.Reload();
-            // //
-            // // if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
-            // // if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
-            // // if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
-            // //
-            // // if (Input.GetKeyDown(_setVictory)) EventsManager.Instance.EventGameOver(true);
-            // // if (Input.GetKeyDown(_setDefeat)) GetComponent<IDamageable>().TakeDamage(20);
-
-
-            // // if (_timer <= 0) Debug.Log("timer fin");     // W-A-S-D
         }
 
-        // private void ChangeWeapon(int index)
-        // {
-        //     foreach (var gun in _guns) gun.gameObject.SetActive(false);
-        //     _currentGun = _guns[index];
-        //     _currentGun.gameObject.SetActive(true);
-        //     _cmdAttack = new CmdAttack(_currentGun);
-        // }
+        private void OnDestroy(){
+            var position = this.transform.position;
+            position.y += 1;
+            Instantiate(_ammoDrop , position , Quaternion.identity );
+            Destroy(this.transform.parent.gameObject);
+        }
     }
 }
