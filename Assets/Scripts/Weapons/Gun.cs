@@ -46,6 +46,8 @@ namespace Weapons
         public Transform BulletSpawnPoint => _bulletSpawnPoint;
         [SerializeField] private Transform _bulletSpawnPoint;
 
+        public Transform MuzzleSpawnPoint => _muzzleSpawnPoint;
+        [SerializeField] private Transform _muzzleSpawnPoint;
 
         private bool _reloading = false;
         private float _reloadTimer = 0f;
@@ -77,6 +79,7 @@ namespace Weapons
 
         public void ChangeGun()
         {
+           
             _reloading = false;
             _reloadTimer = 0;
             _animations?.SetBool("change_gun", true);
@@ -86,6 +89,7 @@ namespace Weapons
 
         public void DrawGun()
         {
+             UI_AmmoUpdater();
             _animations?.SetBool("change_gun", false);
             _animations?.SetBool("draw_gun", true);
             _animations?.SetTrigger("draw_gun 0");
@@ -171,8 +175,8 @@ namespace Weapons
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
             EventsManager.Instance.OnAmmoPickup += OnAmmoPickup;
-            var muzzleFlash = Instantiate(MuzzleFlash, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
-            muzzleFlash.transform.parent = _bulletSpawnPoint;
+            var muzzleFlash = Instantiate(MuzzleFlash, _muzzleSpawnPoint.position, _muzzleSpawnPoint.rotation);
+            muzzleFlash.transform.parent = _muzzleSpawnPoint;
             MuzzleFlashParticles = muzzleFlash.GetComponent<ParticleSystem>();
             _animations = GetComponent<Animator>();
         
@@ -190,7 +194,7 @@ namespace Weapons
         }
 
         private void OnAmmoPickup(){
-            AddMags(1);
+            RefillAmmo();
         }
        
     }

@@ -8,6 +8,7 @@ namespace Sounds
     public class PlayerSoundController : MonoBehaviour, IListenable
     {
         [SerializeField] private AudioClip[] _damageClips;
+        [SerializeField] private AudioClip _deathClip;
         
         public AudioSource AudioSource => _audioSource;
         private AudioSource _audioSource;
@@ -37,6 +38,14 @@ namespace Sounds
         {
             InitAudioSource();
             EventsManager.Instance.OnPlayerDamage += OnPlayerDamage;
+            EventsManager.Instance.OnGameOver += OnGameOver;
+        }
+
+        public void OnGameOver(bool isVictory){
+            if(!isVictory){
+                EventsManager.Instance.OnPlayerDamage -= OnPlayerDamage;
+                AudioSource.PlayOneShot(_deathClip);
+            }
         }
 
         

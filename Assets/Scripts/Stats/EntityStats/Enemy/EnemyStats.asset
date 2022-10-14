@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
   _statsValues:
-    DropFreq: 0.6
+    DropFreq: 0.1
     Vision: 10

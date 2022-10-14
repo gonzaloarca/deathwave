@@ -29,9 +29,8 @@ namespace Entities
             // TODO: destroy self
             Debug.Log("TRIGGER ENTER");
 
-            if (other.gameObject.layer == gameObject.layer)
-                return;
-
+            if (other.gameObject.layer != 8) return;
+            
             // take damage
             var hittable = other.gameObject.GetComponent<IHittable>();
             hittable?.Hit(Damage);

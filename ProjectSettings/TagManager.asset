@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameMusic
   - EnemySpawn
+  - GameOverText
   layers:
   - Default
   - TransparentFX

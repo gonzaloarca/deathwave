@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e060a43adaa450ca26b12d4c0b04df1, type: 3}
+  m_Name: PistolStats
+  m_EditorClassIdentifier: 
+  _gunStatsValues:
+    MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
+    Bullet: {fileID: 5470383844280770365, guid: ab8682b3d380e43019378dd59ee750f0, type: 3}
+    Damage: 200
+    MagSize: 12
+    MaxMags: 5
+    Cooldown: 0.1
+    ReloadTime: 0.5
+    PlayerSpeedModifier: 1
+    Recoil:
+      x: -1
+      y: 0
+      z: 3
+    Range: 100
+    Spread: 0

@@ -8,7 +8,7 @@ namespace Managers
     {
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
-        [SerializeField] private Text _gameoverMessage;
+        [SerializeField] private Sprite _image;
         [SerializeField] private float _gameTime;
 
         void Start()
@@ -22,9 +22,9 @@ namespace Managers
         {
             _isGameOver = true;
             _isVictory = isVictory;
-
-            _gameoverMessage.text = isVictory ? "VICTORIA!" : "DERROTA!";
-            _gameoverMessage.color = isVictory ? Color.cyan : Color.red;
+            Image image = GameObject.FindWithTag("GameOverText")?.GetComponent<Image>();
+            if(image)
+                image.sprite = _image;
         }
 
         void Update()

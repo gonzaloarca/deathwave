@@ -13,7 +13,7 @@ namespace Entities
     {
         // INSTANCIAS
         private EnemyMovementController _movementController;
-
+        private bool _drop = true;
         /* Commands */
         private CmdJump _cmdJump;
         private CmdSprint _cmdStartSprint;
@@ -46,6 +46,7 @@ namespace Entities
             _cmdStopSprint = new CmdSprint(_movementController, false);
             _cmdJump = new CmdJump(_movementController);
             //_cmdPunch= new CmdPunch(_punch);
+            EventsManager.Instance.OnGameOver+= OnGameOver;
         }
 
         void Update()
@@ -75,10 +76,20 @@ namespace Entities
         }
 
         private void OnDestroy(){
-            var position = this.transform.position;
-            position.y += 1;
-            Instantiate(_ammoDrop , position , Quaternion.identity );
+            if(_drop) DeadDrop();
             Destroy(this.transform.parent.gameObject);
         }
+
+        public void OnGameOver(bool isVictory){
+            _drop = false;
+        }
+        void DeadDrop(){
+            var position = this.transform.position;
+            position.y += 1;
+            if(Random.Range(0f,1f) < EnemyStats.DropFreq )
+                Instantiate(_ammoDrop , position , Quaternion.identity );
+        }
+
+        
     }
 }

@@ -55,7 +55,11 @@ namespace Entities
 
         private PlayerSoundController _soundController;
         private int _enemyLayer;
+        private bool _alive = true;
 
+        private void OnGameOver(bool isVictory){
+            _alive = isVictory;
+        }
         private void Start()
         {
             _healthController = GetComponent<HealthController>();
@@ -87,6 +91,7 @@ namespace Entities
 
         void Update()
         {
+            if(!_alive) return;
             // W-A-S-D
             if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddCommand(_cmdMoveForward);
             if (Input.GetKey(_moveBack)) EventQueueManager.Instance.AddCommand(_cmdMoveBack);
