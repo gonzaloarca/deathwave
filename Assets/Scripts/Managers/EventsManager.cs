@@ -23,6 +23,7 @@ namespace Managers
         public event Action OnGunReloadEnd;
         public event Action OnEmptyMag;
         public event Action OnAmmoPickup;
+        public event Action<float> OnSecondPassed;
         
         public void EventGameOver(bool isVictory)
         {
@@ -70,6 +71,11 @@ namespace Managers
 
         public void EventAmmoPickup(){
             OnAmmoPickup?.Invoke();
+        }
+        
+        public void EventSecondPassed(float time)
+        {
+            OnSecondPassed?.Invoke(time);
         }
     }
 }
