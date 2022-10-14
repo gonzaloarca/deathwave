@@ -8,7 +8,6 @@ namespace Managers
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
         [SerializeField] private Text _gameoverMessage;
-    
         void Start()
         {
             EventsManager.Instance.OnGameOver += OnGameOver;
@@ -23,5 +22,8 @@ namespace Managers
             _gameoverMessage.text = isVictory ? "VICTORIA!" : "DERROTA!";
             _gameoverMessage.color = isVictory ? Color.cyan : Color.red;
         }
+
+
+    
     }
 }
