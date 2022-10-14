@@ -19,19 +19,30 @@ public class PlaneSpawn : MonoBehaviour , ISpawn
     {
         
         List<Vector3> vertex = new List<Vector3>(gameObject.GetComponent<MeshFilter>().sharedMesh.vertices);
-    
-        
-        if(transform.TransformPoint(vertex[0]).x > transform.TransformPoint(vertex[120]).x){
-            _minX = transform.TransformPoint(vertex[120]).x;
-            _minZ = transform.TransformPoint(vertex[120]).z;
-            _maxX = transform.TransformPoint(vertex[0]).x;
-            _maxZ = transform.TransformPoint(vertex[0]).z;
+     
+        var minX = transform.TransformPoint(vertex[120]).x;
+        var minZ = transform.TransformPoint(vertex[120]).z;
+        var maxX = transform.TransformPoint(vertex[0]).x;
+        var maxZ = transform.TransformPoint(vertex[0]).z;
+
+        if(maxX> minX){
+            _minX = minX;
+            _maxX = maxX;
         }else{
-            _minX = transform.TransformPoint(vertex[0]).x;
-            _minZ = transform.TransformPoint(vertex[0]).z;
-            _maxX = transform.TransformPoint(vertex[120]).x;
-            _maxZ = transform.TransformPoint(vertex[120]).z;
+            _minX = maxX;
+            _maxX = minX;
         }
+
+        if(maxZ> minZ){
+            _minZ = minZ;
+            _maxZ = maxZ;
+        }else{
+            _minZ = maxZ;
+            _maxZ = minZ;
+        }
+
+
+    
         Debug.Log("Plane spawn at:: p1:(" + _minX + " : " + _minZ + ") p2:(" + _maxX + " : " +_maxZ +")");
 
 

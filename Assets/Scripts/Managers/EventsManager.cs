@@ -22,6 +22,7 @@ namespace Managers
         public event Action OnGunReloadStart;
         public event Action OnGunReloadEnd;
         public event Action OnEmptyMag;
+        public event Action OnAmmoPickup;
         public event Action<float> OnSecondPassed;
         
         public void EventGameOver(bool isVictory)
@@ -66,6 +67,10 @@ namespace Managers
         public void EventPlayerHealthChange(float health, float maxHealth)
         {
             OnPlayerHealthChange?.Invoke(health, maxHealth);
+        }
+
+        public void EventAmmoPickup(){
+            OnAmmoPickup?.Invoke();
         }
         
         public void EventSecondPassed(float time)

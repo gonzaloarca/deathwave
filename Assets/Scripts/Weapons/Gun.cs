@@ -170,11 +170,12 @@ namespace Weapons
             _recoilController = transform.root.GetComponentInChildren<RecoilController>();
             _cmdRecoilFire = new CmdRecoilFire(_recoilController, GunRecoil);
             _hitBoxLayer = LayerMask.NameToLayer("Hitbox");
-
+            EventsManager.Instance.OnAmmoPickup += OnAmmoPickup;
             var muzzleFlash = Instantiate(MuzzleFlash, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
             muzzleFlash.transform.parent = _bulletSpawnPoint;
             MuzzleFlashParticles = muzzleFlash.GetComponent<ParticleSystem>();
             _animations = GetComponent<Animator>();
+        
         }
 
 
@@ -187,5 +188,10 @@ namespace Weapons
                     ReloadFinish();
             }
         }
+
+        private void OnAmmoPickup(){
+            AddMags(1);
+        }
+       
     }
 }
