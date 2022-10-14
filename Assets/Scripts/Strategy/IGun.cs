@@ -20,6 +20,13 @@ namespace Strategy
 
         void Shoot();
         void Reload();
-   
+        void AddMags(int mags);
+        void RefillAmmo();
+
+        void ChangeGun();
+
+        void DrawGun();
+        void ReloadFinish();
+
     }
 }

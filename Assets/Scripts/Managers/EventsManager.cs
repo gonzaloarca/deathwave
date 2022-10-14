@@ -16,6 +16,8 @@ namespace Managers
         public event Action<bool> OnGameOver;
         public event Action OnPlayerDamage;
         public event Action OnGunShot;
+        public event Action<int, int> OnAmmoChange;
+        
         public event Action onGunReloadStart;
         public event Action onGunReloadEnd;
         public event Action onEmptyMag;
@@ -47,6 +49,11 @@ namespace Managers
 
         public void EventEmptyMag(){
             onEmptyMag?.Invoke();
+        }
+        
+        public void EventAmmoChange(int ammo, int maxAmmo)
+        {
+            OnAmmoChange?.Invoke(ammo, maxAmmo);
         }
     }
 }
