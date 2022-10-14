@@ -21,7 +21,8 @@ public class SpawnManager : MonoBehaviour
 
         [SerializeField] private float _timeRateCooldown;
 
-        [SerializeField] private int _closestSpawnsCount = 3;
+        [SerializeField] private int _closestSpawnsCount;
+
         private void Start()
         {
             _enemySpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemySpawn")); 
@@ -36,7 +37,7 @@ public class SpawnManager : MonoBehaviour
             if(_nextSpawnTime <= _time){
                 GetNextSpawnTime();
                 SortByDistance();
-                var index = UnityEngine.Random.Range(0, _closestSpawnsCount - 1);
+                var index = UnityEngine.Random.Range(0, _closestSpawnsCount+1);
                 _enemySpawners[index]?.GetComponent<ISpawn>()?.Spawn();
             }
         }
@@ -61,7 +62,6 @@ public class SpawnManager : MonoBehaviour
                 .CompareTo(Vector3.Distance(_player.transform.position, b.transform.position) 
                 );
             });
-            _enemySpawners[0].GetComponent<ISpawn>()?.Spawn();
         }
     }
 }

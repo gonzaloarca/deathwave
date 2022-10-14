@@ -13,7 +13,7 @@ namespace Controllers
 
         public float SpeedModifier => _speedModifier;
         [SerializeField] private float _speedModifier = 1f;
-        
+
         [SerializeField] private float _maxX=0;
         [SerializeField] private float _maxZ=0;
         [SerializeField] private float _minX=0;
@@ -34,12 +34,13 @@ namespace Controllers
             if(transform.position.x < _minX){
                 newPos.x = _minX;
             }
+            if(transform.position.z > _maxZ){
+                newPos.z = _maxZ;
+            }
             if(transform.position.z < _minZ){
                 newPos.z = _minZ;
             }
-            if(transform.position.z > _maxZ){
-                newPos.z = _maxX;
-            }
+        
             transform.position = newPos;
         }
 
