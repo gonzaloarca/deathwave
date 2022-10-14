@@ -16,6 +16,6 @@ MonoBehaviour:
     MaxHealth: 100
     WalkSpeed: 6
     SprintSpeed: 8
-    JumpStrength: 3
+    JumpStrength: 10
     MeleeRange: 0
     RotationSpeed: 0

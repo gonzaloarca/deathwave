@@ -6,16 +6,15 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
+        private const float GameTime = 60f;
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
         [SerializeField] private Sprite _image;
-        [SerializeField] private float _gameTime;
+        [SerializeField] private float _gameDuration = GameTime;
 
         void Start()
         {
             EventsManager.Instance.OnGameOver += OnGameOver;
-
-            _gameTime = 0;
         }
 
         private void OnGameOver(bool isVictory)
@@ -29,14 +28,22 @@ namespace Managers
 
         void Update()
         {
-            var prevTime = _gameTime;
-            if (!_isGameOver) _gameTime += Time.deltaTime;
+            var prevTime = _gameDuration;
+            if (!_isGameOver) _gameDuration -= Time.deltaTime;
+            
+            if (_gameDuration <= 0)
+            {
+                EventsManager.Instance.EventGameOver(true);
+                return;
+            }
             
             // if a second has passed, update the UI
-            if (Mathf.FloorToInt(prevTime) != Mathf.FloorToInt(_gameTime))
+            if (Mathf.FloorToInt(prevTime) != Mathf.FloorToInt(_gameDuration))
             {
-                EventsManager.Instance.EventSecondPassed(_gameTime);
+                EventsManager.Instance.EventSecondPassed(_gameDuration);
             }
+            
+           
         }
     }
 }

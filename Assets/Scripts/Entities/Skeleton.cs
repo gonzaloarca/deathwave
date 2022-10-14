@@ -28,16 +28,16 @@ namespace Entities
         {
             _movementController = GetComponent<EnemyMovementController>();
             // ChangeWeapon(0);
-            GameObject[] gameObjects;
-            gameObjects = GameObject.FindGameObjectsWithTag("Player");
+            GameObject[] players;
+            players = GameObject.FindGameObjectsWithTag("Player");
 
-            if (gameObjects.Length == 0)
+            if (players.Length == 0)
             {
                 Debug.Log("No game objects are tagged with Player");
             }
             else
             {
-                _target = gameObjects[0];
+                _target = players[0];
             }
 
             _vision = this.EnemyStats.Vision;
