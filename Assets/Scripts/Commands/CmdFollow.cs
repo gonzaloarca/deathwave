@@ -15,6 +15,8 @@ namespace Commands
         }
 
         public void Execute(){
+            // firsrt check if gameobject is null
+            
             _follower.LookAt(_target);
             _follower.Travel(Vector3.forward);
         }
