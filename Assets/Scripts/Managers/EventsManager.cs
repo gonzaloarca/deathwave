@@ -18,7 +18,7 @@ namespace Managers
         public event Action OnGunShot;
         public event Action<int, int> OnAmmoChange;
         public event Action<int> OnScoreChange;
-        
+        public event Action<float, float> OnPlayerHealthChange;
         public event Action OnGunReloadStart;
         public event Action OnGunReloadEnd;
         public event Action OnEmptyMag;
@@ -60,6 +60,11 @@ namespace Managers
         public void EventScoreChange(int score)
         {
             OnScoreChange?.Invoke(score);
+        }
+        
+        public void EventPlayerHealthChange(float health, float maxHealth)
+        {
+            OnPlayerHealthChange?.Invoke(health, maxHealth);
         }
     }
 }

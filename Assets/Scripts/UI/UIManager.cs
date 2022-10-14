@@ -1,4 +1,5 @@
 using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +7,9 @@ namespace UI
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private Text _ammo;
-        [SerializeField] private Text _score;
-        [SerializeField] private Text _round;
+        [SerializeField] private TextMeshProUGUI _ammo;
+        [SerializeField] private TextMeshProUGUI _score;
+        [SerializeField] private TextMeshProUGUI _round;
     
         [SerializeField] private Image _health;
         [SerializeField] private Image _guns;
@@ -20,13 +21,19 @@ namespace UI
         
         private void OnScoreChange(int score)
         {
-            _score.text = $"${score}";
+            _score.text = $"{score}";
+        }
+        
+        private void OnPlayerHealthChange(float health, float maxHealth)
+        {
+            _health.fillAmount = health / maxHealth;
         }
     
         void Start()
         {
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
             EventsManager.Instance.OnScoreChange += OnScoreChange;
+            EventsManager.Instance.OnPlayerHealthChange += OnPlayerHealthChange;
         }
 
     }

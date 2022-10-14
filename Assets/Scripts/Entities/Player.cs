@@ -110,6 +110,7 @@ namespace Entities
 
             if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
             if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
+            
 
             //
             // if (Input.GetKeyDown(_setVictory)) EventsManager.Instance.EventGameOver(true);
