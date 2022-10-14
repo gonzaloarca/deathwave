@@ -17,10 +17,12 @@ namespace Entities
         private PlayerMovementController _movementController;
         private PlayerCameraController _cameraController;
         private PlayerScoreController _scoreController;
-        
+
         [SerializeField] private List<Gun> _guns;
         private Gun _currentGun;
+
         private HealthController _healthController;
+
         // BINDING MOVEMENT
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
         [SerializeField] private KeyCode _moveBack = KeyCode.S;
@@ -53,9 +55,9 @@ namespace Entities
 
         private PlayerSoundController _soundController;
         private int _enemyLayer;
+
         private void Start()
         {
-
             _healthController = GetComponent<HealthController>();
             _movementController = GetComponent<PlayerMovementController>();
             _cameraController = GetComponent<PlayerCameraController>();
@@ -69,12 +71,14 @@ namespace Entities
             _cmdStartSprint = new CmdSprint(_movementController, true);
             _cmdStopSprint = new CmdSprint(_movementController, false);
             _cmdJump = new CmdJump(_movementController);
-            
+
             // Set _currentGun
-          
-            foreach (var gun in _guns) {
+
+            foreach (var gun in _guns)
+            {
                 gun.ChangeGun();
             }
+
             ChangeWeapon(0);
             _cmdReload = new CmdReload(_currentGun);
             _cmdShoot = new CmdShoot(_currentGun);
@@ -88,30 +92,32 @@ namespace Entities
             if (Input.GetKey(_moveBack)) EventQueueManager.Instance.AddCommand(_cmdMoveBack);
             if (Input.GetKey(_moveLeft)) EventQueueManager.Instance.AddCommand(_cmdMoveLeft);
             if (Input.GetKey(_moveRight)) EventQueueManager.Instance.AddCommand(_cmdMoveRight);
-            
+
             // Jumping
             if (Input.GetKeyDown(_jump)) EventQueueManager.Instance.AddCommand(_cmdJump);
-            
+
             // Sprinting
             if (Input.GetKeyDown(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStartSprint);
             if (Input.GetKeyUp(_sprint)) EventQueueManager.Instance.AddCommand(_cmdStopSprint);
-            
+
             // Camera Rotation
-            var verticalRotation = Input.GetAxis("Mouse Y"); 
+            var verticalRotation = Input.GetAxis("Mouse Y");
             var horizontalRotation = Input.GetAxis("Mouse X");
             var rotationDirection = new Vector3(horizontalRotation, verticalRotation, 0);
 
             EventQueueManager.Instance.AddCommand(new CmdRotatePlayerCamera(_cameraController, rotationDirection));
 
-            
+
             // Gun Logic
             if (Input.GetKeyDown(_shoot)) EventQueueManager.Instance.AddCommand(_cmdShoot);
             if (Input.GetKeyDown(_reload)) EventQueueManager.Instance.AddCommand(_cmdReload);
 
             if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
             if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
-            
 
+
+            if (Input.GetKeyDown(KeyCode.Backspace)) _healthController.TakeDamage(30);
+            
             //
             // if (Input.GetKeyDown(_setVictory)) EventsManager.Instance.EventGameOver(true);
             // if (Input.GetKeyDown(_setDefeat)) GetComponent<IDamageable>().TakeDamage(20);
@@ -122,36 +128,37 @@ namespace Entities
 
         private void ChangeWeapon(int index)
         {
-            if(_guns.Count <= 0)
+            if (_guns.Count <= 0)
                 return;
 
-            foreach (var gun in _guns) {
+            foreach (var gun in _guns)
+            {
                 gun.gameObject.SetActive(false);
                 gun.ChangeGun();
             }
+
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
             _cmdShoot = new CmdShoot(_currentGun);
-            _cmdReload= new CmdReload(_currentGun);
+            _cmdReload = new CmdReload(_currentGun);
             _currentGun.DrawGun();
-          
-            
+
+
             // Change speed of character based on weapon
-            EventQueueManager.Instance.AddCommand(new CmdSetSpeedModifier(_movementController, _currentGun.PlayerSpeedModifier));
+            EventQueueManager.Instance.AddCommand(new CmdSetSpeedModifier(_movementController,
+                _currentGun.PlayerSpeedModifier));
         }
 
         void OnCollisionEnter(Collision collision)
         {
-            if (_enemyLayer != collision.gameObject.layer ) return;
+            if (_enemyLayer != collision.gameObject.layer) return;
 
-            
+
             IMelee melee = collision.gameObject.GetComponentInChildren<IMelee>();
-            if(melee == null)
+            if (melee == null)
                 return;
-        
-            EventsManager.Instance.EventPlayerDamage();
+
             _healthController.TakeDamage(melee.Damage());
-        
         }
     }
 }
