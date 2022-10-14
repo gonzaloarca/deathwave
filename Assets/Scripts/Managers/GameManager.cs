@@ -23,5 +23,8 @@ namespace Managers
             _gameoverMessage.text = isVictory ? "VICTORIA!" : "DERROTA!";
             _gameoverMessage.color = isVictory ? Color.cyan : Color.red;
         }
+
+
+    
     }
 }
