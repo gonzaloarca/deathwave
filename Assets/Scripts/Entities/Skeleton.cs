@@ -76,6 +76,7 @@ namespace Entities
         }
 
         private void OnDestroy(){
+            EventsManager.Instance.EventEnemyDeath();
             if(_drop) DeadDrop();
             Destroy(this.transform.parent.gameObject);
         }
@@ -83,6 +84,7 @@ namespace Entities
         public void OnGameOver(bool isVictory){
             _drop = false;
         }
+
         void DeadDrop(){
             var position = this.transform.position;
             position.y += 1;

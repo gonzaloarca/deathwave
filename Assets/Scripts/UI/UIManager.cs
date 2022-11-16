@@ -10,7 +10,8 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _ammo;
         [SerializeField] private TextMeshProUGUI _score;
         [SerializeField] private TextMeshProUGUI _timer;
-    
+        
+
         [SerializeField] private Image _health;
         [SerializeField] private Image _guns;
     

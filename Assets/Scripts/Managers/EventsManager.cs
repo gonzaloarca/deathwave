@@ -24,6 +24,7 @@ namespace Managers
         public event Action OnEmptyMag;
         public event Action OnAmmoPickup;
         public event Action<float> OnSecondPassed;
+        public event Action OnEnemyDeath;
         
         public void EventGameOver(bool isVictory)
         {
@@ -77,5 +78,10 @@ namespace Managers
         {
             OnSecondPassed?.Invoke(time);
         }
+        public void EventEnemyDeath()
+        {
+            OnEnemyDeath?.Invoke();
+        }
+        
     }
 }

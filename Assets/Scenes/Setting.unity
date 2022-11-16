@@ -761,6 +761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySkeletonV7
       objectReference: {fileID: 0}
+    - target: {fileID: 4585881354452353063, guid: 9f06bba082070144d9d33027ba6f2418, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f06bba082070144d9d33027ba6f2418, type: 3}
 --- !u!1 &410830209
@@ -2185,6 +2189,7 @@ GameObject:
   - component: {fileID: 1165309190}
   - component: {fileID: 1165309191}
   - component: {fileID: 1165309192}
+  - component: {fileID: 1165309193}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2247,6 +2252,7 @@ MonoBehaviour:
   _alphaCooldown: 0.1
   _timeRateCooldown: 0.1
   _closestSpawnsCount: 2
+  _maxEnemies: 0
 --- !u!114 &1165309191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,6 +2286,22 @@ MonoBehaviour:
   _isVictory: 0
   _image: {fileID: 21300000, guid: 398ae4e95cb3e224dbb131835211d603, type: 3}
   _gameDuration: 60
+--- !u!114 &1165309193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165309186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3794897b0105c584caa4768000144f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxRounds: 5
+  _isVictory: 0
+  _image: {fileID: 0}
+  _currentRound: 0
 --- !u!1 &1228813833 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 748451be4638a4670954789908837f99, type: 3}
@@ -6540,7 +6562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5617075777793345827
 RectTransform:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Managers
 {
 public class SpawnManager : MonoBehaviour
-    {
+{
 
         private List<GameObject> _enemySpawners;
         private GameObject _player;
@@ -23,6 +23,10 @@ public class SpawnManager : MonoBehaviour
 
         [SerializeField] private int _closestSpawnsCount;
 
+        [SerializeField] private int _maxEnemies;
+
+        private int _enemies;
+        
         private void Start()
         {
             _enemySpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemySpawn")); 
@@ -35,13 +39,21 @@ public class SpawnManager : MonoBehaviour
             _time += Time.deltaTime;
 
             if(_nextSpawnTime <= _time){
+                if(_maxEnemies <= _enemies) return;
                 GetNextSpawnTime();
                 SortByDistance();
                 var index = UnityEngine.Random.Range(0, _closestSpawnsCount+1);
                 _enemySpawners[index]?.GetComponent<ISpawn>()?.Spawn();
+                _enemies++;
             }
         }
 
+        public void Reset(int roundEnemies){
+            _time = 0;
+            _nextSpawnTime = 5;
+            _enemies = 0;
+            _maxEnemies = roundEnemies;
+        }
         
         private void GetNextSpawnTime(){
             var nextTime = _maxSpawnCooldown - _alphaCooldown * Mathf.Exp( _time * _timeRateCooldown);

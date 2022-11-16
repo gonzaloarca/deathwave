@@ -6,14 +6,15 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        private const float GameTime = 60f;
+        private const float GameTime = 900f;
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
         [SerializeField] private Sprite _image;
         [SerializeField] private float _gameDuration = GameTime;
-
+        private int score = 0;
         void Start()
         {
+            EventsManager.Instance.OnEnemyDeath += OnEnemyDeath;
             EventsManager.Instance.OnGameOver += OnGameOver;
         }
 
@@ -44,6 +45,10 @@ namespace Managers
             }
             
            
+        }
+        void OnEnemyDeath(){
+            score+=100;
+            EventsManager.Instance.EventScoreChange(score);
         }
     }
 }

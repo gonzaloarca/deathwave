@@ -16,10 +16,11 @@ namespace Managers
         [SerializeField] private bool _ending;
 
         private int _levelToload;
-
+        private bool _changeLevel = false;
         // Start is called before the first frame update
         void Start()
         {
+           
             _source = GameObject.FindWithTag("GameMusic")?.GetComponent<AudioSource>();
             if (_menu)
             {
@@ -73,11 +74,12 @@ namespace Managers
         {
             _fadeAnimator.SetTrigger("FadeOut");
             _levelToload = levelIndex;
+            StartCoroutine(LoadAsync());
         }
 
         public void OnFadeComplete()
         {
-            SceneManager.LoadScene(_levelToload);
+            _changeLevel = true;
         }
 
         private void OnGameOver(bool isVictory)
@@ -86,5 +88,27 @@ namespace Managers
             if (isVictory) FadeToLevel(2);
             else FadeToLevel(3);
         }
+
+        IEnumerator LoadAsync()
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(_levelToload);
+            operation.allowSceneActivation = false;
+            float progress = 0;
+
+            while (!operation.isDone)
+            {
+                // progress = operation.progress;
+                // _progressBar.fillAmount = progress;
+                // _progressValue.text = $"Cargando ... {progress * 100} %";
+
+                if(operation.progress >= .9f)
+                {   
+                    if(_changeLevel) operation.allowSceneActivation = true;
+                }
+
+                yield return null;
+            }
+        }
+
     }
 }
