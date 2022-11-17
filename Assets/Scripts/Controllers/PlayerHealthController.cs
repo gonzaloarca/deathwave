@@ -29,6 +29,7 @@ namespace Controllers
         protected override void Start()
         {
             base.Start();
+            EventsManager.Instance.OnHealthPickup += Heal;
             UI_UpdateHealth();
         }
 

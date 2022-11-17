@@ -19,6 +19,7 @@ namespace Entities
         private CmdSprint _cmdStartSprint;
         private CmdSprint _cmdStopSprint;
         [SerializeField] private GameObject _ammoDrop;
+        [SerializeField] private GameObject _healthDrop;
         //  private CmdIdle _idle;
         private float _vision;
         private float _meleeRange;
@@ -88,8 +89,14 @@ namespace Entities
         void DeadDrop(){
             var position = this.transform.position;
             position.y += 1;
-            if(Random.Range(0f,1f) < EnemyStats.DropFreq )
-                Instantiate(_ammoDrop , position , Quaternion.identity );
+            if(Random.Range(0f,1f) < EnemyStats.DropFreq ){
+                if(Random.Range(0f,1f) < 0.75f){
+                    Instantiate(_healthDrop , position , Quaternion.identity );
+                }else{
+                    Instantiate(_ammoDrop , position , Quaternion.identity );
+                }
+            }
+                
         }
 
         
