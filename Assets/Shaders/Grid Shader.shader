@@ -13,6 +13,7 @@ Shader "Unlit/Grid"
     {
         Tags { "RenderType"="Opaque" }
         LOD 100
+        Cull Off
 
         Pass
         {
