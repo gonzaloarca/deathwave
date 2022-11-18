@@ -72,10 +72,10 @@ namespace Entities
         }
 
         protected virtual void OnDestroy(){;
-            Instantiate(_deathSound, this.transform.position , Quaternion.identity);
-            EventsManager.Instance.EventEnemyDeath();
-            if(_drop) DeadDrop();
-            Destroy(this.transform.parent.gameObject);
+            if(!EventsManager.Instance.IsGameOver()){
+                Instantiate(_deathSound, this.transform.position , Quaternion.identity);
+            }
+            base.OnDestroy();
         }
 
     }

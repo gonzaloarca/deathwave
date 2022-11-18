@@ -16,7 +16,7 @@ namespace Managers
         [SerializeField] private bool _ending;
 
         private int _levelToload;
-
+        private bool _fading =false;
         private bool _changeLevel = false;
 
         // Start is called before the first frame update
@@ -73,7 +73,9 @@ namespace Managers
         {
             _fadeAnimator.SetTrigger("FadeOut");
             _levelToload = levelIndex;
-            StartCoroutine(LoadAsync());
+            if(!_fading)
+                StartCoroutine(LoadAsync());
+            _fading = true;
         }
 
         public void OnFadeComplete()
@@ -84,8 +86,13 @@ namespace Managers
         private void OnGameOver(bool isVictory)
         {
             if (!_menu) GameObject.FindWithTag("GameMusic")?.GetComponent<AudioSource>()?.Stop();
-            if (isVictory) FadeToLevel(2);
-            else FadeToLevel(3);
+            
+            if (isVictory){
+                FadeToLevel(2);
+            }
+            else {
+                FadeToLevel(3);
+            }
         }
 
         IEnumerator LoadAsync()

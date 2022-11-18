@@ -14,9 +14,8 @@ namespace Managers
         public int _currentRound;
         private int _maxEnemies = 5;
         private int _roundKills = 0;
-
         private SpawnManager spawnManager;
-
+     
         void Start()
         {
             spawnManager = gameObject.GetComponent<SpawnManager>();
@@ -29,6 +28,10 @@ namespace Managers
 
         void OnEnemyDeath()
         {
+             if (_currentRound > _maxRounds)
+            {
+                return;
+            }
             _roundKills += 1;
 
             if (_roundKills >= _maxEnemies)

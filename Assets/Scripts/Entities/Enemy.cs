@@ -49,8 +49,10 @@ namespace Entities
         }
 
         protected virtual void OnDestroy(){;
-            EventsManager.Instance.EventEnemyDeath();
-            if(_drop) DeadDrop();
+            if(!EventsManager.Instance.IsGameOver()){
+                EventsManager.Instance.EventEnemyDeath();
+                if(_drop) DeadDrop();
+            }
             Destroy(this.transform.parent.gameObject);
         }
 

@@ -31,5 +31,8 @@ namespace Managers
             score += 100;
             EventsManager.Instance.EventScoreChange(score);
         }
+        public bool IsGameOver(){
+            return _isGameOver;
+        }
     }
 }

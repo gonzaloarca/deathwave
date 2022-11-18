@@ -12,7 +12,10 @@ namespace Managers
             if (Instance != null) Destroy(this);
             Instance = this;
         }
-
+        private bool _isGameOver;
+        public bool IsGameOver(){
+            return _isGameOver;
+        }
         public event Action<bool> OnGameOver;
         public event Action OnPlayerDamage;
         public event Action OnGunShot;
@@ -29,6 +32,7 @@ namespace Managers
         public event Action<int> OnRoundChange;
         public void EventGameOver(bool isVictory)
         {
+            _isGameOver = true;
             OnGameOver?.Invoke(isVictory);
         }
         

@@ -3063,7 +3063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3794897b0105c584caa4768000144f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxRounds: 5
+  _maxRounds: 2
   _isVictory: 0
   _image: {fileID: 0}
   _currentRound: 0
