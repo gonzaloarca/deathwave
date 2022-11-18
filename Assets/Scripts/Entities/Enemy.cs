@@ -36,7 +36,7 @@ namespace Entities
             position.y = _target.transform.position.y + 1;
             //position.y += 1;
             if(Random.Range(0f,1f) < EnemyStats.DropFreq ){
-                if(Random.Range(0f,1f) < 0.75f){
+                if(Random.Range(0f,1f) < 0.5f){
                     Instantiate(_healthDrop , position , Quaternion.identity );
                 }else{
                     Instantiate(_ammoDrop , position , Quaternion.identity );
