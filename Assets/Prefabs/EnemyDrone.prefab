@@ -403,53 +403,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9043753042525423144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7718328564709750447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d62ac7cef4f2f6247bdf4047be6ce469, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHealth: 0
---- !u!114 &9043753042525423148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7718328564709750447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d714f7d1d9dd0d343928ac54f1906924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _actorStats: {fileID: 11400000, guid: 0fd40487c2a1d0a4fa1d2c40a8315c73, type: 2}
-  enemyStats: {fileID: 11400000, guid: 64160048ab8f181429c9b4e58ba12499, type: 2}
-  _ammoDrop: {fileID: 8640208673538754408, guid: 20fccd262e91a5a48a1bad37d22a2054, type: 3}
-  _healthDrop: {fileID: 8640208673538754408, guid: 2f083ab04f851e84fb95d38eebc2bad4, type: 3}
-  _drop: 1
-  _deathSound: {fileID: 7065168157141594371, guid: 17201c9e45dcf6c4a8e93808f9108903, type: 3}
---- !u!114 &9043753042525423151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7718328564709750447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: babd59a512df35d49b176228db7fd3e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guns:
-  - {fileID: 9043753040672258253}
-  - {fileID: 9043753041305149290}
-  _droneGunStats: {fileID: 11400000, guid: 2264aaba912495944aefcf2e045f58aa, type: 2}
 --- !u!82 &6839420459972097672
 AudioSource:
   m_ObjectHideFlags: 0
@@ -462,7 +415,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -473,7 +426,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -565,3 +518,50 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b02661b1983843f4a8e25854215c13f1, type: 3}
   - {fileID: 8300000, guid: b590eb6e51c172d4ea06202230bf8177, type: 3}
   - {fileID: 8300000, guid: b103f9d4e304eeb4291787b9d002dc35, type: 3}
+--- !u!114 &9043753042525423144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718328564709750447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62ac7cef4f2f6247bdf4047be6ce469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 0
+--- !u!114 &9043753042525423148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718328564709750447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d714f7d1d9dd0d343928ac54f1906924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _actorStats: {fileID: 11400000, guid: 0fd40487c2a1d0a4fa1d2c40a8315c73, type: 2}
+  enemyStats: {fileID: 11400000, guid: 64160048ab8f181429c9b4e58ba12499, type: 2}
+  _ammoDrop: {fileID: 8640208673538754408, guid: 20fccd262e91a5a48a1bad37d22a2054, type: 3}
+  _healthDrop: {fileID: 8640208673538754408, guid: 2f083ab04f851e84fb95d38eebc2bad4, type: 3}
+  _drop: 1
+  _deathSound: {fileID: 7065168157141594371, guid: 17201c9e45dcf6c4a8e93808f9108903, type: 3}
+--- !u!114 &9043753042525423151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718328564709750447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babd59a512df35d49b176228db7fd3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guns:
+  - {fileID: 9043753040672258253}
+  - {fileID: 9043753041305149290}
+  _droneGunStats: {fileID: 11400000, guid: 2264aaba912495944aefcf2e045f58aa, type: 2}
