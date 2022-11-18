@@ -1,12 +1,13 @@
 using Strategy;
 using UnityEngine;
 using Entities;
-
+using Managers;
 namespace Controllers
 {
     public class DamageableHitboxController : MonoBehaviour, IHittable
     {
         private HealthController _healthController;
+        [SerializeField] private bool _head = false;
         [SerializeField] private float _damageMultiplier = 1;
         private void FindOwnerHealthController()
         {
@@ -25,10 +26,12 @@ namespace Controllers
         public void Start()
         {
             FindOwnerHealthController();
+
         }
 
         public void Hit(float damage)
         {
+            if(_head) EventsManager.Instance.EventHeadshot();
            // Debug.Log("GUNHIT");
             _healthController?.TakeDamage(damage * _damageMultiplier);
         }

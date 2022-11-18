@@ -25,6 +25,7 @@ namespace Managers
         public event Action OnGunReloadStart;
         public event Action OnGunReloadEnd;
         public event Action OnEmptyMag;
+        public event Action OnHeadshot;
         public event Action OnAmmoPickup;
         // public event Action<float> OnSecondPassed;
         public event Action OnEnemyDeath;
@@ -44,6 +45,11 @@ namespace Managers
         public void EventGunShot()
         {
             OnGunShot?.Invoke();
+        }
+         
+        public void EventHeadshot()
+        {
+            OnHeadshot?.Invoke();
         }
         
         public void EventGunReloadStart()

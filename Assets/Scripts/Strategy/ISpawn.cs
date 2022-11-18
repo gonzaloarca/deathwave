@@ -4,6 +4,6 @@ namespace Strategy
 {
     public interface ISpawn
     {
-        void Spawn();
+        void Spawn(GameObject o);
     }
 }

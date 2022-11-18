@@ -22,16 +22,16 @@ namespace Managers
             _currentRound = 1;
             EventsManager.Instance.EventRoundChange(_currentRound);
             EventsManager.Instance.OnEnemyDeath += OnEnemyDeath;
-            spawnManager.Reset(_maxEnemies);
+            spawnManager.Reset(_maxEnemies , _currentRound);
         }
 
 
         void OnEnemyDeath()
         {
-             if (_currentRound > _maxRounds)
-            {
-                return;
-            }
+            //  if (_currentRound > _maxRounds)
+            // {
+            //     return;
+            // }
             _roundKills += 1;
 
             if (_roundKills >= _maxEnemies)
@@ -48,7 +48,7 @@ namespace Managers
 
 
                 EventsManager.Instance.EventRoundChange(_currentRound);
-                spawnManager.Reset(_maxEnemies);
+                spawnManager.Reset(_maxEnemies , _currentRound);
             }
         }
     }

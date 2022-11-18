@@ -17,7 +17,7 @@ namespace Entities
         //  private CmdIdle _idle;
         private float _vision;
         private float _range;
-        private bool _gunsDrawn = true;
+        public bool _gunsDrawn = true;
         private void Start()
         {
             base.Start();

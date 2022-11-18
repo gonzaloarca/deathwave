@@ -6,8 +6,7 @@ using Strategy;
 [RequireComponent(typeof(MeshFilter))]
 public class PlaneSpawn : MonoBehaviour , ISpawn
 {
-    public GameObject SpawnObject => _spawnObject;
-    [SerializeField] private GameObject _spawnObject;
+
    
     private MeshFilter _filter;
     private float _minX;
@@ -53,12 +52,10 @@ public class PlaneSpawn : MonoBehaviour , ISpawn
     private float _time = 0f;
     private float _nextSpawnTime = 0f;
     // Update is called once per frame
- 
 
-    public void Spawn(){
-     
+    public void Spawn(GameObject o){
         var position = new Vector3(Random.Range(_minX, _maxX), transform.position.y + 2, Random.Range(_minZ, _maxZ));
-        var skeletonRoot = Instantiate(_spawnObject, position, Quaternion.identity);
+        var skeletonRoot = Instantiate(o, position, Quaternion.identity);
       
     }
 

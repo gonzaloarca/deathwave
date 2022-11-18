@@ -55,6 +55,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4585881354452353057}
     m_Modifications:
+    - target: {fileID: 494337756042147245, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
+      propertyPath: _head
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 494337756042147245, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
+      propertyPath: _damageMultiplier
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 987806154528279228, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -111,6 +119,18 @@ PrefabInstance:
       propertyPath: _healthDrop
       value: 
       objectReference: {fileID: 8640208673538754408, guid: 2f083ab04f851e84fb95d38eebc2bad4, type: 3}
+    - target: {fileID: 7758812224362668431, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758812224362668431, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.0025
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758812224362668431, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.0025
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
 --- !u!4 &1800373440629817832 stripped

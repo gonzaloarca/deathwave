@@ -10,7 +10,9 @@ public class SpawnManager : MonoBehaviour
 
         private List<GameObject> _enemySpawners;
         private GameObject _player;
+       
         private float _time = 0;
+
         private float _nextSpawnTime = 0;
  
         [SerializeField] private float _minSpawnCooldown;
@@ -25,12 +27,45 @@ public class SpawnManager : MonoBehaviour
 
         [SerializeField] private int _maxEnemies;
 
-        private int _enemies;
+        public GameObject[] SpawnObjects => _spawnObjects;
         
+        [SerializeField] private GameObject[] _spawnObjects;
+        
+        private int _round = 0;
+
+        private int _enemies;
+        private int _deadEnemies = 0;
+        private int _maxAliveEnemies = 5;
+
+        public void OnEnemyDeath(){
+            _deadEnemies++;
+        }
+
+        private GameObject GetEnemyToSpawn(){
+            //cada 3 rondas hay una que spawnea drones
+         
+            //aca podria spawnear el boss
+            if(_round % 10 == 0){
+                return _spawnObjects[1];
+            }
+            
+            // if( _round > 10){
+            //     return _spawnObjects[1];
+            // }
+
+            if (_round % 5 == 0 && _enemies % 2 == 0 ||  _round % 3 == 0 && _enemies % 3 == 0 ){
+                    return _spawnObjects[1];
+            }
+
+
+            return _spawnObjects[0];
+        }
+
+
         private void Start()
         {
             _enemySpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemySpawn")); 
-           
+            EventsManager.Instance.OnEnemyDeath += OnEnemyDeath;
             _player = GameObject.FindWithTag("Player");
         }
 
@@ -39,21 +74,29 @@ public class SpawnManager : MonoBehaviour
             _time += Time.deltaTime;
 
             if(_nextSpawnTime <= _time){
+                
+                int maxEnemiesRoundModifier = (int) _round/3;
+                int alive = _enemies - _deadEnemies;
+                if(  (alive) >= (_maxAliveEnemies + maxEnemiesRoundModifier) ) return;
+                
                 if(_maxEnemies <= _enemies) return;
                 GetNextSpawnTime();
                 SortByDistance();
                 var index = UnityEngine.Random.Range(0, _closestSpawnsCount+1);
-                _enemySpawners[index]?.GetComponent<ISpawn>()?.Spawn();
+                _enemySpawners[index]?.GetComponent<ISpawn>()?.Spawn(GetEnemyToSpawn());
                 _enemies++;
             }
         }
 
-        public void Reset(int roundEnemies){
+        public void Reset(int roundEnemies , int round){
             _time = 0;
             _nextSpawnTime = 5;
             _enemies = 0;
             _maxEnemies = roundEnemies;
+            _round = round;
         }
+        
+        
         
         private void GetNextSpawnTime(){
             var nextTime = _maxSpawnCooldown - _alphaCooldown * Mathf.Exp( _time * _timeRateCooldown);
