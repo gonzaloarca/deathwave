@@ -6,6 +6,6 @@ namespace Strategy
     {
        
         void LookAt(Vector3 direction);
-        void Attack();
+        void Attack(Vector3 objective);
     }
 }

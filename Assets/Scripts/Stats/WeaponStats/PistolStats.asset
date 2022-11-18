@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunStatsValues:
     MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
-    Bullet: {fileID: 5470383844280770365, guid: ab8682b3d380e43019378dd59ee750f0, type: 3}
+    Bullet: {fileID: 5470383844280770365, guid: 3711ecff4abeea0418a4d3f8dd909e1a, type: 3}
     Damage: 30
     MagSize: 12
     MaxMags: 5

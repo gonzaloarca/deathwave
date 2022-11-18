@@ -17,5 +17,5 @@ MonoBehaviour:
     WalkSpeed: 3
     SprintSpeed: 5
     JumpStrength: 1
-    MeleeRange: 1.2
+    Range: 0.5
     RotationSpeed: 5

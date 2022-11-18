@@ -84,7 +84,7 @@ namespace Weapons
             _reloadTimer = 0;
             _animations?.SetBool("change_gun", true);
             _animations?.SetBool("draw_gun", false);
-            _animations?.SetBool("reloading_start", false);
+            _animations?.SetBool("reload_start", false);
         }
 
         public void DrawGun()

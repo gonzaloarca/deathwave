@@ -104,6 +104,10 @@ PrefabInstance:
       value: Skeleton
       objectReference: {fileID: 0}
     - target: {fileID: 6414321991636751545, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
+      propertyPath: _drop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6414321991636751545, guid: d48025980d0fd8442b2c797a9d389f6b, type: 3}
       propertyPath: _healthDrop
       value: 
       objectReference: {fileID: 8640208673538754408, guid: 2f083ab04f851e84fb95d38eebc2bad4, type: 3}

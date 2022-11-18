@@ -42,7 +42,7 @@ namespace Controllers{
             transform.Translate(direction * (Time.deltaTime * MovementSpeed));
         }
 
-        public void Attack(){
+        public void Attack(Vector3 objective){
             if(_stop >0f)  
                 return;
                  

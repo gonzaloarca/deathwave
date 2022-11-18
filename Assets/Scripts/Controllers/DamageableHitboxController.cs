@@ -19,7 +19,7 @@ namespace Controllers
                 _healthController = healthOwner.GetComponent<HealthController>();
             }
 
-          //  Debug.Log("owner: " + healthOwner?.name + "health controller:" + _healthController);
+          Debug.Log("owner: " + healthOwner?.name + "health controller:" + _healthController);
         }
 
         public void Start()

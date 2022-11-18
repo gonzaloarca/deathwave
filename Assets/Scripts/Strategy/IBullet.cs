@@ -11,6 +11,7 @@ namespace Strategy
         void Travel();
         
         void SetRange(float range);
-        void SetDamage(float damage);
+        void SetDamage(float damage); 
+        void SetTargetLayer(int layer);
     }
 }

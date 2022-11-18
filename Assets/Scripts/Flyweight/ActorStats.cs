@@ -13,7 +13,7 @@ namespace Flyweight
         public float WalkSpeed => _statsValues.WalkSpeed;
         public float SprintSpeed => _statsValues.SprintSpeed;
         public float JumpStrength => _statsValues.JumpStrength;
-        public float MeleeRange => _statsValues.MeleeRange;
+        public float Range => _statsValues.Range;
         public float RotationSpeed => _statsValues.RotationSpeed;
     }
 
@@ -24,7 +24,7 @@ namespace Flyweight
         public float WalkSpeed;
         public float SprintSpeed;
         public float JumpStrength;
-        public float MeleeRange;
+        public float Range;
         public float RotationSpeed;
     }
 }

@@ -10,7 +10,7 @@ namespace Entities
         public float Speed => BulletStats.Speed;
         public float Range => _range;
         [SerializeField] private float _range;
-
+        private int _targetLayer = 8;
         public float Damage => _damage;
         [SerializeField] private float _damage;
 
@@ -27,10 +27,10 @@ namespace Entities
             // TODO: spawn sound effect
             // TODO: force feedback
             // TODO: destroy self
-            Debug.Log("TRIGGER ENTER");
+         
 
-            if (other.gameObject.layer != 8) return;
-            
+            if (other.gameObject.layer != _targetLayer) return;
+               Debug.Log("TRIGGER ENTER");
             // take damage
             var hittable = other.gameObject.GetComponent<IHittable>();
             hittable?.Hit(Damage);
@@ -49,6 +49,13 @@ namespace Entities
         {
             _range = range;
         }
+
+        
+        public void SetTargetLayer(int layer)
+        {
+            _targetLayer = layer;
+        }
+
 
         public void SetDamage(float damage)
         {
