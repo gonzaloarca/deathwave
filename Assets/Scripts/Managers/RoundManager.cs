@@ -7,7 +7,7 @@ namespace Managers
     [RequireComponent(typeof(SpawnManager))]
     public class RoundManager : MonoBehaviour
     {
-        [SerializeField] private int _maxRounds = 5;
+        [SerializeField] private int _maxRounds = 2;
         [SerializeField] private bool _isVictory = false;
         [SerializeField] private Sprite _image;
 
@@ -35,7 +35,15 @@ namespace Managers
             {
                 _maxEnemies = (int)(_maxEnemies * 1.25);
                 _roundKills = 0;
-                _currentRound += 1;
+                _currentRound++;
+
+                if (_currentRound > _maxRounds)
+                {
+                    EventsManager.Instance.EventGameOver(true);
+                    return;
+                }
+
+
                 EventsManager.Instance.EventRoundChange(_currentRound);
                 spawnManager.Reset(_maxEnemies);
             }

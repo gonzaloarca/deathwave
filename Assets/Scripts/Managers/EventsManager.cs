@@ -23,7 +23,7 @@ namespace Managers
         public event Action OnGunReloadEnd;
         public event Action OnEmptyMag;
         public event Action OnAmmoPickup;
-        public event Action<float> OnSecondPassed;
+        // public event Action<float> OnSecondPassed;
         public event Action OnEnemyDeath;
         public event Action<float> OnHealthPickup;
         public event Action<int> OnRoundChange;
@@ -75,10 +75,10 @@ namespace Managers
             OnAmmoPickup?.Invoke();
         }
         
-        public void EventSecondPassed(float time)
-        {
-            OnSecondPassed?.Invoke(time);
-        }
+        // public void EventSecondPassed(float time)
+        // {
+        //     OnSecondPassed?.Invoke(time);
+        // }
         public void EventEnemyDeath()
         {
             OnEnemyDeath?.Invoke();
