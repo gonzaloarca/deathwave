@@ -16,7 +16,6 @@ namespace Entities
         // INSTANCIAS
         private PlayerMovementController _movementController;
         private PlayerCameraController _cameraController;
-        private PlayerScoreController _scoreController;
 
         [SerializeField] private List<Gun> _guns;
         private Gun _currentGun;
@@ -28,7 +27,7 @@ namespace Entities
         [SerializeField] private KeyCode _moveBack = KeyCode.S;
         [SerializeField] private KeyCode _moveLeft = KeyCode.A;
         [SerializeField] private KeyCode _moveRight = KeyCode.D;
-        [SerializeField] private KeyCode _jump = KeyCode.Space;
+        private readonly string _jump = "space";
         [SerializeField] private KeyCode _sprint = KeyCode.LeftShift;
 
         // BIINDING COMBAT
@@ -57,16 +56,17 @@ namespace Entities
         private int _enemyLayer;
         private bool _alive = true;
 
-        private void OnGameOver(bool isVictory){
+        private void OnGameOver(bool isVictory)
+        {
             _alive = isVictory;
         }
+
         private void Start()
         {
             _healthController = GetComponent<HealthController>();
             _movementController = GetComponent<PlayerMovementController>();
             _cameraController = GetComponent<PlayerCameraController>();
             _soundController = GetComponent<PlayerSoundController>();
-            _scoreController = GetComponent<PlayerScoreController>();
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
@@ -91,7 +91,7 @@ namespace Entities
 
         void Update()
         {
-            if(!_alive) return;
+            if (!_alive) return;
             // W-A-S-D
             if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddCommand(_cmdMoveForward);
             if (Input.GetKey(_moveBack)) EventQueueManager.Instance.AddCommand(_cmdMoveBack);
@@ -122,7 +122,7 @@ namespace Entities
 
 
             if (Input.GetKeyDown(KeyCode.Backspace)) _healthController.TakeDamage(30);
-            
+
             //
             // if (Input.GetKeyDown(_setVictory)) EventsManager.Instance.EventGameOver(true);
             // if (Input.GetKeyDown(_setDefeat)) GetComponent<IDamageable>().TakeDamage(20);
