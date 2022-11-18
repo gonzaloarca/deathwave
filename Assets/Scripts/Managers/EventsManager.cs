@@ -26,6 +26,7 @@ namespace Managers
         public event Action<float> OnSecondPassed;
         public event Action OnEnemyDeath;
         public event Action<float> OnHealthPickup;
+        public event Action<int> OnRoundChange;
         public void EventGameOver(bool isVictory)
         {
             OnGameOver?.Invoke(isVictory);
@@ -84,6 +85,10 @@ namespace Managers
         }
         public void EventHealthPickup(float healthPoints){
             OnHealthPickup?.Invoke(healthPoints);
+        }
+        public void EventRoundChange(int newRound)
+        {
+            OnRoundChange?.Invoke(newRound);
         }
     }
 }

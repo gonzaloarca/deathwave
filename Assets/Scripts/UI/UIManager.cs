@@ -9,6 +9,7 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI _ammo;
         [SerializeField] private TextMeshProUGUI _score;
+        [SerializeField] private TextMeshProUGUI _round;
         [SerializeField] private TextMeshProUGUI _timer;
         
 
@@ -37,6 +38,11 @@ namespace UI
             
             _timer.text = $"{minutes:00}:{seconds:00}";
         }
+        
+        private void OnRoundChange(int round)
+        {
+            _round.text = $"Round {round}";
+        }
     
         void Start()
         {
@@ -44,6 +50,7 @@ namespace UI
             EventsManager.Instance.OnScoreChange += OnScoreChange;
             EventsManager.Instance.OnPlayerHealthChange += OnPlayerHealthChange;
             EventsManager.Instance.OnSecondPassed += OnSecondPassed;
+            EventsManager.Instance.OnRoundChange += OnRoundChange;
         }
 
     }
