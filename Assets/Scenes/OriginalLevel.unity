@@ -2731,6 +2731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roundStartSound: {fileID: 8300000, guid: e303cdc695f834e869870fa9d814303c, type: 3}
+  _dropPickupSound: {fileID: 8300000, guid: 06e888b586a5a41ce90ee41239bb71cd, type: 3}
   _source: {fileID: 1193867806}
 --- !u!82 &1193867806
 AudioSource:
