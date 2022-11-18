@@ -15,7 +15,7 @@ MonoBehaviour:
   _gunStatsValues:
     MuzzleFlash: {fileID: 0}
     Bullet: {fileID: 5470383844280770365, guid: ab8682b3d380e43019378dd59ee750f0, type: 3}
-    Damage: 30
+    Damage: 10
     MagSize: 12
     MaxMags: 0
     Cooldown: 0.5

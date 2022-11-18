@@ -52,7 +52,7 @@ namespace Sounds
             PlayHeadshot();
         }
         private void Update(){
-            if( Time.time - _lastKill > 1f ){
+            if( Time.time - _lastKill > 2.5f ){
                 _killingSpree = 0;
             }
         }
@@ -67,18 +67,18 @@ namespace Sounds
         private void PlayDoubleKill()
         {
 
-            _audioSource.PlayOneShot(_doublekill);
+            _audioSource.PlayOneShot(_doublekill, 1.2f);
         }
 
         private void PlayHeadshot(){
-            _audioSource.PlayOneShot(_headshot);
+            _audioSource.PlayOneShot(_headshot , 0.6f);
         }
         private void PlayMonsterkill(){
-            _audioSource.PlayOneShot(_monsterkill);
+            _audioSource.PlayOneShot(_monsterkill, 1.2f);
         }
 
         private void PlayFirstBlood(){
-            _audioSource.PlayOneShot(_firstBlood);
+            _audioSource.PlayOneShot(_firstBlood , 1.2f);
         }
 
         

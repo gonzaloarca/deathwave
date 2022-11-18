@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using Commands;
 using Controllers;
 using EventQueue;
@@ -25,7 +26,7 @@ namespace Entities
             _vision = this.EnemyStats.Vision;
             _range = this.ActorStats.Range;
         }
-
+        
         void Update()
         {
             // Debug.Log("Bad to the bone");
@@ -41,12 +42,14 @@ namespace Entities
             }
 
 
+            
        
             if(distance >= (_range-15f) && !_gunsDrawn){
                 targetPos.y = transform.position.y; 
                 _movementController.LookAt(targetPos);
                 _movementController.Travel(Vector3.forward);
                 _movementController.DrawGun();
+                StartCoroutine(StartDraw());
                 return;
             }
 
@@ -70,7 +73,10 @@ namespace Entities
         public void GunDrawnFalse(){
             _gunsDrawn = false;
         }
-
+        IEnumerator StartDraw(){
+            yield return new WaitForSeconds(1);
+            GunDrawnTrue();
+        }
         protected virtual void OnDestroy(){;
             if(!EventsManager.Instance.IsGameOver()){
                 Instantiate(_deathSound, this.transform.position , Quaternion.identity);

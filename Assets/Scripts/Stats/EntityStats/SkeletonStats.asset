@@ -17,5 +17,5 @@ MonoBehaviour:
     WalkSpeed: 3
     SprintSpeed: 5
     JumpStrength: 1
-    Range: 0.5
+    Range: 1.35
     RotationSpeed: 5
