@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Managers;
-
+using TMPro;
 namespace Managers
 {
+
     public class GameLevelManager : MonoBehaviour
     {
+
         [SerializeField] private AudioClip _startingLoop;
         [SerializeField] private AudioClip _firstTrack;
         [SerializeField] private AudioSource _source;
         [SerializeField] private Animator _fadeAnimator;
+        [SerializeField] private Animator _textAnimator;
+        [SerializeField] private TextMeshProUGUI _round;
         [SerializeField] private bool _menu;
         [SerializeField] private bool _ending;
-
+        [SerializeField] private int[] _roundChoices;
+        private GlobalData _data;
+        private int _selectedRoundIndex;
+        public int SelectedRoundCount;
+        private MusicManager _musicManager;
         private int _levelToload;
         private bool _fading =false;
         private bool _changeLevel = false;
@@ -22,12 +30,18 @@ namespace Managers
         // Start is called before the first frame update
         void Start()
         {
+            _data = GameObject.FindWithTag("GlobalData")?.GetComponent<GlobalData>();
             _source = GameObject.FindWithTag("GameMusic")?.GetComponent<AudioSource>();
+            _musicManager = GameObject.FindWithTag("GameMusic")?.GetComponent<MusicManager>();
             if (_menu)
             {
+                
+                SelectedRoundCount = _roundChoices[0];
+                _data.SelectedRounds = SelectedRoundCount;
                 _source.clip = _startingLoop;
                 _source.loop = true;
                 _source.Play();
+                _source.volume = 1.0f;
             }
 
             EventsManager.Instance.OnGameOver += OnGameOver;
@@ -43,7 +57,21 @@ namespace Managers
 
             if (_menu)
             {
-                if (_source.loop && Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    _selectedRoundIndex++;
+                    SelectedRoundCount = _roundChoices[_selectedRoundIndex % (_roundChoices.Length)];
+                    if(SelectedRoundCount > 0){
+                        _round.text = $"[R] Rounds: {SelectedRoundCount}";
+                    }
+                    else
+                    {
+                        _round.text = $"[R] Rounds: INFINITE";
+                    }
+                    _data.SelectedRounds = SelectedRoundCount;
+                    _textAnimator.SetTrigger("RoundChange");
+                }
+                if (_source.loop && Input.GetKeyDown(KeyCode.Space))
                 {
                     _source.loop = false;
                 }
@@ -60,7 +88,7 @@ namespace Managers
 
             if (_ending)
             {
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     FadeToLevel(0);
                 }
@@ -109,7 +137,14 @@ namespace Managers
 
                 if (operation.progress >= .9f)
                 {
-                    if (_changeLevel) operation.allowSceneActivation = true;
+                    if (_changeLevel){
+                        operation.allowSceneActivation = true;
+                        if(_levelToload == 1){
+                            _musicManager.Activate();
+                        }else{
+                            _musicManager.Deactivate();
+                        }
+                    }
                 }
 
                 yield return null;

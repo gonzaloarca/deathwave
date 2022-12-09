@@ -15,9 +15,13 @@ namespace Managers
         private int _maxEnemies = 5;
         private int _roundKills = 0;
         private SpawnManager spawnManager;
-     
+        private GlobalData _data;
         void Start()
-        {
+        {   
+            _data = GameObject.FindWithTag("GlobalData")?.GetComponent<GlobalData>();
+            if(_data){
+                _maxRounds = _data.SelectedRounds;
+            }
             spawnManager = gameObject.GetComponent<SpawnManager>();
             _currentRound = 1;
             EventsManager.Instance.EventRoundChange(_currentRound);
@@ -40,7 +44,7 @@ namespace Managers
                 _roundKills = 0;
                 _currentRound++;
 
-                if (_currentRound > _maxRounds)
+                if (_maxRounds > 0 && _currentRound > _maxRounds )
                 {
                     EventsManager.Instance.EventGameOver(true);
                     return;

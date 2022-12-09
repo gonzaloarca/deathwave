@@ -31,7 +31,7 @@ namespace Sounds
         public void OnPlayerDamage()
         {
             AudioClip clip = _damageClips[Random.Range(0 , _damageClips.Length)];
-            AudioSource.PlayOneShot(clip);
+            AudioSource.PlayOneShot(clip , 1.3f);
         }
 
         public void Start()

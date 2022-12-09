@@ -165,5 +165,6 @@ namespace Entities
 
             _healthController.TakeDamage(melee.Damage());
         }
+      
     }
 }

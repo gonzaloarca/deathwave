@@ -164,8 +164,9 @@ namespace Weapons
             UI_AmmoUpdater();
         }
         
-        public void UI_AmmoUpdater() => EventsManager.Instance.EventAmmoChange(_bulletsLeftInMag, _totalBulletsLeft);
-
+        public void UI_AmmoUpdater() {
+            if(this.gameObject.active) EventsManager.Instance.EventAmmoChange(_bulletsLeftInMag, _totalBulletsLeft);
+        }
 
         private void Start()
         {

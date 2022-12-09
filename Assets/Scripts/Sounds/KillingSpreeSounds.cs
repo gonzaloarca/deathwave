@@ -16,9 +16,9 @@ namespace Sounds
         [SerializeField] private AudioClip _doublekill;
         
         private int _totalKills = 0;
-        private int _killingSpree = 0;
+        public int _killingSpree = 0;
         private float _lastKill = 0;
-
+        public int _killingSpreeDoubleKill = 0;
         public void InitAudioSource()
         {
             _audioSource = GetComponent<AudioSource>();
@@ -39,8 +39,9 @@ namespace Sounds
             if(_totalKills == 0) PlayFirstBlood();
             _totalKills++;
             _killingSpree++;
+            _killingSpreeDoubleKill++;
             _lastKill = Time.time;
-            if( _killingSpree == 2){
+            if( _killingSpreeDoubleKill == 2){
                 PlayDoubleKill();
             }
             if(_killingSpree > 4){
@@ -54,6 +55,9 @@ namespace Sounds
         private void Update(){
             if( Time.time - _lastKill > 2.5f ){
                 _killingSpree = 0;
+            }
+            if( Time.time - _lastKill > 1f ){
+                _killingSpreeDoubleKill = 0;
             }
         }
 
