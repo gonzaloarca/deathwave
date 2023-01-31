@@ -10818,7 +10818,7 @@ MonoBehaviour:
   _playerHeight: 2
   _groundDrag: 10
   _jumpCooldown: 0.2
-  _airModifier: 0.01
+  _airModifier: 0.005
   _speedModifier: 1
 --- !u!4 &8262076113804391719
 Transform:
