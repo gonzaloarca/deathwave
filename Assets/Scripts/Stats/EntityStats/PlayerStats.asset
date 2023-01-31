@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statsValues:
     MaxHealth: 100
-    WalkSpeed: 60
-    SprintSpeed: 75
-    JumpStrength: 15
+    WalkSpeed: 10
+    SprintSpeed: 13
+    JumpStrength: 12.5
     Range: 0
     RotationSpeed: 0
