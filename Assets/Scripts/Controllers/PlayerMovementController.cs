@@ -31,7 +31,7 @@ namespace Controllers
         private void Update()
         {
             _grounded = Physics.Raycast(transform.position, -Vector3.up, _playerHeight * 0.1f, 1 << GroundLayer);
-            
+
             if (_grounded)
             {
                 _rigidbody.drag = _groundDrag;
@@ -54,7 +54,7 @@ namespace Controllers
         {
             var transform1 = transform;
             var moveDirection = transform1.forward * direction.z + transform1.right * direction.x;
-            var movementForce = moveDirection * (MovementSpeed * SpeedModifier);
+            var movementForce = moveDirection * (MovementSpeed * SpeedModifier * Time.deltaTime * 1000);
 
             if (!_grounded)
             {
@@ -65,11 +65,17 @@ namespace Controllers
 
             _rigidbody.AddForce(movementForce, ForceMode.Force);
             Debug.Log(_rigidbody.velocity.magnitude);
+
+            var velocity = _rigidbody.velocity;
+            velocity.y = 0;
+
             // velocity check
-            if (_rigidbody.velocity.magnitude > MovementSpeed)
+            if (velocity.magnitude > MovementSpeed)
             {
                 Debug.Log("SPEED THROTTLING");
-                _rigidbody.velocity = _rigidbody.velocity.normalized * MovementSpeed;
+                var clampedVelocity = velocity.normalized * MovementSpeed;
+                clampedVelocity.y = _rigidbody.velocity.y;
+                _rigidbody.velocity = clampedVelocity;
             }
         }
 
@@ -88,9 +94,9 @@ namespace Controllers
 
             // Only jump if the player is on the ground
             _readyToJump = false;
-            
+
             _rigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
-            
+
             Invoke(nameof(ResetJump), _jumpCooldown);
         }
 
