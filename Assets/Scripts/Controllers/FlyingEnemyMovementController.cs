@@ -2,6 +2,7 @@ using System;
 using Entities;
 using Strategy;
 using UnityEngine;
+using UnityEngine.AI;
 using Flyweight;
 using Sounds;
 namespace Controllers{
@@ -27,6 +28,9 @@ namespace Controllers{
         private float _damage;
         private float _range;
         private Animator _animator;
+       
+          // INSTANCIAS
+        private NavMeshAgent _agent;
         private GameObject _bullet;
         private DroneSoundController _sounds;
         private void Start()
@@ -34,6 +38,7 @@ namespace Controllers{
             _stop = 0f;
             _sprint = true;
             _gunCount = _guns.Length;
+             _agent = GetComponent<NavMeshAgent>();
             // _rigidbody = GetComponent<Rigidbody>();
           //  _animator = GetComponent<Animator>();
             //_animator.SetBool("running" , true);
@@ -43,6 +48,15 @@ namespace Controllers{
             _range = DroneGunStats.Range;
             _bullet = DroneGunStats.Bullet;
             _sounds = GetComponent<DroneSoundController>();
+
+            _agent.stoppingDistance = 0.1f;
+            _agent.speed = _movementSpeed;
+        }
+
+        public void Stop()
+        {
+              _agent.ResetPath();
+     
         }
 
         private void Update(){
@@ -55,6 +69,7 @@ namespace Controllers{
         public void Travel(Vector3 direction)
         {
       
+            _agent.ResetPath();
             if(_stop >0f)
                 return;
             _animator.SetBool("Moving" , true);
@@ -62,11 +77,14 @@ namespace Controllers{
             _animator.SetBool("Shooting" , false);
         //    _animator.SetFloat("Vertical", 1f);
            // Debug.Log("speed " + _movementSpeed);
-            transform.Translate(direction * (Time.deltaTime * MovementSpeed));
+           // transform.Translate(direction * (Time.deltaTime * MovementSpeed));
+            
+            
+            _agent.SetDestination(direction);
         }
 
         public void Attack(Vector3 objective){
-
+             _agent.ResetPath();
      
             if(_stop >0f)  
                 return;

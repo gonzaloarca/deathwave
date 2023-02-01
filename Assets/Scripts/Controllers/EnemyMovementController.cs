@@ -2,6 +2,7 @@ using System;
 using Entities;
 using Strategy;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 namespace Controllers{
@@ -9,8 +10,12 @@ namespace Controllers{
     [RequireComponent(typeof(Enemy),typeof(Animator))]
     public class EnemyMovementController : MonoBehaviour, IFollower
     {
+
+          // INSTANCIAS
+        private NavMeshAgent _agent;
         public float MovementSpeed => _movementSpeed;
         private float _movementSpeed;
+         private float _meleeRange;
         // public Transform _torso;
         private Animator _animator;
         public int GroundLayer => LayerMask.NameToLayer($"Ground");
@@ -19,15 +24,20 @@ namespace Controllers{
         private float _stop;
         private void Start()
         {
+            _agent = GetComponent<NavMeshAgent>();
             _stop = 0f;
             _sprint = true;
             // _rigidbody = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
             _animator.SetBool("running" , true);
             _movementSpeed = GetComponent<Enemy>().ActorStats.SprintSpeed;
+            _meleeRange = GetComponent<Enemy>().ActorStats.Range;
+             _agent.stoppingDistance = _meleeRange;
+            _agent.speed = _movementSpeed;
         }
 
         private void Update(){
+            
               if(_stop > 0f)
                     _stop -= Time.deltaTime;
         }
@@ -35,14 +45,18 @@ namespace Controllers{
         public void SetSpeedModifier(float num ){}
         public void Travel(Vector3 direction)
         {
+            
+             _agent.ResetPath();
             if(_stop >0f)
                 return;
             _animator.SetFloat("Vertical", 1f);
            // Debug.Log("speed " + _movementSpeed);
-            transform.Translate(direction * (Time.deltaTime * MovementSpeed));
+            _agent.SetDestination(direction);
+           
         }
 
         public void Attack(Vector3 objective){
+            _agent.ResetPath();
             if(_stop >0f)  
                 return;
                  
