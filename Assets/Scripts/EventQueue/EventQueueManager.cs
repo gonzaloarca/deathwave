@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Commands;
+using UI;
 using UnityEngine;
 
 namespace EventQueue
@@ -19,13 +20,20 @@ namespace EventQueue
 
         private void Update()
         {
+            if (PauseMenu.GameIsPaused) return;
+
             while (!IsQueueEmpty())
                 _events.Dequeue().Execute();
 
             _events.Clear();
         }
 
-        public void AddCommand(ICommand command) => _events.Enqueue(command);
+        public void AddCommand(ICommand command)
+        {
+            if (PauseMenu.GameIsPaused) return;
+
+            _events.Enqueue(command);
+        }
 
         private bool IsQueueEmpty() => _events.Count <= 0;
     }
