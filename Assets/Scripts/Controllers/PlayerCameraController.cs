@@ -25,14 +25,7 @@ namespace Controllers
 
         public void Update()
         {
-            if (PauseManager.GameIsPaused)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+            Cursor.lockState = PauseManager.GameIsPaused ? CursorLockMode.None : CursorLockMode.Locked;
         }
 
         public void Rotate(Vector3 direction)
