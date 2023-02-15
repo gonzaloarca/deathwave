@@ -19,7 +19,7 @@ namespace Controllers
         [SerializeField] private Transform _verticalTransform;
 
         public void Start()
-        {
+        { 
             Cursor.lockState = CursorLockMode.Locked;
         }
 

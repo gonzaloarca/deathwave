@@ -4,12 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Managers;
 using TMPro;
+
 namespace Managers
 {
+    public enum LevelIndex
+    {
+        MainMenu = 0,
+        SynthwaveLevel = 1,
+        WinScene = 2,
+        LoseScene = 3,
+        IslandLevel = 4
+    }
+
 
     public class GameLevelManager : MonoBehaviour
     {
-
         [SerializeField] private AudioClip _startingLoop;
         [SerializeField] private AudioClip _firstTrack;
         [SerializeField] private AudioSource _source;
@@ -24,7 +33,7 @@ namespace Managers
         public int SelectedRoundCount;
         private MusicManager _musicManager;
         private int _levelToload;
-        private bool _fading =false;
+        private bool _fading = false;
         private bool _changeLevel = false;
 
         // Start is called before the first frame update
@@ -35,7 +44,6 @@ namespace Managers
             _musicManager = GameObject.FindWithTag("GameMusic")?.GetComponent<MusicManager>();
             if (_menu)
             {
-                
                 SelectedRoundCount = _roundChoices[0];
                 _data.SelectedRounds = SelectedRoundCount;
                 _source.clip = _startingLoop;
@@ -61,16 +69,19 @@ namespace Managers
                 {
                     _selectedRoundIndex++;
                     SelectedRoundCount = _roundChoices[_selectedRoundIndex % (_roundChoices.Length)];
-                    if(SelectedRoundCount > 0){
+                    if (SelectedRoundCount > 0)
+                    {
                         _round.text = $"[R] Rounds: {SelectedRoundCount}";
                     }
                     else
                     {
                         _round.text = $"[R] Rounds: INFINITE";
                     }
+
                     _data.SelectedRounds = SelectedRoundCount;
                     _textAnimator.SetTrigger("RoundChange");
                 }
+
                 if (_source.loop && Input.GetKeyDown(KeyCode.Space))
                 {
                     _source.loop = false;
@@ -80,7 +91,7 @@ namespace Managers
                 {
                     _source.clip = _firstTrack;
                     _source.Play();
-                    FadeToLevel(1);
+                    FadeToLevel(LevelIndex.SynthwaveLevel);
                 }
 
                 return;
@@ -90,18 +101,16 @@ namespace Managers
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    FadeToLevel(0);
+                    FadeToLevel(LevelIndex.MainMenu);
                 }
-
-                return;
             }
         }
 
-        public void FadeToLevel(int levelIndex)
+        public void FadeToLevel(LevelIndex level)
         {
             _fadeAnimator.SetTrigger("FadeOut");
-            _levelToload = levelIndex;
-            if(!_fading)
+            _levelToload = (int)level;
+            if (!_fading)
                 StartCoroutine(LoadAsync());
             _fading = true;
         }
@@ -114,12 +123,14 @@ namespace Managers
         private void OnGameOver(bool isVictory)
         {
             if (!_menu) GameObject.FindWithTag("GameMusic")?.GetComponent<AudioSource>()?.Stop();
-            
-            if (isVictory){
-                FadeToLevel(2);
+
+            if (isVictory)
+            {
+                FadeToLevel(LevelIndex.WinScene);
             }
-            else {
-                FadeToLevel(3);
+            else
+            {
+                FadeToLevel(LevelIndex.LoseScene);
             }
         }
 
@@ -137,11 +148,15 @@ namespace Managers
 
                 if (operation.progress >= .9f)
                 {
-                    if (_changeLevel){
+                    if (_changeLevel)
+                    {
                         operation.allowSceneActivation = true;
-                        if(_levelToload == 1){
+                        if (_levelToload == 1)
+                        {
                             _musicManager.Activate();
-                        }else{
+                        }
+                        else
+                        {
                             _musicManager.Deactivate();
                         }
                     }
