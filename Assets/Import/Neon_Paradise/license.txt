@@ -1,0 +1,11 @@
+Model Information:
+* title:	Neon Paradise
+* source:	https://sketchfab.com/3d-models/neon-paradise-b5d20b0006a84d75b74e3bc2c7912c66
+* author:	tl0615 (https://sketchfab.com/tl0615)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Neon Paradise" (https://sketchfab.com/3d-models/neon-paradise-b5d20b0006a84d75b74e3bc2c7912c66) by tl0615 (https://sketchfab.com/tl0615) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
