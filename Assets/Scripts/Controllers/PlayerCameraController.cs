@@ -1,5 +1,4 @@
-using Strategy;
-using UI;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -26,7 +25,7 @@ namespace Controllers
 
         public void Update()
         {
-            if (PauseMenu.GameIsPaused)
+            if (PauseManager.GameIsPaused)
             {
                 Cursor.lockState = CursorLockMode.None;
             }

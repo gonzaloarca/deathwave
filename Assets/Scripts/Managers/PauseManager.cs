@@ -1,15 +1,26 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UI
+namespace Managers
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseManager : MonoBehaviour
     {
+        [SerializeField] private int killCount = 0;
+        [SerializeField] private int headshotCount = 0;
+        [SerializeField] private TextMeshProUGUI killsText;
+        [SerializeField] private TextMeshProUGUI headshotsText;
         public static bool GameIsPaused = false;
 
         public GameObject pauseMenuUI;
 
-        // Update is called once per frame
+        private void Start()
+        {
+            EventsManager.Instance.OnEnemyDeath += OnEnemyDeath;
+            EventsManager.Instance.OnHeadshot += OnHeadshot;
+        }
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -50,6 +61,18 @@ namespace UI
         {
             Debug.Log("Quitting...");
             Application.Quit();
+        }
+
+        public void OnEnemyDeath()
+        {
+            killCount += 1;
+            killsText.text = $"KILLS: {killCount}";
+        }
+
+        public void OnHeadshot()
+        {
+            headshotCount += 1;
+            headshotsText.text = $"HEADSHOTS: {headshotCount}";
         }
     }
 }

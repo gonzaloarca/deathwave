@@ -31,6 +31,7 @@ namespace Managers
         public event Action OnEnemyDeath;
         public event Action<float> OnHealthPickup;
         public event Action<int> OnRoundChange;
+        
         public void EventGameOver(bool isVictory)
         {
             _isGameOver = true;
