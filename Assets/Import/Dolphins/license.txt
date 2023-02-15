@@ -1,0 +1,11 @@
+Model Information:
+* title:	Dolphins
+* source:	https://sketchfab.com/3d-models/dolphins-af86a89db8004cf6a8c99ed6d2de098a
+* author:	Virginia Vidonis (https://sketchfab.com/virginiavidonis)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Dolphins" (https://sketchfab.com/3d-models/dolphins-af86a89db8004cf6a8c99ed6d2de098a) by Virginia Vidonis (https://sketchfab.com/virginiavidonis) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

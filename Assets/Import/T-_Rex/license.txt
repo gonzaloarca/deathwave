@@ -1,0 +1,11 @@
+Model Information:
+* title:	T- Rex
+* source:	https://sketchfab.com/3d-models/t-rex-5c2fc7f324a547ffa6d3f898071d7693
+* author:	bluoppVR (https://sketchfab.com/bluoppVR)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "T- Rex" (https://sketchfab.com/3d-models/t-rex-5c2fc7f324a547ffa6d3f898071d7693) by bluoppVR (https://sketchfab.com/bluoppVR) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Plastic Flamingo
+* source:	https://sketchfab.com/3d-models/plastic-flamingo-41d2173a8d554793b3e8009d9f647804
+* author:	MelonMan (https://sketchfab.com/MelonMan)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Plastic Flamingo" (https://sketchfab.com/3d-models/plastic-flamingo-41d2173a8d554793b3e8009d9f647804) by MelonMan (https://sketchfab.com/MelonMan) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

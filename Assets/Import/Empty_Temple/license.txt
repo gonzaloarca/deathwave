@@ -1,0 +1,11 @@
+Model Information:
+* title:	Empty Temple
+* source:	https://sketchfab.com/3d-models/empty-temple-1cb5bcd8cd0745d3ae7934816d0af72a
+* author:	Kelisei Ventura (https://sketchfab.com/frankestudios71)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Empty Temple" (https://sketchfab.com/3d-models/empty-temple-1cb5bcd8cd0745d3ae7934816d0af72a) by Kelisei Ventura (https://sketchfab.com/frankestudios71) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

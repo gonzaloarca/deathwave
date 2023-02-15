@@ -1,0 +1,11 @@
+Model Information:
+* title:	a mushroom cloud
+* source:	https://sketchfab.com/3d-models/a-mushroom-cloud-3e827d4989134c1f95b71fd5f58d8556
+* author:	Mirage (https://sketchfab.com/mirageml)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "a mushroom cloud" (https://sketchfab.com/3d-models/a-mushroom-cloud-3e827d4989134c1f95b71fd5f58d8556) by Mirage (https://sketchfab.com/mirageml) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Esclator
+* source:	https://sketchfab.com/3d-models/esclator-fb5a4343e7d54a7ca8cd498797c2c69b
+* author:	Alihan (https://sketchfab.com/Dare0)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Esclator" (https://sketchfab.com/3d-models/esclator-fb5a4343e7d54a7ca8cd498797c2c69b) by Alihan (https://sketchfab.com/Dare0) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
