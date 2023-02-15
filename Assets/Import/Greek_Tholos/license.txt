@@ -1,0 +1,11 @@
+Model Information:
+* title:	Greek Tholos
+* source:	https://sketchfab.com/3d-models/greek-tholos-b4fbe06384ba439e93643fc8818e5da4
+* author:	Nicole (https://sketchfab.com/nicolioos)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Greek Tholos" (https://sketchfab.com/3d-models/greek-tholos-b4fbe06384ba439e93643fc8818e5da4) by Nicole (https://sketchfab.com/nicolioos) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

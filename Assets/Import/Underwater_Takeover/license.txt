@@ -1,0 +1,11 @@
+Model Information:
+* title:	Underwater Takeover
+* source:	https://sketchfab.com/3d-models/underwater-takeover-9ed253a7cf4f4f55b880e2628d3ef6c6
+* author:	niano (https://sketchfab.com/niano)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Underwater Takeover" (https://sketchfab.com/3d-models/underwater-takeover-9ed253a7cf4f4f55b880e2628d3ef6c6) by niano (https://sketchfab.com/niano) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
