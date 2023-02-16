@@ -44,24 +44,23 @@ public class SpawnManager : MonoBehaviour
         }
 
         private GameObject GetEnemyToSpawn(){
-            //cada 3 rondas hay una que spawnea drones
+            // cada 3 rondas hay una que spawnea drones
          
-            //aca podria spawnear el boss
-            // if(_round % 10 == 0){
-            //     return _spawnObjects[1];
-            // }
+            // aca podria spawnear el boss
+            if(_round % 10 == 0){
+                return _spawnObjects[1];
+            }
             
-            // // if( _round > 10){
-            // //     return _spawnObjects[1];
-            // // }
+            if( _round > 10){
+                return _spawnObjects[1];
+            }
 
-            // if (_round % 5 == 0 && _enemies % 2 == 0 ||  _round % 3 == 0 && _enemies % 3 == 0 ){
-            //         return _spawnObjects[1];
-            // }
+            if (_round % 5 == 0 && _enemies % 2 == 0 ||  _round % 3 == 0 && _enemies % 3 == 0 ){
+                    return _objectPools[0].GetObject();
+            }
 
 
-            // return _spawnObjects[0];
-            return _objectPools[0].GetObject();
+            return _objectPools[1].GetObject();
         }
 
 

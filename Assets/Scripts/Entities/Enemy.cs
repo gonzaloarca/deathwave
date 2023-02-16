@@ -83,14 +83,7 @@ namespace Entities
             EventsManager.Instance.OnGameOver+= OnGameOver;
             EventsManager.Instance.OnPooling += OnPooling;
         }
-        protected virtual void OnDestroy(){;
-            if(!EventsManager.Instance.IsGameOver() & !_pooling){
-                EventsManager.Instance.EventEnemyDeath();
-                if(_drop) DeadDrop();
-            }
-            this.transform.parent.gameObject.SetActive(false);
-        }
-
+ 
     
     }
 }
