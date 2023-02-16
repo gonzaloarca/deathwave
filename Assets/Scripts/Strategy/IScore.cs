@@ -8,6 +8,8 @@ namespace Strategy
         
         void ResetScore();
         
-        void SubtractScore(int score);
+        void SubtractScore(int cost);
+
+        bool CanSubtract(int cost);
     }
 }

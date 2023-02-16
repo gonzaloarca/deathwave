@@ -1,4 +1,5 @@
 using System;
+using Buyable;
 using Commands;
 using Controllers;
 using Entities;
@@ -16,6 +17,8 @@ namespace Weapons
     {
         [SerializeField] private GunStats _stats;
 
+        public GunType Type => _stats.Type;
+        public string Name => _stats.Name;
         public GameObject MuzzleFlash => _stats.MuzzleFlash;
         public GameObject Bullet => _stats.Bullet;
         public int MagSize => _stats.MagSize;
@@ -197,6 +200,5 @@ namespace Weapons
         private void OnAmmoPickup(){
             RefillAmmo();
         }
-       
     }
 }

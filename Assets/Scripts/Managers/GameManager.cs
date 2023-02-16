@@ -9,7 +9,7 @@ namespace Managers
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
         [SerializeField] private Sprite _image;
-        private int score = 0;
+        [SerializeField] private PlayerScoreController _scoreController;
 
         void Start()
         {
@@ -28,8 +28,7 @@ namespace Managers
 
         void OnEnemyDeath()
         {
-            score += 100;
-            EventsManager.Instance.EventScoreChange(score);
+            _scoreController.AddScore(100);
         }
      
     }

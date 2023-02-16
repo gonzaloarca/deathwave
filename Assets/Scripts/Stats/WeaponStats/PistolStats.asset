@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PistolStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
+    Type: 0
+    Name: Pistol
     MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
     Bullet: {fileID: 5470383844280770365, guid: 3711ecff4abeea0418a4d3f8dd909e1a, type: 3}
     Damage: 30
@@ -27,3 +29,5 @@ MonoBehaviour:
       z: 3
     Range: 100
     Spread: 0
+    WeaponPrice: 1000
+    AmmoPrice: 500

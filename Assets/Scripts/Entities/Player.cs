@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Commands;
 using Controllers;
 using EventQueue;
+using Factory;
 using Managers;
 using Sounds;
 using Strategy;
@@ -17,10 +18,17 @@ namespace Entities
         private PlayerMovementController _movementController;
         private PlayerCameraController _cameraController;
 
+        [SerializeField] private GunSpawner _gunFactory;
+        [SerializeField] private int _maxGuns = 2;
+        [SerializeField] private List<GunType> _initialGunTypes;
         [SerializeField] private List<Gun> _guns;
         private Gun _currentGun;
+        private int _currentGunIndex = 0;
+        [SerializeField] private Transform _gunParent;
 
         private HealthController _healthController;
+
+        public PlayerScoreController scoreController;
 
         // BINDING MOVEMENT
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
@@ -67,6 +75,7 @@ namespace Entities
             _movementController = GetComponent<PlayerMovementController>();
             _cameraController = GetComponent<PlayerCameraController>();
             _soundController = GetComponent<PlayerSoundController>();
+            scoreController = GetComponent<PlayerScoreController>();
 
             _cmdMoveForward = new CmdMovement(_movementController, Vector3.forward);
             _cmdMoveBack = new CmdMovement(_movementController, -Vector3.forward);
@@ -78,9 +87,9 @@ namespace Entities
 
             // Set _currentGun
 
-            foreach (var gun in _guns)
+            foreach (var gunType in _initialGunTypes)
             {
-                gun.ChangeGun();
+                _guns.Add(CreateGun(gunType));
             }
 
             ChangeWeapon(0);
@@ -131,6 +140,8 @@ namespace Entities
             // if (_timer <= 0) Debug.Log("timer fin");
         }
 
+        public bool OwnsGun(GunType gunType) => _guns.Exists(g => g.Type == gunType);
+
         private void ChangeWeapon(int index)
         {
             if (_guns.Count <= 0)
@@ -142,6 +153,7 @@ namespace Entities
                 gun.ChangeGun();
             }
 
+            _currentGunIndex = index;
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
             _cmdShoot = new CmdShoot(_currentGun);
@@ -165,6 +177,37 @@ namespace Entities
 
             _healthController.TakeDamage(melee.Damage());
         }
-      
+
+        private Gun CreateGun(GunType gunType)
+        {
+            Gun gun = _gunFactory.Create(gunType);
+            gun.transform.parent = _gunParent;
+            return gun;
+        }
+
+        public void AddGun(GunType gunType)
+        {
+            // replace current gun with new gun
+            if (_guns.Count == _maxGuns)
+            {
+                _guns.RemoveAt(_currentGunIndex);
+                Destroy(_currentGun);
+            }
+
+            _guns.Add(CreateGun(gunType));
+            int newGunIndex = _guns.Count;
+
+            ChangeWeapon(newGunIndex);
+        }
+
+        public void RefillGunAmmo(GunType gunType)
+        {
+            Gun gun = _guns.Find(g => g.Type == gunType);
+
+            if (gun != null)
+            {
+                gun.RefillAmmo();
+            }
+        }
     }
 }

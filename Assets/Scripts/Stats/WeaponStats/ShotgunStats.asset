@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ShotgunStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
+    Type: 1
+    Name: Shotgun
     MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
     Bullet: {fileID: 5470383844280770365, guid: 3711ecff4abeea0418a4d3f8dd909e1a, type: 3}
     Damage: 110
@@ -27,3 +29,5 @@ MonoBehaviour:
       z: 5
     Range: 50
     Spread: 0.1
+    WeaponPrice: 3000
+    AmmoPrice: 1500

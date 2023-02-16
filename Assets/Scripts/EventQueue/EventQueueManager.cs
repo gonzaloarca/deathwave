@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Commands;
-using Managers;
 using UnityEngine;
+using UI;
 
 namespace EventQueue
 {

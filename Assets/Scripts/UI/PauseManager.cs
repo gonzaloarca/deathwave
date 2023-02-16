@@ -1,9 +1,9 @@
-using System;
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Managers
+namespace UI
 {
     public class PauseManager : MonoBehaviour
     {

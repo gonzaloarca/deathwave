@@ -1,4 +1,4 @@
-using Managers;
+using UI;
 using UnityEngine;
 
 namespace Controllers
