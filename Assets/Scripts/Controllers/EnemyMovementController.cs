@@ -12,16 +12,16 @@ namespace Controllers{
     {
 
           // INSTANCIAS
-        private NavMeshAgent _agent;
+        [SerializeField]  private NavMeshAgent _agent;
         public float MovementSpeed => _movementSpeed;
-        private float _movementSpeed;
-         private float _meleeRange;
+        [SerializeField]private float _movementSpeed;
+        [SerializeField]private float _meleeRange;
         // public Transform _torso;
-        private Animator _animator;
+        [SerializeField] private Animator _animator;
         public int GroundLayer => LayerMask.NameToLayer($"Ground");
-        private bool _sprint;
-        private bool _lpunch = false;
-        private float _stop;
+        [SerializeField] private bool _sprint;
+        [SerializeField] private bool _lpunch = false;
+        [SerializeField] private float _stop;
         private void Start()
         {
             _agent = GetComponent<NavMeshAgent>();
@@ -32,16 +32,28 @@ namespace Controllers{
             _animator.SetBool("running" , true);
             _movementSpeed = GetComponent<Enemy>().ActorStats.SprintSpeed;
             _meleeRange = GetComponent<Enemy>().ActorStats.Range;
-             _agent.stoppingDistance = _meleeRange;
+            _agent.stoppingDistance = _meleeRange;
             _agent.speed = _movementSpeed;
+           // _agent.enabled = false;
         }
 
+        public void Warp(Vector3 position){
+            Start();
+            if(position ==null)
+                return;
+            _agent.Warp(position);
+            _agent.enabled = true;
+        }
+
+        public bool IsEnabled(){
+            return _agent.enabled;
+        }
         private void Update(){
             
               if(_stop > 0f)
                     _stop -= Time.deltaTime;
         }
-
+        
         public void SetSpeedModifier(float num ){}
         public void Travel(Vector3 direction)
         {
@@ -50,7 +62,7 @@ namespace Controllers{
             if(_stop >0f)
                 return;
             _animator.SetFloat("Vertical", 1f);
-           // Debug.Log("speed " + _movementSpeed);
+           Debug.Log("moving to:" + direction);
             _agent.SetDestination(direction);
            
         }

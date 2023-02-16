@@ -24,9 +24,12 @@ namespace Managers
 
         public event Action<bool> OnGameOver;
 
+
         public void EventGameOver(bool isVictory)
         {   
             OnGameOver?.Invoke(isVictory);
         }
+
+      
     }
 }

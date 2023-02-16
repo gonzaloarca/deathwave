@@ -35,11 +35,12 @@ namespace Controllers
         }
 
         public virtual void Die() { 
-            Destroy(this.gameObject);
+            transform.parent.gameObject.SetActive(false);
         }
 
-        private void OnDestroy()
+        public void OnDisable()
         {
+            _currentHealth = MaxHealth;
             //EventsManager.Instance.EventGameOver(false);
         }
     }

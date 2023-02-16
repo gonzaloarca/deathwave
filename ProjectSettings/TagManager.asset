@@ -23,9 +23,9 @@ TagManager:
   - Post Processing
   - PlayerHitbox
   - Obstacles
-  - 
-  - 
-  - 
+  - Walkable
+  - Spawn
+  - SpawnObstacles
   - 
   - 
   - 

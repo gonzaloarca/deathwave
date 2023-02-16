@@ -20,7 +20,7 @@ namespace Entities
         private float _meleeRange;
         private void Start()
         {
-              base.Start();
+            base.Start();
            
             _movementController = GetComponent<EnemyMovementController>();
             _vision = this.EnemyStats.Vision;
@@ -29,6 +29,8 @@ namespace Entities
 
         void Update()
         {
+            if(!_movementController.IsEnabled())
+                return;
             // Debug.Log("Bad to the bone");
             float distance = Vector3.Distance(_target.transform.position, transform.position);
             // _movementController.LookAt(_target.transform.position);
@@ -49,11 +51,15 @@ namespace Entities
                 _movementController.Attack(_target.transform.position);
                 return;
             }
+            Debug.Log("chasing");
             _movementController.Travel(_target.transform.position);
 
         }
+
+        public void OnEnable(){
+            Start();
+        }
+
         
-
-
     }
 }
