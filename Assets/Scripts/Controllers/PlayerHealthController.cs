@@ -47,6 +47,8 @@ namespace Controllers
             UI_UpdateHealth();
         }
 
+    
+
         private void Update()
         {
             if (Time.time > _nextHealTime && _currentHealth < MaxHealth)

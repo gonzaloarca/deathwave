@@ -39,6 +39,7 @@ namespace Controllers{
             _sprint = true;
             _gunCount = _guns.Length;
              _agent = GetComponent<NavMeshAgent>();
+             _agent.enabled = false;
             // _rigidbody = GetComponent<Rigidbody>();
           //  _animator = GetComponent<Animator>();
             //_animator.SetBool("running" , true);
@@ -59,13 +60,19 @@ namespace Controllers{
      
         }
 
+        public bool IsEnabled(){
+            return _agent.enabled;
+        }
         private void Update(){
               if(_stop > 0f)
                     _stop -= Time.deltaTime;
         }
 
         public void SetSpeedModifier(float num ){}
-        
+        public void Warp(Vector3 position){
+            _agent.Warp(position);
+            _agent.enabled = true;
+        }
         public void Travel(Vector3 direction)
         {
       

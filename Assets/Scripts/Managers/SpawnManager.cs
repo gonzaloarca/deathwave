@@ -28,8 +28,10 @@ public class SpawnManager : MonoBehaviour
         [SerializeField] private int _maxEnemies;
 
         public GameObject[] SpawnObjects => _spawnObjects;
+        private ObjectPool[] _objectPools;
         
         [SerializeField] private GameObject[] _spawnObjects;
+        [SerializeField] private int[] _maxObjects;
         
         private int _round = 0;
 
@@ -45,20 +47,21 @@ public class SpawnManager : MonoBehaviour
             //cada 3 rondas hay una que spawnea drones
          
             //aca podria spawnear el boss
-            if(_round % 10 == 0){
-                return _spawnObjects[1];
-            }
-            
-            // if( _round > 10){
+            // if(_round % 10 == 0){
             //     return _spawnObjects[1];
             // }
+            
+            // // if( _round > 10){
+            // //     return _spawnObjects[1];
+            // // }
 
-            if (_round % 5 == 0 && _enemies % 2 == 0 ||  _round % 3 == 0 && _enemies % 3 == 0 ){
-                    return _spawnObjects[1];
-            }
+            // if (_round % 5 == 0 && _enemies % 2 == 0 ||  _round % 3 == 0 && _enemies % 3 == 0 ){
+            //         return _spawnObjects[1];
+            // }
 
 
-            return _spawnObjects[0];
+            // return _spawnObjects[0];
+            return _objectPools[0].GetObject();
         }
 
 
@@ -67,6 +70,13 @@ public class SpawnManager : MonoBehaviour
             _enemySpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("EnemySpawn")); 
             EventsManager.Instance.OnEnemyDeath += OnEnemyDeath;
             _player = GameObject.FindWithTag("Player");
+            _objectPools = new ObjectPool[_spawnObjects.Length];
+            EventsManager.Instance.EventPooling(true);
+            for(int i = 0 ; i < _spawnObjects.Length ; i++){
+                _objectPools[i] = ObjectPool.CreateInstance(_spawnObjects[i] , _maxObjects[i] );
+            }
+            EventsManager.Instance.EventPooling(false);
+
         }
 
         void Update()
@@ -81,9 +91,9 @@ public class SpawnManager : MonoBehaviour
                 
                 if(_maxEnemies <= _enemies) return;
                 GetNextSpawnTime();
-                SortByDistance();
+                //SortByDistance();
                 var index = UnityEngine.Random.Range(0, _closestSpawnsCount+1);
-                _enemySpawners[index]?.GetComponent<ISpawn>()?.Spawn(GetEnemyToSpawn());
+                _enemySpawners[0]?.GetComponent<ISpawn>()?.Spawn(GetEnemyToSpawn());
                 _enemies++;
             }
         }

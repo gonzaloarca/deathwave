@@ -20,6 +20,7 @@ namespace Entities
         private float _vision;
         private float _range;
         public bool _gunsDrawn = true;
+        private bool _pooling =true;
         private void Start()
         {
             base.Start();
@@ -27,6 +28,7 @@ namespace Entities
             _movementController = GetComponent<FlyingEnemyMovementController>();
             _vision = this.EnemyStats.Vision;
             _range = this.ActorStats.Range;
+            EventsManager.Instance.OnPooling += OnPooling;
         }
 
         private bool lineOfSight ( Vector3 targetPos){
@@ -54,6 +56,8 @@ namespace Entities
         
         void Update()
         {
+            if(!_movementController.IsEnabled())
+                return;
             // Debug.Log("Bad to the bone");
             float distance = Vector3.Distance(_target.transform.position, transform.position);
             Vector3 targetPos = _target.transform.position;
@@ -122,6 +126,15 @@ namespace Entities
             yield return new WaitForSeconds(1);
             GunDrawnTrue();
         }
+
+
+
+        protected virtual void OnDisable(){;
+            if(!EventsManager.Instance.IsGameOver() && !_pooling){
+                Instantiate(_deathSound, this.transform.position , Quaternion.identity);
+            }
+            base.OnDisable();
+        }
         protected virtual void OnDestroy(){;
             if(!EventsManager.Instance.IsGameOver()){
                 Instantiate(_deathSound, this.transform.position , Quaternion.identity);
@@ -129,5 +142,8 @@ namespace Entities
             base.OnDestroy();
         }
 
+     public void OnEnable(){
+            Start();
+        }
     }
 }

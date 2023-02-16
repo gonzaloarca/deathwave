@@ -101,5 +101,13 @@ namespace Managers
         {
             OnRoundChange?.Invoke(newRound);
         }
+
+
+        
+         public event Action<bool> OnPooling;
+            public void EventPooling(bool start)
+        {   
+            OnPooling?.Invoke(start);
+        }
     }
 }
