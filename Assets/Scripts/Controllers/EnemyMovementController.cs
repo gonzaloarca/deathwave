@@ -62,7 +62,7 @@ namespace Controllers{
             if(_stop >0f)
                 return;
             _animator.SetFloat("Vertical", 1f);
-           Debug.Log("moving to:" + direction);
+          // Debug.Log("moving to:" + direction);
             _agent.SetDestination(direction);
            
         }

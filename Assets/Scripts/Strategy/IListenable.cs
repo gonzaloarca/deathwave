@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sounds
+namespace Strategy
 {
     public interface IListenable
     {

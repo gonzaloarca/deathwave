@@ -71,9 +71,9 @@ namespace Entities
         }
 
         protected virtual void OnDisable(){
-            if(!EventsManager.Instance.IsGameOver() ){
+            if(!EventsManager.Instance.IsGameOver() && !_pooling ){
                 EventsManager.Instance.EventEnemyDeath();
-                if(_drop & !_pooling) DeadDrop();
+                if(_drop) DeadDrop();
             }
             Parent.ReturnObjectToPool(this.transform.parent.gameObject);
 

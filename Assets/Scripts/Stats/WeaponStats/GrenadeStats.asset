@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00ef9353c12caf84796691adc7abb9ac, type: 3}
-  m_Name: MeleeStats
+  m_Script: {fileID: 11500000, guid: 3066b4439a2f7f645b6e7578b19428cf, type: 3}
+  m_Name: GrenadeStats
   m_EditorClassIdentifier: 
-  _MeleeStatsValues:
-    BaseDamage: 0
-    DeltaDamage: 0
+  _statsValues:
+    Damage: 100
+    Radius: 4
+    Force: 2
+    Delay: 3
+    ExplosionEffect: {fileID: 5646916377099638766, guid: d49b9abd13a9aa844b2bc03d82c2c1c8, type: 3}

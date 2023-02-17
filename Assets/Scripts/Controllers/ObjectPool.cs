@@ -18,7 +18,7 @@ public class ObjectPool
     {
         ObjectPool pool = new ObjectPool(Prefab, Size);
         GameObject poolGameObject = new GameObject(Prefab + " Pool");
-       
+        poolGameObject.layer = LayerMask.NameToLayer("Enemy");
         pool.CreateObjects(poolGameObject);
       
         return pool;

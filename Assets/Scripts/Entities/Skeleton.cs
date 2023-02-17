@@ -51,7 +51,7 @@ namespace Entities
                 _movementController.Attack(_target.transform.position);
                 return;
             }
-            Debug.Log("chasing");
+          //  Debug.Log("chasing");
             _movementController.Travel(_target.transform.position);
 
         }

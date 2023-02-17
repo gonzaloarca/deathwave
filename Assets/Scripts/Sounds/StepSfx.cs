@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Strategy;
 namespace Sounds
 {
     [RequireComponent(typeof(AudioSource))]

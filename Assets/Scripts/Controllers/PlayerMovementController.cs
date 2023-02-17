@@ -44,7 +44,7 @@ namespace Controllers
 
         private void Start()
         {
-            Debug.Log("READY TO JUMP SET TO TRUE");
+           // Debug.Log("READY TO JUMP SET TO TRUE");
             _readyToJump = true;
             _rigidbody = GetComponent<Rigidbody>();
             _movementSpeed = GetComponent<Actor>().ActorStats.WalkSpeed;
@@ -58,13 +58,13 @@ namespace Controllers
 
             if (!_grounded)
             {
-                Debug.Log("AIR MODIFIER");
+              //  Debug.Log("AIR MODIFIER");
                 movementForce *= _airModifier;
             }
 
 
             _rigidbody.AddForce(movementForce, ForceMode.Force);
-            Debug.Log(_rigidbody.velocity.magnitude);
+           // Debug.Log(_rigidbody.velocity.magnitude);
 
             var velocity = _rigidbody.velocity;
             velocity.y = 0;
@@ -72,7 +72,7 @@ namespace Controllers
             // velocity check
             if (velocity.magnitude > MovementSpeed)
             {
-                Debug.Log("SPEED THROTTLING");
+                //Debug.Log("SPEED THROTTLING");
                 var clampedVelocity = velocity.normalized * MovementSpeed;
                 clampedVelocity.y = _rigidbody.velocity.y;
                 _rigidbody.velocity = clampedVelocity;
