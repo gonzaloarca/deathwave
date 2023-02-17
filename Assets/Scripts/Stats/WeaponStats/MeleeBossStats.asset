@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534324c0be8357e4f91966c129dec1bc, type: 3}
-  m_Name: EnemyStats
+  m_Script: {fileID: 11500000, guid: 00ef9353c12caf84796691adc7abb9ac, type: 3}
+  m_Name: MeleeBossStats
   m_EditorClassIdentifier: 
-  _statsValues:
-    DropFreq: 0.2
-    Vision: 100
-    Score: 100
+  _MeleeStatsValues:
+    BaseDamage: 20
+    DeltaDamage: 5

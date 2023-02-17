@@ -35,8 +35,9 @@ namespace Controllers
             UI_UpdateScore();
         }
 
-        public bool CanSubtract(int cost) => _score - cost >= 0;
+        public bool CanSubtract(int cost) => (_score - cost) >= 0;
 
+       
         private void Start()
         {
             ResetScore();

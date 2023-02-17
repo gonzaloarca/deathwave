@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534324c0be8357e4f91966c129dec1bc, type: 3}
-  m_Name: EnemyStats
+  m_Script: {fileID: 11500000, guid: a88a197f03f44f4f8d63585bc7be4cd4, type: 3}
+  m_Name: MacTonightStats 1
   m_EditorClassIdentifier: 
   _statsValues:
-    DropFreq: 0.2
-    Vision: 100
-    Score: 100
+    MaxHealth: 1000
+    WalkSpeed: 2.5
+    SprintSpeed: 4
+    JumpStrength: 0
+    Range: 2
+    RotationSpeed: 5

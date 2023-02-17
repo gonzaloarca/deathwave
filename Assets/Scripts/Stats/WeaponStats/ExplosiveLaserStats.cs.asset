@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534324c0be8357e4f91966c129dec1bc, type: 3}
-  m_Name: EnemyStats
+  m_Script: {fileID: 11500000, guid: 3066b4439a2f7f645b6e7578b19428cf, type: 3}
+  m_Name: ExplosiveLaserStats.cs
   m_EditorClassIdentifier: 
   _statsValues:
-    DropFreq: 0.2
-    Vision: 100
-    Score: 100
+    Damage: 50
+    Radius: 5
+    Force: 1
+    Delay: 100
+    ExplosionEffect: {fileID: 5646916377099638766, guid: 3ab6adba48f1104479ab0799087162e6, type: 3}

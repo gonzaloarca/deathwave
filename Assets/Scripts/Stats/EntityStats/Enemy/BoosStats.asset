@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b1d6ac3155a42a79087a944f74b48a8, type: 3}
-  m_Name: LaserShotStats
+  m_Script: {fileID: 11500000, guid: 534324c0be8357e4f91966c129dec1bc, type: 3}
+  m_Name: BoosStats
   m_EditorClassIdentifier: 
-  bulletStatsValues:
-    Speed: 40.65
+  _statsValues:
+    DropFreq: 1
+    Vision: 0
+    Score: 1000

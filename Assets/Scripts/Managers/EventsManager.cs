@@ -6,7 +6,7 @@ namespace Managers
     public class EventsManager : MonoBehaviour
     {
         public static EventsManager Instance;
-
+        public int Round = 0;
         private void Awake()
         {
             if (Instance != null) Destroy(this);
@@ -28,7 +28,7 @@ namespace Managers
         public event Action OnHeadshot;
         public event Action OnAmmoPickup;
         // public event Action<float> OnSecondPassed;
-        public event Action OnEnemyDeath;
+        public event Action<int> OnEnemyDeath;
         public event Action<float> OnHealthPickup;
         public event Action<int> OnRoundChange;
         
@@ -90,15 +90,16 @@ namespace Managers
         // {
         //     OnSecondPassed?.Invoke(time);
         // }
-        public void EventEnemyDeath()
+        public void EventEnemyDeath(int score)
         {
-            OnEnemyDeath?.Invoke();
+            OnEnemyDeath?.Invoke(score);
         }
         public void EventHealthPickup(float healthPoints){
             OnHealthPickup?.Invoke(healthPoints);
         }
         public void EventRoundChange(int newRound)
-        {
+        {   
+            Round = newRound;
             OnRoundChange?.Invoke(newRound);
         }
 

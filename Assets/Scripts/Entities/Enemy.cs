@@ -72,7 +72,7 @@ namespace Entities
 
         protected virtual void OnDisable(){
             if(!EventsManager.Instance.IsGameOver() && !_pooling ){
-                EventsManager.Instance.EventEnemyDeath();
+                EventsManager.Instance.EventEnemyDeath(EnemyStats.Score);
                 if(_drop) DeadDrop();
             }
             Parent.ReturnObjectToPool(this.transform.parent.gameObject);

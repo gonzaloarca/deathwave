@@ -38,8 +38,9 @@ namespace Weapons
                 Explode();
             }
         }
-
-        protected void Explode()
+        
+    
+        public void Explode()
         {
             Debug.Log("Grenade exploded!!!");
 

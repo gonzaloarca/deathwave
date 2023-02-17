@@ -59,7 +59,9 @@ namespace Entities
         public void OnEnable(){
             Start();
         }
-
+      protected virtual void OnDisable(){
+             base.OnDisable();
+        }
         
     }
 }

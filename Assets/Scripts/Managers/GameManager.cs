@@ -26,9 +26,9 @@ namespace Managers
                 image.sprite = _image;
         }
 
-        void OnEnemyDeath()
+        void OnEnemyDeath(int score)
         {
-            _scoreController.AddScore(100);
+            _scoreController.AddScore(score);
         }
      
     }

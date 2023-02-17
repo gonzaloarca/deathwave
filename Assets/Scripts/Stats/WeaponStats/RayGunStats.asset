@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e060a43adaa450ca26b12d4c0b04df1, type: 3}
-  m_Name: ShotGunStats
+  m_Name: RayGunStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
-    Type: 1
-    Name: Shotgun
+    Type: 3
+    Name: RayGun
     MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
-    Bullet: {fileID: 5470383844280770365, guid: 3711ecff4abeea0418a4d3f8dd909e1a, type: 3}
-    Damage: 110
-    MagSize: 9
+    Bullet: {fileID: 5470383844280770365, guid: ef67a22276e64434b92d9b3ae8f6de8d, type: 3}
+    Damage: 30
+    MagSize: 12
     MaxMags: 5
-    Cooldown: 1
-    ReloadTime: 3
-    PlayerSpeedModifier: 0.8
+    Cooldown: 0.1
+    ReloadTime: 0.5
+    PlayerSpeedModifier: 1
     Recoil:
-      x: -4
+      x: -1
       y: 0
-      z: 5
+      z: 3
     ArmsRotation:
-      x: -6
-      y: 93
-      z: 0.66
+      x: 0
+      y: 90
+      z: 0
     ArmsShift:
-      x: -0.1710442
-      y: 0.02
-      z: -0.093
-    Range: 50
-    Spread: 0.1
-    WeaponPrice: 100
-    AmmoPrice: 100
+      x: -0.218
+      y: 0.167
+      z: -0.1
+    Range: 100
+    Spread: 0
+    WeaponPrice: 1000
+    AmmoPrice: 500

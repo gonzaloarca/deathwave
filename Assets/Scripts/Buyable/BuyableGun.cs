@@ -46,22 +46,30 @@ namespace Buyable
         {
             RefreshPrice();
             RefreshPromptText();
+            base.Update();
         }
 
         public void Buy()
         {
+            Debug.Log("Attempting to buy");
             var finalPrice = PlayerOwnsGun ? AmmoPrice : WeaponPrice;
 
-            if (!player.scoreController.CanSubtract(finalPrice)) return;
+            if (!player.scoreController.CanSubtract(finalPrice)) {
+                  Debug.Log("player cant buy!");
+                return;
+            }
 
             player.scoreController.SubtractScore(finalPrice);
 
             if (PlayerOwnsGun)
             {
+                Debug.Log("getting ammog");
                 player.RefillGunAmmo(type);
             }
             else
             {
+                
+                Debug.Log("getting gun");
                 player.AddGun(type);
             }
         }

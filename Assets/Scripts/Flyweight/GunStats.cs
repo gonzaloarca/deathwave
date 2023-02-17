@@ -20,6 +20,9 @@ namespace Flyweight
         public float Cooldown => _gunStatsValues.Cooldown;
         public float PlayerSpeedModifier => _gunStatsValues.PlayerSpeedModifier;
         public GunRecoil Recoil => _gunStatsValues.Recoil;
+     
+        public ArmsRotation ArmsRotation => _gunStatsValues.ArmsRotation;
+        public ArmsShift ArmsShift => _gunStatsValues.ArmsShift;
         public float Range => _gunStatsValues.Range;
         
         public float Spread => _gunStatsValues.Spread;
@@ -42,6 +45,10 @@ public struct GunStatsValues
     public float ReloadTime; // in seconds
     public float PlayerSpeedModifier;
     public GunRecoil Recoil;
+
+    
+    public ArmsRotation ArmsRotation;
+    public ArmsShift ArmsShift;
     public float Range; // in meters
     public float Spread;
     public int WeaponPrice;
@@ -50,6 +57,22 @@ public struct GunStatsValues
 
 [System.Serializable]
 public struct GunRecoil
+{
+    public float x;
+    public float y;
+    public float z;
+}
+
+
+[System.Serializable]
+public struct ArmsShift
+{
+    public float x;
+    public float y;
+    public float z;
+}
+[System.Serializable]
+public struct ArmsRotation
 {
     public float x;
     public float y;

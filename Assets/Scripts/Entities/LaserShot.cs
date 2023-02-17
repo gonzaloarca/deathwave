@@ -68,6 +68,7 @@ namespace Entities
             var lifeTime = Range / Speed;
             Destroy(gameObject, lifeTime);
         }
+     
 
         private void Update()
         {

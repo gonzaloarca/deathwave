@@ -10,6 +10,8 @@ namespace Flyweight
         [SerializeField] private EnemyStatsValues _statsValues;
         public float DropFreq => _statsValues.DropFreq;
         public float Vision => _statsValues.Vision;
+
+        public int Score => _statsValues.Score;
     }
 
     [System.Serializable]
@@ -17,5 +19,6 @@ namespace Flyweight
     {
         public float DropFreq;
         public float Vision;
+        public int Score;
     }
 }

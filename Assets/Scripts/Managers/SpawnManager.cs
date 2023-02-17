@@ -3,8 +3,10 @@ using UnityEngine;
 using Strategy;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 namespace Managers
 {
+
 public class SpawnManager : MonoBehaviour
 {
 
@@ -39,27 +41,30 @@ public class SpawnManager : MonoBehaviour
         private int _deadEnemies = 0;
         private int _maxAliveEnemies = 5;
 
-        public void OnEnemyDeath(){
+        public void OnEnemyDeath(int score){
             _deadEnemies++;
         }
 
         private GameObject GetEnemyToSpawn(){
             // cada 3 rondas hay una que spawnea drones
-         
-            // aca podria spawnear el boss
-            // if(_round % 10 == 0){
-            //     return _spawnObjects[1];
-            // }
             
-            // if( _round > 10){
-            //     return _spawnObjects[1];
-            // }
+            if(  _round == 10 && _round % 5 == 0 && _enemies % 25 ==0){  
+                if(_objectPools[2].IsEmpty())
+                    return null;  
+                return _objectPools[2].GetObject();
+            }
+            
 
-            // if (_round % 5 == 0 && _enemies % 2 == 0 ||  _round % 3 == 0 && _enemies % 3 == 0 ){
-            //         return _objectPools[1].GetObject();
-            // }
+            if (_round % 5 == 0 && _enemies % 2 == 0 ||  _round % 3 == 0 && _enemies % 3 == 0 ){
+                  if(_objectPools[1].IsEmpty())
+                    return null; 
+                return _objectPools[1].GetObject();
+            }
 
-
+            if(_objectPools[0].IsEmpty()){
+        
+                    return null; 
+            }
             return _objectPools[0].GetObject();
         }
 
@@ -86,13 +91,14 @@ public class SpawnManager : MonoBehaviour
                 
                 int maxEnemiesRoundModifier = (int) _round/3;
                 int alive = _enemies - _deadEnemies;
+                if( _enemies >= _maxEnemies) return;
                 if(  (alive) >= (_maxAliveEnemies + maxEnemiesRoundModifier) ) return;
-                
-                if(_maxEnemies <= _enemies) return;
+                GameObject next = GetEnemyToSpawn();
+                if(next == null) return;
                 GetNextSpawnTime();
                 //SortByDistance();
                 var index = UnityEngine.Random.Range(0, _closestSpawnsCount+1);
-                _enemySpawners[0]?.GetComponent<ISpawn>()?.Spawn(GetEnemyToSpawn());
+                _enemySpawners[0]?.GetComponent<ISpawn>()?.Spawn(next);
                 _enemies++;
             }
         }

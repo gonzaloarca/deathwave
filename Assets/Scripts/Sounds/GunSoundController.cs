@@ -16,6 +16,7 @@ namespace Sounds
         [SerializeField] private AudioClip _emptyMagSound;
         public void InitAudioSource()
         {
+        
             _audioSource = GetComponent<AudioSource>();
         }
 
@@ -52,6 +53,19 @@ namespace Sounds
 
         private void onEmptyMag(){
             _audioSource.PlayOneShot(_emptyMagSound);
+        }
+
+        public void Reset(){
+            Debug.Log("adding events");
+            Start();
+        }
+
+        public void Unsuscribe(){
+            
+            EventsManager.Instance.OnGunShot -= PlayGunShot;
+            EventsManager.Instance.OnGunReloadStart -= PlayReloadStart;
+            EventsManager.Instance.OnGunReloadEnd -= PlayReloadEnd;
+            EventsManager.Instance.OnEmptyMag -= onEmptyMag;
         }
     }
 }

@@ -27,7 +27,15 @@ MonoBehaviour:
       x: -1
       y: 0
       z: 3
+    ArmsRotation:
+      x: 0
+      y: 90
+      z: 0
+    ArmsShift:
+      x: -0.149
+      y: 0.3601037
+      z: -0.32
     Range: 100
     Spread: 0
-    WeaponPrice: 1000
-    AmmoPrice: 500
+    WeaponPrice: 0
+    AmmoPrice: 0

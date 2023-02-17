@@ -17,6 +17,8 @@ namespace Weapons
     {
         [SerializeField] private GunStats _stats;
 
+        public ArmsRotation ArmsRotation => _stats.ArmsRotation;
+        public ArmsShift ArmsShift => _stats.ArmsShift;
         public GunType Type => _stats.Type;
         public string Name => _stats.Name;
         public GameObject MuzzleFlash => _stats.MuzzleFlash;

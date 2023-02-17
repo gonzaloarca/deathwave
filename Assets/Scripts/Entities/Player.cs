@@ -89,6 +89,7 @@ namespace Entities
 
             foreach (var gunType in _initialGunTypes)
             {
+               // Debug.log("GUN TYPE: " + gunType);
                 _guns.Add(CreateGun(gunType));
             }
 
@@ -146,6 +147,8 @@ namespace Entities
         {
             if (_guns.Count <= 0)
                 return;
+            if (_guns.Count <= index)
+                return;
 
             foreach (var gun in _guns)
             {
@@ -182,6 +185,8 @@ namespace Entities
         {
             Gun gun = _gunFactory.Create(gunType);
             gun.transform.parent = _gunParent;
+            gun.transform.localPosition = new Vector3(gun.ArmsShift.x , gun.ArmsShift.y , gun.ArmsShift.z);
+            gun.transform.localEulerAngles = new Vector3(gun.ArmsRotation.x , gun.ArmsRotation.y , gun.ArmsRotation.z);
             return gun;
         }
 
@@ -191,13 +196,24 @@ namespace Entities
             if (_guns.Count == _maxGuns)
             {
                 _guns.RemoveAt(_currentGunIndex);
-                Destroy(_currentGun);
+                    
+                GunSoundController c = _currentGun.gameObject.GetComponent<GunSoundController>();
+                c.Unsuscribe();
+                Destroy(_currentGun.gameObject);
             }
-
+            
             _guns.Add(CreateGun(gunType));
             int newGunIndex = _guns.Count;
+            // foreach( Gun g in _guns){
+                
+            //     GunSoundController c = g.gameObject.GetComponent<GunSoundController>();
+            //     if(c){
+            //         Debug.Log("Found controller");
+            //         c.Reset();
+            //     }
 
-            ChangeWeapon(newGunIndex);
+            // }
+            ChangeWeapon(newGunIndex-1);
         }
 
         public void RefillGunAmmo(GunType gunType)

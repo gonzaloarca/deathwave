@@ -29,13 +29,13 @@ namespace Sounds
             AudioSource.PlayOneShot(clip);
         }
 
-    
+        
         public void Stop()
         {
             AudioSource.Stop();
         }
 
-        public void OnEnemyDeath(){
+        public void OnEnemyDeath(int score){
             if(_totalKills == 0) PlayFirstBlood();
             _totalKills++;
             _killingSpree++;

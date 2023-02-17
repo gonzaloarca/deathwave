@@ -24,6 +24,10 @@ public class ObjectPool
         return pool;
     }
 
+    public bool IsEmpty(){
+        return _availableObjectsPool.Count == 0;
+    }
+
     private void CreateObjects(GameObject parent)
     {
     
@@ -36,6 +40,7 @@ public class ObjectPool
             poolable.Parent = this;
        
             poolableObject.gameObject.SetActive(false); // PoolableObject handles re-adding the object to the AvailableObjects
+            //_availableObjectsPool.Add(poolableObject);
         }
      
     }

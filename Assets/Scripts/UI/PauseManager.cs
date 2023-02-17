@@ -63,7 +63,7 @@ namespace UI
             Application.Quit();
         }
 
-        public void OnEnemyDeath()
+        public void OnEnemyDeath(int score)
         {
             killCount += 1;
             killsText.text = $"KILLS: {killCount}";

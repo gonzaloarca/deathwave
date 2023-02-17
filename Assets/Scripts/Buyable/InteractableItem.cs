@@ -13,11 +13,26 @@ namespace Buyable
         public UnityEvent onInteract;
         public int price;
         public string prompt;
+        public bool  _playerInside = false;
 
+        protected void Update(){
+          
+            if(!_playerInside)
+                 return;
+            
+        
+
+            if (Input.GetKeyDown(interactionKey))
+            {
+                onInteract?.Invoke();
+            }
+        }
+        
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
 
+            _playerInside = true;
             promptCanvas.enabled = true;
             promptText.text = $"Press {interactionKey} to {prompt}";
 
@@ -30,19 +45,11 @@ namespace Buyable
         private void OnTriggerExit(Collider other)
         {
             if (!other.CompareTag("Player")) return;
-
+            _playerInside = false;
             promptCanvas.enabled = false;
             promptText.text = "";
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            if (!other.CompareTag("Player")) return;
-
-            if (Input.GetKeyDown(interactionKey))
-            {
-                onInteract?.Invoke();
-            }
-        }
+        
     }
 }

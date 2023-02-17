@@ -11,7 +11,8 @@ namespace Managers
         [SerializeField] private bool _isVictory = false;
         [SerializeField] private Sprite _image;
 
-        public int _currentRound;
+        public int CurrentRound => _currentRound;
+        private int _currentRound;
         private int _maxEnemies = 5;
         private int _roundKills = 0;
         private SpawnManager spawnManager;
@@ -30,7 +31,7 @@ namespace Managers
         }
 
 
-        void OnEnemyDeath()
+        void OnEnemyDeath( int score)
         {
             //  if (_currentRound > _maxRounds)
             // {
