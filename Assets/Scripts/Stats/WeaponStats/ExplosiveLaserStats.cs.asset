@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ExplosiveLaserStats.cs
   m_EditorClassIdentifier: 
   _statsValues:
-    Damage: 50
+    Damage: 70
     Radius: 5
-    Force: 1
+    Force: 0
     Delay: 100
     ExplosionEffect: {fileID: 5646916377099638766, guid: 3ab6adba48f1104479ab0799087162e6, type: 3}

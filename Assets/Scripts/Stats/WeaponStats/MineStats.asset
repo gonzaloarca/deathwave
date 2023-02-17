@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MineStats
   m_EditorClassIdentifier: 
   _statsValues:
-    Damage: 1
+    Damage: 500
     Radius: 15
     Force: 3.5
     Delay: 0.5

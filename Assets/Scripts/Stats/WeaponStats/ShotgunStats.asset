@@ -17,7 +17,7 @@ MonoBehaviour:
     Name: Shotgun
     MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
     Bullet: {fileID: 5470383844280770365, guid: 3711ecff4abeea0418a4d3f8dd909e1a, type: 3}
-    Damage: 110
+    Damage: 80
     MagSize: 9
     MaxMags: 5
     Cooldown: 1
@@ -37,5 +37,5 @@ MonoBehaviour:
       z: -0.093
     Range: 50
     Spread: 0.1
-    WeaponPrice: 100
-    AmmoPrice: 100
+    WeaponPrice: 1500
+    AmmoPrice: 500

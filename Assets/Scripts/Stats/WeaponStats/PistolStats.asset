@@ -37,5 +37,5 @@ MonoBehaviour:
       z: -0.25
     Range: 100
     Spread: 0
-    WeaponPrice: 0
-    AmmoPrice: 0
+    WeaponPrice: 700
+    AmmoPrice: 400

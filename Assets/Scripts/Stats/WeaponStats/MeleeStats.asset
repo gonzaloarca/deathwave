@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MeleeStats
   m_EditorClassIdentifier: 
   _MeleeStatsValues:
-    BaseDamage: 0
-    DeltaDamage: 0
+    BaseDamage: 10
+    DeltaDamage: 2

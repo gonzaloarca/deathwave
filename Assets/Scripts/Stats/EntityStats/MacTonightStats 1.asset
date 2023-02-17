@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MacTonightStats 1
   m_EditorClassIdentifier: 
   _statsValues:
-    MaxHealth: 1000
+    MaxHealth: 2500
     WalkSpeed: 2.5
     SprintSpeed: 4
     JumpStrength: 0

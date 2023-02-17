@@ -17,11 +17,11 @@ MonoBehaviour:
     Name: RayGun
     MuzzleFlash: {fileID: 7979613115905603516, guid: 26badcc0f9cba4c3dba66d0ff351e7b1, type: 3}
     Bullet: {fileID: 5470383844280770365, guid: ef67a22276e64434b92d9b3ae8f6de8d, type: 3}
-    Damage: 30
-    MagSize: 12
-    MaxMags: 5
-    Cooldown: 0.1
-    ReloadTime: 0.5
+    Damage: 50
+    MagSize: 10
+    MaxMags: 6
+    Cooldown: 0.3
+    ReloadTime: 0.75
     PlayerSpeedModifier: 1
     Recoil:
       x: -1
@@ -37,5 +37,5 @@ MonoBehaviour:
       z: -0.1
     Range: 100
     Spread: 0
-    WeaponPrice: 1000
-    AmmoPrice: 500
+    WeaponPrice: 4000
+    AmmoPrice: 2000

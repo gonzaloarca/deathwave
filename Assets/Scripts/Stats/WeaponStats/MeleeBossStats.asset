@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MeleeBossStats
   m_EditorClassIdentifier: 
   _MeleeStatsValues:
-    BaseDamage: 20
+    BaseDamage: 30
     DeltaDamage: 5
