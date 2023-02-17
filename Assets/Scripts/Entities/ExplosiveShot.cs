@@ -12,6 +12,7 @@ namespace Entities
     public class ExplosiveShot : LaserShot, IBullet
     {
         private Explosive _explosive;
+    
         public void Start(){
             base.Start();
             _explosive = gameObject.GetComponent<Explosive>();
@@ -35,7 +36,7 @@ namespace Entities
             impact.Play();
 
             Destroy(impact.gameObject, 1f);
-
+            _explosive.SetLevel(Level);
             _explosive.Explode();
         }
     }

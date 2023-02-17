@@ -13,5 +13,7 @@ namespace Strategy
         void SetRange(float range);
         void SetDamage(float damage); 
         void SetTargetLayer(int layer);
+
+         void SetLevel(int level);
     }
 }

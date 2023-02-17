@@ -35,6 +35,7 @@ namespace Managers
         private int _levelToload;
         private bool _fading = false;
         private bool _changeLevel = false;
+        private LevelIndex _levelToLoad; 
 
         // Start is called before the first frame update
         void Start()
@@ -57,63 +58,54 @@ namespace Managers
 
         // Update is called once per frame
         void Update()
-        {
+        {     
             if (Input.GetKey(KeyCode.Escape))
             {
                 Application.Quit();
             }
 
-            if (_menu)
-            {
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    _selectedRoundIndex++;
-                    SelectedRoundCount = _roundChoices[_selectedRoundIndex % (_roundChoices.Length)];
-                    if (SelectedRoundCount > 0)
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            switch(scene){
+                case (int) LevelIndex.MainMenu:
+                    MainMenuHandler();
+                    break;
+                case (int) LevelIndex.SynthwaveLevel:
+                case (int) LevelIndex.IslandLevel:
+                    break;
+                case (int) LevelIndex.LoseScene:
+                case (int) LevelIndex.WinScene:
+                    if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        _round.text = $"[R] Rounds: {SelectedRoundCount}";
+                        FadeToLevel(LevelIndex.MainMenu);
                     }
-                    else
-                    {
-                        _round.text = $"[R] Rounds: INFINITE";
-                    }
+                    break;
+                default:
+                    return;
+            }
+               
+        }
 
-                    _data.SelectedRounds = SelectedRoundCount;
-                    _textAnimator.SetTrigger("RoundChange");
-                }
-
-                if (_source.loop && Input.GetKeyDown(KeyCode.Space))
-                {
-                    _source.loop = false;
-                }
-
-                if (_source.isPlaying == false)
-                {
+        private void RunFadeToLevel(LevelIndex level){
+            _levelToload = (int)level;
+          
+            if (!_fading){
+                 _fadeAnimator.SetTrigger("FadeOut");
+                 if(_source){
                     _source.clip = _firstTrack;
                     _source.Play();
-                    FadeToLevel(LevelIndex.SynthwaveLevel);
-                }
-
-                return;
-            }
-
-            if (_ending)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    FadeToLevel(LevelIndex.MainMenu);
-                }
-            }
-        }
-
-        public void FadeToLevel(LevelIndex level)
-        {
-            _fadeAnimator.SetTrigger("FadeOut");
-            _levelToload = (int)level;
-            if (!_fading)
+                 }
                 StartCoroutine(LoadAsync());
+            }
             _fading = true;
         }
+
+        public void FadeToLevel(LevelIndex level){
+            
+             _levelToload = (int)level;
+              if(_source) _source.loop = false;
+            
+        }
+     
 
         public void OnFadeComplete()
         {
@@ -126,11 +118,11 @@ namespace Managers
 
             if (isVictory)
             {
-                FadeToLevel(LevelIndex.WinScene);
+                RunFadeToLevel(LevelIndex.WinScene);
             }
             else
             {
-                FadeToLevel(LevelIndex.LoseScene);
+                RunFadeToLevel(LevelIndex.LoseScene);
             }
         }
 
@@ -164,6 +156,36 @@ namespace Managers
 
                 yield return null;
             }
+        }
+
+        private void MainMenuHandler(){
+            if (Input.GetKeyDown(KeyCode.R))
+                {
+                    _selectedRoundIndex++;
+                    SelectedRoundCount = _roundChoices[_selectedRoundIndex % (_roundChoices.Length)];
+                    if (SelectedRoundCount > 0)
+                    {
+                        _round.text = $"[R] Rounds: {SelectedRoundCount}";
+                    }
+                    else
+                    {
+                        _round.text = $"[R] Rounds: INFINITE";
+                    }
+
+                    _data.SelectedRounds = SelectedRoundCount;
+                    _textAnimator.SetTrigger("RoundChange");
+                }
+
+                if (_source.loop && Input.GetKeyDown(KeyCode.Space))
+                {
+                    _source.loop = false;
+                }
+
+                if (_source.isPlaying == false)
+                {
+                    RunFadeToLevel(LevelIndex.SynthwaveLevel);
+                }
+
         }
     }
 }

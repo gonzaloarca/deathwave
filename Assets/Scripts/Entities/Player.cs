@@ -142,11 +142,14 @@ namespace Entities
         }
 
         public bool OwnsGun(GunType gunType) => _guns.Exists(g => g.Type == gunType);
-
+        public Gun GetGun(){
+            return _currentGun;
+        }
         private void ChangeWeapon(int index)
         {
             if (_guns.Count <= 0)
                 return;
+
             if (_guns.Count <= index)
                 return;
 
@@ -155,14 +158,17 @@ namespace Entities
                 gun.gameObject.SetActive(false);
                 gun.ChangeGun();
             }
+            
 
             _currentGunIndex = index;
             _currentGun = _guns[index];
             _currentGun.gameObject.SetActive(true);
+             EventsManager.Instance.EventGunChange();
             _cmdShoot = new CmdShoot(_currentGun);
             _cmdReload = new CmdReload(_currentGun);
             _currentGun.DrawGun();
-
+            
+           
 
             // Change speed of character based on weapon
             EventQueueManager.Instance.AddCommand(new CmdSetSpeedModifier(_movementController,

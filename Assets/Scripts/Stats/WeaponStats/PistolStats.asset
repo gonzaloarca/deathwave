@@ -33,8 +33,8 @@ MonoBehaviour:
       z: 0
     ArmsShift:
       x: -0.149
-      y: 0.3601037
-      z: -0.32
+      y: 0.35
+      z: -0.25
     Range: 100
     Spread: 0
     WeaponPrice: 0

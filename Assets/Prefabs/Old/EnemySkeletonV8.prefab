@@ -2188,7 +2188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actorStats: {fileID: 11400000, guid: 0ce713a7c8368214c83cd9d75cbca2bd, type: 2}
   enemyStats: {fileID: 11400000, guid: 64160048ab8f181429c9b4e58ba12499, type: 2}
-  _ammoDrop: {fileID: 8640208673538754408, guid: 20fccd262e91a5a48a1bad37d22a2054, type: 3}
+  _ammoDrop: {fileID: 8640208673538754408, guid: 7d61be52e1dfc004bb78957ef4224dc6, type: 3}
   _healthDrop: {fileID: 8640208673538754408, guid: 2f083ab04f851e84fb95d38eebc2bad4, type: 3}
   _drop: 1
 --- !u!114 &4445973652292107907
@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHealth: 0
-  _currentHealth: 0
+  _currentMaxHealth: 0
 --- !u!1 &7274750069019809116
 GameObject:
   m_ObjectHideFlags: 0

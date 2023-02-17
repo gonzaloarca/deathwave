@@ -22,6 +22,10 @@ namespace Weapons
         
         private float _countdown;
         
+        
+        public int Level => _level;
+        [SerializeField] int _level = 1;
+
         void Start(){
             _countdown = Delay;
         }
@@ -38,8 +42,13 @@ namespace Weapons
                 Explode();
             }
         }
-        
-    
+        public float GetDamage(){
+            return Damage  + Damage * (1- Level) *0.75f; 
+        }
+        public void SetLevel(int level){
+            _level = level;
+        }
+
         public void Explode()
         {
             Debug.Log("Grenade exploded!!!");
@@ -84,7 +93,7 @@ namespace Weapons
                     if (life != null )
                     {
                         Debug.Log("Damaging enemy");
-                        life.TakeDamage(Damage);
+                        life.TakeDamage(GetDamage());
                     }
                 }
                 
