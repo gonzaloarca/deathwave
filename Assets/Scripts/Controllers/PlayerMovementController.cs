@@ -32,15 +32,17 @@ namespace Controllers
         {
             _grounded = Physics.Raycast(transform.position, -Vector3.up, _playerHeight * 0.1f, 1 << GroundLayer);
 
-            SpeedControl();
+          
 
             if (_grounded)
             {
                 _rigidbody.drag = _groundDrag;
             }
-            else
+            else if( OnSlope()){
+                _rigidbody.drag = _groundDrag;
+            }else
             {
-                _rigidbody.drag = 0.2f;
+                _rigidbody.drag = 0;
             }
         }
 
@@ -59,15 +61,13 @@ namespace Controllers
             moveDirection = transform1.forward * direction.z + transform1.right * direction.x;
             var movementForce = moveDirection * (MovementSpeed * SpeedModifier * Time.deltaTime * 1000);
 
-            if (!_grounded)
+            if (!_grounded && !OnSlope())
             {
               //  Debug.Log("AIR MODIFIER");
                 movementForce *= _airModifier;
             }
 
               
-         
-
 
             _rigidbody.AddForce(movementForce, ForceMode.Force);
            // Debug.Log(_rigidbody.velocity.magnitude);
@@ -77,12 +77,13 @@ namespace Controllers
 
             if (OnSlope() && !exitingSlope)
             {
-                _rigidbody.AddForce(GetSlopeMoveDirection() * _movementSpeed *5f, ForceMode.Force);
+                _rigidbody.AddForce(GetSlopeMoveDirection() * _movementSpeed *10f, ForceMode.Force);
 
                 if (_rigidbody.velocity.y > 0)
-                    _rigidbody.AddForce(Vector3.down * 10f, ForceMode.Force);
+                    _rigidbody.AddForce(Vector3.down * 50f, ForceMode.Force);
             }
 
+            SpeedControl();
             // velocity check
             if (velocity.magnitude > MovementSpeed)
             {
@@ -146,6 +147,7 @@ namespace Controllers
         public float maxSlopeAngle;
         private RaycastHit slopeHit;
         private bool exitingSlope;
+        private bool wasSlope = false;
          private bool OnSlope()
         {
             if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, 2f * 0.5f + 0.3f))
@@ -174,13 +176,13 @@ namespace Controllers
             // limiting speed on ground or in air
             else
             {
-                Vector3 flatVel = new Vector3(_rigidbody.velocity.x, _rigidbody.velocity.y, _rigidbody.velocity.z);
+                Vector3 flatVel = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z);
 
                 // limit velocity if needed
                 if (flatVel.magnitude >  _movementSpeed)
                 {
                     Vector3 limitedVel = flatVel.normalized *  _movementSpeed;
-                    _rigidbody.velocity = new Vector3(limitedVel.x, limitedVel.y, limitedVel.z);
+                    _rigidbody.velocity = new Vector3(limitedVel.x, _rigidbody.velocity.y, limitedVel.z);
                 }
             }
     }
