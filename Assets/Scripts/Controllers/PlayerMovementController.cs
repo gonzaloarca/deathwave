@@ -83,7 +83,7 @@ namespace Controllers
                     _rigidbody.AddForce(Vector3.down * 50f, ForceMode.Force);
             }
 
-            SpeedContro();
+            SpeedControl();
             // velocity check
             if (velocity.magnitude > MovementSpeed)
             {
