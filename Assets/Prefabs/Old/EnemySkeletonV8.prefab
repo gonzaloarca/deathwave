@@ -2020,8 +2020,8 @@ GameObject:
   - component: {fileID: 4445973652292107904}
   - component: {fileID: 4445973652292107907}
   - component: {fileID: 4445973652292107917}
-  - component: {fileID: 5645959230041176207}
   - component: {fileID: 8214047621072416107}
+  - component: {fileID: 7887484577628859687}
   m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
@@ -2224,19 +2224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clips:
   - {fileID: 8300000, guid: b6fb0d52621dc5247bf175fc7227006e, type: 3}
---- !u!114 &5645959230041176207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6870600810106802838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d62ac7cef4f2f6247bdf4047be6ce469, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHealth: 0
 --- !u!195 &8214047621072416107
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2259,6 +2246,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7887484577628859687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870600810106802838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a262824507319245af65be8059bc004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 0
+  _currentHealth: 0
 --- !u!1 &7274750069019809116
 GameObject:
   m_ObjectHideFlags: 0

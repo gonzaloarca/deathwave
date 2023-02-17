@@ -869,6 +869,7 @@ GameObject:
   - component: {fileID: 6525298465676670009}
   - component: {fileID: 3898731968233391400}
   - component: {fileID: 3898731968233391401}
+  - component: {fileID: -7063199876037309170}
   m_Layer: 9
   m_Name: PlayerWithGun
   m_TagString: Player
@@ -960,7 +961,7 @@ MonoBehaviour:
   _actorStats: {fileID: 11400000, guid: fb5f24d4e8f3647508e6623adfc3541a, type: 2}
   _gunFactory: {fileID: 0}
   _maxGuns: 2
-  _initialGunTypes: 0000000001000000
+  _initialGunTypes: 000000000100000003000000
   _guns: []
   _gunParent: {fileID: 3170386082023206011}
   scoreController: {fileID: 0}
@@ -1169,6 +1170,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _score: 0
+--- !u!114 &-7063199876037309170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898731968233391403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367e664ecac39ad42be8521d29c571e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grenadePrefab: {fileID: 8427756130833882294, guid: 55d5d5f4fcf70a14da62ae79894c6b11, type: 3}
+  _throwForce: 40
+  _throwKey: 103
 --- !u!1 &4246222251319550398
 GameObject:
   m_ObjectHideFlags: 0
