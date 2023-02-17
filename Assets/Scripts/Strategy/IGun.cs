@@ -19,7 +19,8 @@ namespace Strategy
         public int TotalBulletsLeft { get; }
         public float Range { get; }
         public float Spread { get; }
-
+        public int Level { get; }
+        public int Price {get;}
 
         void Shoot();
         void Reload();
@@ -29,6 +30,8 @@ namespace Strategy
         void ChangeGun();
 
         void DrawGun();
+
+        void Upgrade();
         void ReloadFinish();
     }
 }

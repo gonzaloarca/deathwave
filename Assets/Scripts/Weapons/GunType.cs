@@ -4,8 +4,8 @@ namespace Weapons
     {
         Pistol,
         Shotgun,
-        Rpg,
+       // Rpg,
         Raygun,
-        MachineGun
+       // MachineGun
     }
 }

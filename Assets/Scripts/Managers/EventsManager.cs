@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using Strategy;
 namespace Managers
 {
     public class EventsManager : MonoBehaviour
@@ -109,6 +109,15 @@ namespace Managers
             public void EventPooling(bool start)
         {   
             OnPooling?.Invoke(start);
+        }
+
+        public event Action<string> OnGunNameChange;
+        public void EventGunNameChange(string name){
+            OnGunNameChange?.Invoke(name);
+        }
+        public event Action OnGunChange;
+        public void EventGunChange(){
+            OnGunChange?.Invoke();
         }
     }
 }

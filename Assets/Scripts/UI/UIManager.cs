@@ -14,7 +14,7 @@ namespace UI
         
 
         [SerializeField] private Image _health;
-        [SerializeField] private Image _guns;
+        [SerializeField] private TextMeshProUGUI _guns;
     
         private void OnAmmoChange(int ammo, int maxAmmo)
         {
@@ -26,6 +26,9 @@ namespace UI
             _score.text = $"{score}";
         }
         
+        private void OnGunNameChange(string name){
+            _guns.text =name;
+        }
         private void OnPlayerHealthChange(float health, float maxHealth)
         {
             _health.fillAmount = health / maxHealth;
@@ -51,6 +54,7 @@ namespace UI
             EventsManager.Instance.OnPlayerHealthChange += OnPlayerHealthChange;
             // EventsManager.Instance.OnSecondPassed += OnSecondPassed;
             EventsManager.Instance.OnRoundChange += OnRoundChange;
+            EventsManager.Instance.OnGunNameChange += OnGunNameChange;
         }
 
     }

@@ -2,11 +2,11 @@ using Buyable;
 
 namespace Commands
 {
-    public class CmdBuyShotgun : ICommand
+    public class CmdBuy : ICommand
     {
         private IBuyable _buyable;
 
-        public CmdBuyShotgun(IBuyable buyable)
+        public CmdBuy(IBuyable buyable)
         {
             _buyable = buyable;
         }

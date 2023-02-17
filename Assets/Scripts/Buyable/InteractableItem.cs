@@ -4,11 +4,12 @@ using UnityEngine.Events;
 
 namespace Buyable
 {
-    public class InteractableItem : MonoBehaviour
+    public class InteractableItem : MonoBehaviour , IBuyable
     {
-        [SerializeField] private Canvas promptCanvas;
-        [SerializeField] private TextMeshProUGUI promptText;
-        [SerializeField] private KeyCode interactionKey = KeyCode.F;
+        [SerializeField] protected Canvas promptCanvas;
+        [SerializeField] protected TextMeshProUGUI promptText;
+        [SerializeField] protected KeyCode interactionKey = KeyCode.F;
+        [SerializeField] private GameObject _sfx;
         
         public UnityEvent onInteract;
         public int price;
@@ -48,6 +49,11 @@ namespace Buyable
             _playerInside = false;
             promptCanvas.enabled = false;
             promptText.text = "";
+        }
+
+        public void Buy(){
+            if(_sfx)
+                Instantiate(_sfx , transform.position , transform.rotation);
         }
 
         

@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actorStats: {fileID: 11400000, guid: 0fd40487c2a1d0a4fa1d2c40a8315c73, type: 2}
   enemyStats: {fileID: 11400000, guid: 64160048ab8f181429c9b4e58ba12499, type: 2}
-  _ammoDrop: {fileID: 8640208673538754408, guid: 20fccd262e91a5a48a1bad37d22a2054, type: 3}
+  _ammoDrop: {fileID: 8640208673538754408, guid: 7d61be52e1dfc004bb78957ef4224dc6, type: 3}
   _healthDrop: {fileID: 8640208673538754408, guid: 2f083ab04f851e84fb95d38eebc2bad4, type: 3}
   _drop: 1
   _deathSound: {fileID: 7065168157141594371, guid: 17201c9e45dcf6c4a8e93808f9108903, type: 3}

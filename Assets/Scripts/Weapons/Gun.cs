@@ -14,13 +14,13 @@ using Random = UnityEngine.Random;
 namespace Weapons
 {
     public class Gun : MonoBehaviour, IGun
-    {
+    {   
         [SerializeField] private GunStats _stats;
 
         public ArmsRotation ArmsRotation => _stats.ArmsRotation;
         public ArmsShift ArmsShift => _stats.ArmsShift;
         public GunType Type => _stats.Type;
-        public string Name => _stats.Name;
+        public string Name => GetName();
         public GameObject MuzzleFlash => _stats.MuzzleFlash;
         public GameObject Bullet => _stats.Bullet;
         public int MagSize => _stats.MagSize;
@@ -33,6 +33,7 @@ namespace Weapons
         public int TotalBulletsLeft => _totalBulletsLeft;
         public float Range => _stats.Range;
         public float Spread => _stats.Spread;
+        public int Price => _stats.WeaponPrice;
         [SerializeField] private int _totalBulletsLeft;
 
         public int BulletsLeftInMag => _bulletsLeftInMag;
@@ -60,6 +61,9 @@ namespace Weapons
         private Animator _animations;
 
 
+        public int Level => _level;
+        public int _level = 1;
+
         // Bullet instantiation method for modularity across extended classes
         protected virtual void InstantiateBullet(Vector3 position, Quaternion rotation)
         {
@@ -67,9 +71,16 @@ namespace Weapons
             var bulletScript = bullet.GetComponent<IBullet>();
             bullet.name = "Bullet";
             bulletScript.SetRange(Range);
-            bulletScript.SetDamage(Damage);
+            bulletScript.SetDamage(GetDamage());
+            bulletScript.SetLevel(_level);
         }
 
+        public string GetName(){
+                if(Level == 1)
+                    return _stats.Name;
+                else
+                return _stats.Name + " lvl" + _level;
+        }
         protected virtual void ShootBullet(Transform theTransform)
         {
             Debug.Log("SHOOT");
@@ -82,9 +93,12 @@ namespace Weapons
             InstantiateBullet(_bulletSpawnPoint.position, Quaternion.LookRotation(bulletDirection));
         }
 
+        public float GetDamage(){
+            return Damage  + Damage * (Level - 1) *0.75f; 
+        }
         public void ChangeGun()
         {
-           
+            
             _reloading = false;
             _reloadTimer = 0;
             _animations?.SetBool("change_gun", true);
@@ -94,6 +108,7 @@ namespace Weapons
 
         public void DrawGun()
         {
+            UI_NameUpdater();
              UI_AmmoUpdater();
             _animations?.SetBool("change_gun", false);
             _animations?.SetBool("draw_gun", true);
@@ -112,7 +127,7 @@ namespace Weapons
             }
             
             if (Time.time < _nextTimeToFire) return;
-
+            
             _bulletsLeftInMag--;
             _nextTimeToFire = Time.time + Cooldown;
             var transform1 = transform;
@@ -149,7 +164,6 @@ namespace Weapons
 
             _totalBulletsLeft -= emptyRounds;
             _bulletsLeftInMag += emptyRounds;
-            
             UI_AmmoUpdater();
         }
 
@@ -160,6 +174,7 @@ namespace Weapons
             _bulletsLeftInMag = MagSize;
 
             UI_AmmoUpdater();
+            
         }
 
         public void AddMags(int mags)
@@ -173,6 +188,16 @@ namespace Weapons
             if(this.gameObject.active) EventsManager.Instance.EventAmmoChange(_bulletsLeftInMag, _totalBulletsLeft);
         }
 
+        public void UI_NameUpdater() {
+            if(this.gameObject.active) EventsManager.Instance.EventGunNameChange(GetName());
+        }
+
+
+        public void Upgrade(){
+            Debug.Log("UPGRADING GUN!");
+            this._level= _level + 1;
+            RefillAmmo();
+        }
         private void Start()
         {
             RefillAmmo();

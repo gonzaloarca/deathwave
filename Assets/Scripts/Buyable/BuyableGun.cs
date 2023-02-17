@@ -25,7 +25,7 @@ namespace Buyable
 
         private void Start()
         {
-            onInteract.AddListener(() => EventQueueManager.Instance.AddCommand(new CmdBuyShotgun(this)));
+            onInteract.AddListener(() => EventQueueManager.Instance.AddCommand(new CmdBuy(this)));
         }
 
         private void RefreshPrice()
@@ -58,7 +58,7 @@ namespace Buyable
                   Debug.Log("player cant buy!");
                 return;
             }
-
+             base.Buy();
             player.scoreController.SubtractScore(finalPrice);
 
             if (PlayerOwnsGun)
@@ -72,6 +72,7 @@ namespace Buyable
                 Debug.Log("getting gun");
                 player.AddGun(type);
             }
+            
         }
     }
 }
